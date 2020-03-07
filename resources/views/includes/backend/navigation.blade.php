@@ -59,7 +59,7 @@
         <li class="<?php //if ($page_name == 'amenities' || $page_name == 'amenity_add' || $page_name == 'amenity_edit') echo 'opened active has-sub'; ?>">
             <a href="#">
                 <i class="fa fa-puzzle-piece"></i>
-                <span><?php //echo get_phrase('amenities'); ?></span>
+                <span>amenities<?php //echo get_phrase('amenities'); ?></span>
             </a>
             <ul>
                 <li class="<?php //if ($page_name == 'amenity') echo 'active'; ?> ">
@@ -80,7 +80,7 @@
         <li class="<?php //if ($page_name == 'listings' || $page_name == 'listing_add_wiz' || $page_name == 'listing_edit_wiz' || $page_name == 'reported_listings' || $page_name == 'claimed_listings') echo 'opened active has-sub'; ?>">
             <a href="#">
                 <i class="fa fa-sitemap"></i>
-                <span>Listing<?php //echo get_phrase('listings'); ?></span>
+                <span>Listings<?php //echo get_phrase('listings'); ?></span>
             </a>
             <ul>
                 <li class="<?php //if ($page_name == 'listings') echo 'active'; ?> ">
@@ -111,7 +111,7 @@
         <li class="<?php //if ($page_name == 'booking_request_hotel' || $page_name == 'booking_request_restaurant' || $page_name == 'booking_request_beauty') echo 'opened active has-sub'; ?>">
             <a href="#">
                 <i class="fa fa-tasks"></i>
-                <span><?php //echo get_phrase('booking_requests'); ?></span>
+                <span>Bookings<?php //echo get_phrase('booking_requests'); ?></span>
             </a>
             <ul>
                 <li class="<?php //if ($page_name == 'booking_request_hotel') echo 'active'; ?> ">
@@ -137,7 +137,7 @@
         <li class="<?php //if ($page_name == 'cities' || $page_name == 'city_add' || $page_name == 'city_edit') echo 'opened active has-sub'; ?>">
             <a href="#">
                 <i class="fa fa-location-arrow"></i>
-                <span><?php //echo get_phrase('cities'); ?></span>
+                <span>Cities<?php //echo get_phrase('cities'); ?></span>
             </a>
             <ul>
                 <li class="<?php //if ($page_name == 'cities') echo 'active'; ?> ">
@@ -157,7 +157,7 @@
         <li class="<?php //if ($page_name == 'packages' || $page_name == 'package_add' || $page_name == 'package_edit') echo 'opened active has-sub'; ?>">
             <a href="#">
                 <i class="fa fa-credit-card"></i>
-                <span><?php //echo get_phrase('pricings'); ?></span>
+                <span>Pricing<?php //echo get_phrase('pricings'); ?></span>
             </a>
             <ul>
                 <li class="<?php //if ($page_name == 'packages') echo 'active'; ?> ">
@@ -178,7 +178,7 @@
         <li class="<?php //if ($page_name == 'offline_payment') echo 'active'; ?> " style="border-top:1px solid #232540;">
             <a href="<?php //echo site_url('admin/offline_payment'); ?>">
                 <i class="fa fa-archive"></i>
-                <span><?php //echo get_phrase('offline_payment'); ?></span>
+                <span>Offline Payment<?php //echo get_phrase('offline_payment'); ?></span>
             </a>
         </li>
 
@@ -186,14 +186,14 @@
         <li class="<?php //if ($page_name == 'report' || $page_name == 'package_invoice') echo 'active'; ?> " style="border-top:1px solid #232540;">
             <a href="<?php //echo site_url('admin/report'); ?>">
                 <i class="fa fa-paperclip"></i>
-                <span><?php //echo get_phrase('report'); ?></span>
+                <span>Reports<?php //echo get_phrase('report'); ?></span>
             </a>
         </li>
         <!-- Rating wise quality -->
         <li class="<?php //if ($page_name == 'rating_wise_quality' || $page_name == 'edit_rating_wise_quality') echo 'active'; ?> " style="border-top:1px solid #232540;">
             <a href="<?php //echo site_url('admin/rating_wise_quality'); ?>">
                 <i class="fa fa-thumbs-up"></i>
-                <span><?php //echo get_phrase('rating_wise_quality'); ?></span>
+                <span>Rating wise quality<?php //echo get_phrase('rating_wise_quality'); ?></span>
             </a>
         </li>
 
@@ -201,7 +201,7 @@
         <li class="<?php //if ($page_name == 'agents' || $page_name == 'users' || $page_name == 'user_add' || $page_name == 'user_edit') echo 'opened active has-sub'; ?>">
             <a href="#">
                 <i class="fa fa-users"></i>
-                <span><?php //echo get_phrase('users'); ?></span>
+                <span>Users<?php //echo get_phrase('users'); ?></span>
             </a>
             <ul>
                 <li class="<?php //if ($page_name == 'users') echo 'active'; ?> ">
@@ -222,7 +222,7 @@
         //if ($page_name == 'system_settings' || $page_name == 'frontend_settings' || $page_name == 'payment_settings' || $page_name == 'smtp_settings' || $page_name == 'about' ) echo 'opened active'; ?> ">
         <a href="#">
             <i class="fa fa-cogs"></i>
-            <span><?php //echo get_phrase('settings'); ?></span>
+            <span>Settings<?php //echo get_phrase('settings'); ?></span>
         </a>
         <ul>
             <li class="<?php //if ($page_name == 'system_settings') echo 'active'; ?> ">
