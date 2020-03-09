@@ -15,16 +15,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-<<<<<<< HEAD
+
 
 Route::resource('/admin','Admin\AdminController');
 
 Route::resource('/admin/categories','Admin\categoriesController');
 
+
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-=======
-Route::resource('/admin','AdminController');
->>>>>>> parent of 048461a... dashboard
+
+
