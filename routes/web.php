@@ -17,11 +17,11 @@ Route::get('/', function () {
 
 
 
-Route::resource('/admin','Admin\AdminController');
+Route::get('/admin','Admin\AdminController@index');
 
-Route::resource('/admin/categories','Admin\categoriesController');
+Route::resource('/admin/categories','Admin\CategoriesController');
 
-
+Route::resource('/admin/users','Admin\UsersController');
 
 
 Auth::routes();

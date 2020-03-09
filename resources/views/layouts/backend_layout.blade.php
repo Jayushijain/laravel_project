@@ -19,7 +19,7 @@
 <body class="page-body" >
   <div class="page-container <?php //if ($text_align == 'right-to-left') echo 'right-sidebar';?>" >
     <!-- SIDEBAR -->
-    @include('includes.backend.navigation')
+    @include('backend.admin.navigation')
     <?php //include $logged_in_user_role.'/'.'navigation.php' ?>
     <div class="main-content">
 
@@ -29,11 +29,12 @@
 
       <h3 style="margin:20px 0px;" class="hidden-print">
         <i class="entypo-right-circled"></i>
-        <?php //echo $page_title;?>
+        {{ $page_info['page_title'] }}
       </h3>
 
       <!-- Start Content-->
-      <?php //include $logged_in_user_role.'/'.$page_name.'.php';?>
+      @yield('content')
+
       <!-- Footer starts here -->
       @include('includes.backend.footer')
      
