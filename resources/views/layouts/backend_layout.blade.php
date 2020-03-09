@@ -18,14 +18,14 @@
 </head>
 <body class="page-body" >
   <div class="page-container <?php //if ($text_align == 'right-to-left') echo 'right-sidebar';?>" >
-
     <!-- SIDEBAR -->
-    @include('backend.admin.navigation')
+    @include('includes.backend.navigation')
     <?php //include $logged_in_user_role.'/'.'navigation.php' ?>
     <div class="main-content">
 
       <!-- Topbar Start -->
-      @include('includes.backend.header')      
+      @include('includes.backend.header')
+      
 
       <h3 style="margin:20px 0px;" class="hidden-print">
         <i class="entypo-right-circled"></i>
@@ -33,9 +33,7 @@
       </h3>
 
       <!-- Start Content-->
-      @yield('content')
       <?php //include $logged_in_user_role.'/'.$page_name.'.php';?>
-
       <!-- Footer starts here -->
       @include('includes.backend.footer')
      
