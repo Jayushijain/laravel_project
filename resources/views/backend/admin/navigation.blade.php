@@ -24,12 +24,13 @@
     <div style=""></div>
     <ul id="main-menu" class="">
         <div style="text-align: -webkit-center;" id="branding_element">
+            Demo
             <img src="<?php //echo base_url('assets/global/light_logo.png'); ?>"  style="max-height:30px;"/>
         </div>
         <br>
         <!-- Home -->
         <li class="<?php //if ($page_name == 'dashboard') echo 'active'; ?> " style="border-top:1px solid #232540;">
-            <a href="<?php //echo site_url('admin/dashboard'); ?>">
+            <a href="/admin">
                 <i class="fa fa-home"></i>
                 <span>Dashboard<?php //echo get_phrase('dashboard'); ?></span>
             </a>
@@ -59,7 +60,7 @@
         <li class="<?php //if ($page_name == 'amenities' || $page_name == 'amenity_add' || $page_name == 'amenity_edit') echo 'opened active has-sub'; ?>">
             <a href="#">
                 <i class="fa fa-puzzle-piece"></i>
-                <span>amenities<?php //echo get_phrase('amenities'); ?></span>
+                <span>Amenities<?php //echo get_phrase('amenities'); ?></span>
             </a>
             <ul>
                 <li class="<?php //if ($page_name == 'amenity') echo 'active'; ?> ">
