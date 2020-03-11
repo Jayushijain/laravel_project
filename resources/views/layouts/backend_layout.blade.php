@@ -9,11 +9,13 @@
 <html lang="en" dir="<?php //if ($text_align == 'right-to-left') echo 'rtl';?>">
 <head>
 
-  <title><?php //echo $page_title;?> | <?php //echo $website_title;?></title>
+  <title>{{ $page_info['page_title'] }} | <?php //echo $website_title;?></title>
   <!-- all the meta tags -->
   <?php //include 'metas.php'; ?>
   <!-- all the css files -->
   @include('includes.backend.backend_top')
+
+  @yield('styles')
 
 </head>
 <body class="page-body" >
@@ -42,7 +44,8 @@
   </div>
   <!-- all the js files -->
   @include('includes.backend.backend_bottom')
-  <?php //include 'modal.php'; ?>
+  @include('includes.backend.modal')
+  @yield('scripts')
   <?php //include 'common_scripts.php'; ?>
 </body>
 </html>

@@ -21,6 +21,8 @@ Route::get('/admin','Admin\AdminController@index');
 
 Route::resource('/admin/categories','Admin\CategoriesController');
 
+Route::resource('/admin/amenities','Admin\AmenitiesController');
+
 Route::resource('/admin/users','Admin\UsersController');
 
 

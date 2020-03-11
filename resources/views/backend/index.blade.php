@@ -94,6 +94,10 @@
 @php
 	$months = array('january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december');
 @endphp
+
+@stop
+
+@section('scripts')
 <script>
 am4core.ready(function() {
 
@@ -220,4 +224,5 @@ chart.data = [{
 
 }); // end am4core.ready()
 </script>
+
 @stop

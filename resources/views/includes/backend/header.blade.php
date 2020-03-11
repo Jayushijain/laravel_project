@@ -4,7 +4,7 @@
 		<ul class="list-inline links-list pull-left" style="margin-top:9px;">
 			<li>
 				<a href="<?php //echo site_url('home');?>" target="_blank">
-					<i class="entypo-paper-plane"></i> <?php //echo get_phrase('website'); ?>
+					<i class="entypo-paper-plane"></i> Website
 				</a>
 			</li>
 		</ul>
