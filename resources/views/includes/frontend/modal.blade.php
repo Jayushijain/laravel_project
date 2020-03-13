@@ -2,7 +2,7 @@
 function showAjaxModal(url, header)
 {
     // SHOWING AJAX PRELOADER IMAGE
-    jQuery('#modal_ajax .modal-body').html('<div style="text-align:center;margin-top:200px;"><img src="<?php //echo base_url().'assets/global/bg-pattern-light.svg'; ?>" /></div>');
+    jQuery('#modal_ajax .modal-body').html('<div style="text-align:center;margin-top:200px;"><img src="global/bg-pattern-light.svg" /></div>');
     jQuery('#modal_ajax .modal-title').html('...');
     // LOADING THE AJAX MODAL
     jQuery('#modal_ajax').modal('show', {backdrop: 'true'});
@@ -31,7 +31,7 @@ function showAjaxModal(url, header)
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-dismiss="modal"><?php //echo get_phrase('close'); ?>Close</button>
+                <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -58,8 +58,8 @@ function showAjaxModal(url, header)
 
 
                 <div class="modal-footer" style="margin:0px; border-top:0px; text-align:center;">
-                    <a href="#" class="btn btn-danger" id="delete_link"><?php //echo get_phrase('delete');?>Delete</a>
-                    <button type="button" class="btn btn-info" data-dismiss="modal"><?php //echo get_phrase('cancel');?>Cancle</button>
+                    <a href="#" class="btn btn-danger" id="delete_link">Delete</a>
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Cancle</button>
                 </div>
             </div>
         </div>
