@@ -9,19 +9,20 @@
 </div>
 <div class="gallery-env">
   <div class="row">
-    @foreach ($categories as $category):
+    @foreach ($categories as $category)
       @if($category->parent_id > 0)
       	@continue
       	@endif
       	@php
       		$sub_categories = App\Category::where('parent_id',$category->id)->get(); 
       	@endphp
-      
+       
+       @if($category->parent_id == 0) 
       <div class="col-sm-4 on-hover-action" id = "{{ $category->id }}">
         <article class="album">
           <header>
             <a href="extra-gallery-single.html">
-              <img src="{{ asset("uploads/category_thumbnails/$category->thumbnail") }}" />
+              <img src="{{ asset('/uploads/category_thumbnails/'.$category->thumbnail) }}" />
             </a>
           </header>
 
@@ -41,7 +42,7 @@
                   <i class="entypo-cog"></i>
                 </a>
 
-                <a href="#" onclick="confirm_modal('{{ route('categories.destroy',$sub_category->id) }}');">
+                <a href="#" onclick="confirm_modal('{{ 'categories' }}','{{ $sub_category->id }}');">
                   <i class="entypo-trash"></i>
                 </a>
               </div>
@@ -51,12 +52,13 @@
             <a href = "{{ route('categories.edit',$category->id) }}" class="btn btn-info" id = "category-edit-btn-{{ $category->id  }}" style="display: none; margin-right:5px;">
   						Edit
   					</a> 
-            <a href = "javascript::" class="btn btn-red" id = "category-delete-btn-{{ $category->id  }}" onclick="confirm_modal('{{ "'.Admin/CategoriesController.destroy.'"}}',{{ $category->id }});" style="margin-right:5px; float: right; display: none;">
+            <a href = "javascript::" class="btn btn-red" id = "category-delete-btn-{{ $category->id  }}" onclick="confirm_modal('{{ 'categories' }}','{{ $category->id }}');" style="margin-right:5px; float: right; display: none;">
   						Delete
   					</a>
           </div>
         </article>
       </div>
+      @endif
     @endforeach
   </div>
 </div>

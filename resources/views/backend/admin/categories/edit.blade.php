@@ -23,7 +23,7 @@
 						<label for="name" class="col-sm-3 control-label">Category Title:</label>
 
 						<div class="col-sm-7">
-							<input type="text" class="form-control" name="name" id="name" placeholder="Provide Category Name" value="{{ $category->name }}">
+							<input type="text" class="form-control" name="name" id="name" placeholder="Provide Category Name" value="{{ $category->name }}" required onchange="checkCategoryName(this.value)">
 						</div>
 					</div>
 
@@ -35,7 +35,11 @@
 								<option value="0">None</option>
 								@foreach ($categories as $p_category)
 									@if ($p_category->parent_id == 0 && $p_category->id != $category->id)
-										<option value="{{ $p_category->id }}">{{ $p_category->name }}</option>
+										<option value="{{ $p_category->id }}"
+											@if ( $p_category->id == $category->parent_id )
+												{{ 'selected' }}
+											@endif
+											>{{ $p_category->name }}</option>
 									@endif
 								@endforeach
 							</select>
@@ -50,6 +54,7 @@
 						</div>
 					</div>
 
+					@if ( $category->thumbnail != "" )
 					<div class="form-group" id = "thumbnail-picker-area">
 						<label class="col-sm-3 control-label">Category Thumbnail <small>(400 X 255)</small> </label>
 
@@ -59,7 +64,7 @@
 								<div class="fileinput-new thumbnail" style="width: 200px; height: 200px;" data-trigger="fileinput">
 
 									@if ( $category->thumbnail != "")
-										<img src="{{ asset('uploads/category_thumbnails/'.$category->thumbnail) }}" style="width: 200px; height: 200px;" alt="...">
+										<img src="{{ asset('/uploads/category_thumbnails/'.$category->thumbnail) }}" style="width: 200px; height: 200px;" alt="...">
 									@else
 										<img src="{{ asset('uploads/category_thumbnails/thumbnail.png') }}" alt="...">
 									@endif
@@ -78,6 +83,8 @@
 							</div>
 						</div>
 					</div>
+					@endif
+
 					<div class="col-sm-offset-3 col-sm-5" style="padding-top: 10px;">
 							<button type="submit" class="btn btn-info">Update Category</button>
 					</div>
@@ -98,6 +105,24 @@ function checkCategoryType(category_type) {
 	}else {
 		$('#thumbnail-picker-area').show();
 	}
+}
+
+function checkCategoryName(category_name)
+{
+	if(/^[a-zA-Z0-9]+\s+[a-zA-Z0-9]*$/.test(category_name) == false && 
+		/^[a-zA-Z0-9]*$/.test(category_name) == false)
+	{
+		$("#name").parent().parent().addClass("has-error");
+		$("#name").parent().append('<span class="help-block">Category name can only contain text and numbers</span>');
+		return false;
+	}
+	else
+	{
+		$("#name").parent().parent().removeClass("has-error");
+		$(".help-block").remove();
+		return true;
+	}
+
 }
 </script>
 

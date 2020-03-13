@@ -20,7 +20,7 @@
 						<label for="name" class="col-sm-3 control-label">Category Title:</label>
 
 						<div class="col-sm-7">
-							<input type="text" class="form-control" name="name" id="name" placeholder="Provide Category Name">
+							<input type="text" class="form-control" name="name" id="name" placeholder="Provide Category Name" required onchange="checkCategoryName(this.value)">
 						</div>
 					</div>
 
@@ -88,6 +88,24 @@ function checkCategoryType(category_type) {
 	}else {
 		$('#thumbnail-picker-area').show();
 	}
+}
+
+function checkCategoryName(category_name)
+{
+	if(/^[a-zA-Z0-9]+\s+[a-zA-Z0-9]*$/.test(category_name) == false && 
+		/^[a-zA-Z0-9]*$/.test(category_name) == false)
+	{
+		$("#name").parent().parent().addClass("has-error");
+		$("#name").parent().append('<span class="help-block">Category name can only contain text and numbers</span>');
+		return false;
+	}
+	else
+	{
+		$("#name").parent().parent().removeClass("has-error");
+		$(".help-block").remove();
+		return true;
+	}
+
 }
 </script>
 

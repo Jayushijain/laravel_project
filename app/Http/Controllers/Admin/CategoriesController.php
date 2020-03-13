@@ -155,6 +155,24 @@ class CategoriesController extends Controller
 	 */
 	public function destroy($id)
 	{
-		return "in delte";
+		$category = Category::findOrFail($id);
+		//return $category;
+		if($category->thumbnail === " " || $category->thumbnail !== '/uploads/category_thumbnails/thumbnail.png')
+		{		
+			//unlink(asset('/uploads/category_thumbnails/'.$category->thumbnail));	
+		    unlink(public_path().'/uploads/category_thumbnails/'.$category->thumbnail);
+		}
+		
+        if($category->delete())
+        {
+        	Session::flash('success_message','Category deleted ');
+        }
+        else
+        {
+        	Session::flash('error_message','Category not deleted ');
+        }
+
+         
+         return redirect('/admin/categories');
 	}
 }

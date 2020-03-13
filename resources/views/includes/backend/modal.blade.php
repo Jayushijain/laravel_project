@@ -58,8 +58,8 @@ function confirm_modal(delete_url,id, modal_type)
     else{
         
         jQuery('#modal-4').modal('show', {backdrop: 'static'});
-        url = [delete_url,id];
-        alert(url);
+        url = '/admin/'+delete_url+'/'+id;
+        // alert(url);
         document.getElementById('delete_form').setAttribute('action' , url);
     }
 }
@@ -75,15 +75,15 @@ function confirm_modal(delete_url,id, modal_type)
                 <h4 class="modal-title" style="text-align:center;">Are yo sure to delete this information ?</h4>
             </div>
 
-
             <div class="modal-footer" style="margin:0px; border-top:0px; text-align:center;">
                 
-                {!! Form::open(['method'=>'DELETE','role' =>'form','class'=>'form-horizontal form-groups-bordered','id'=>'delete_form']) !!}
-                {{--  <form action="" method="post" > --}}
+                {{-- {!! Form::open(['method'=>'DELETE','role' =>'form','class'=>'form-horizontal form-groups-bordered','id'=>'delete_form']) !!} --}}
+                 <form action="" method="post" id ='delete_form' >
                     {{ method_field('delete') }}
+                    {{ csrf_field() }}
                 <button type="submit" class="btn btn-danger" id="delete_link">Delete</button>
-                {{-- </form>  --}}
-               {!! Form::close() !!}
+                </form> 
+               {{-- {!! Form::close() !!} --}}
                 <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
             </div>
         </div>
