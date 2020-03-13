@@ -2,36 +2,24 @@
 
 namespace App;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
 
 class Category extends Model
 {
-    //
-    protected $fillable = [
-        'parent_id',
-        'icon_class',
-        'name',
-        'slug',
-        'thumbnail',
-    ];
-    
+	use Sluggable; 
 
-    // function get_sub_categories() {
-    //     if ($this->id > 0) {
-    //       $this->db->where('parent_id', 1);
-    //     }
-    //     $this->db->where('parent_id >', '0');
-    //     return $this->db->get('categories');
-    //   }
+    protected $fillable = ['name','parent_id','icon_class','thumbnail','slug'];
 
-      public function get_sub_categories()
-      {
-          return $this->hasMany(SELF::class, 'parent_id');
-      }  
+     public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name',
+                'onUpdate' => true
+            ]
+        ];
+    }
 
-      public function parentCategory()
-      {
-         return $this->hasMany(SELF::class, 'id', 'parent_id');
-      }
 }

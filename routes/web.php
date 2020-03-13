@@ -23,32 +23,26 @@ Route::group(['middleware' => 'logincheck'], function () {
     Route::resource('/admin','AdminController');
 });
 
-Route::resource('/listings','ListingsController',['names'=>[
-    'index'=>'listings.index',
-    'create'=>'listings.create',
-    'store'=>'listings.store',
-    'edit'=>'listings.edit'
-]]);
+Route::resource('/listings','ListingsController');
 
-Route::resource('/categories','CategoriesController',['names'=>[
-    'index'=>'categories.index',
-    'create'=>'categories.create',
-    'store'=>'categories.store',
-    'edit'=>'categories.edit'
-]]);
+Route::resource('/categories','CategoriesController');
 
-Route::resource('/pricings','PricingsController',['names'=>[
-    'index'=>'pricings.index',
-    'create'=>'pricings.create',
-    'store'=>'pricings.store',
-    'edit'=>'pricings.edit'
-]]);
+Route::resource('/pricings','PricingsController');
 
 Route::get('/packages', 'PricingsController@packages');
+
+Route::get('/admin','Admin\AdminController@index');
+
+Route::resource('/admin/categories','Admin\CategoriesController');
+
+Route::resource('/admin/amenities','Admin\AmenitiesController');
+
+Route::resource('/admin/users','Admin\UsersController');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 
 //other page
 Route::get('/about', function () {
@@ -70,3 +64,4 @@ Route::get('/faq', function () {
 
 
 Route::get('/logout', 'Auth\LoginController@logout');
+

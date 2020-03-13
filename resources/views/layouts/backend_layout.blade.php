@@ -9,17 +9,19 @@
 <html lang="en" dir="<?php //if ($text_align == 'right-to-left') echo 'rtl';?>">
 <head>
 
-  <title><?php //echo $page_title;?> | <?php //echo $website_title;?></title>
+  <title>{{ $page_info['page_title'] }} | <?php //echo $website_title;?></title>
   <!-- all the meta tags -->
   <?php //include 'metas.php'; ?>
   <!-- all the css files -->
   @include('includes.backend.backend_top')
 
+  @yield('styles')
+
 </head>
 <body class="page-body" >
   <div class="page-container <?php //if ($text_align == 'right-to-left') echo 'right-sidebar';?>" >
     <!-- SIDEBAR -->
-    @include('includes.backend.navigation')
+    @include('backend.admin.navigation')
     <?php //include $logged_in_user_role.'/'.'navigation.php' ?>
     <div class="main-content">
 
@@ -29,11 +31,12 @@
 
       <h3 style="margin:20px 0px;" class="hidden-print">
         <i class="entypo-right-circled"></i>
-        <?php //echo $page_title;?>
+        {{ $page_info['page_title'] }}
       </h3>
 
       <!-- Start Content-->
-      <?php //include $logged_in_user_role.'/'.$page_name.'.php';?>
+      @yield('content')
+
       <!-- Footer starts here -->
       @include('includes.backend.footer')
      
@@ -41,7 +44,9 @@
   </div>
   <!-- all the js files -->
   @include('includes.backend.backend_bottom')
-  <?php //include 'modal.php'; ?>
-  <?php //include 'common_scripts.php'; ?>
+  @include('includes.backend.modal')
+  @include('includes.backend.common_scripts')
+  @yield('scripts')
+ 
 </body>
 </html>
