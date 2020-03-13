@@ -10,7 +10,8 @@
 <link rel="stylesheet" href="{{asset('css/backend/neon-theme.css')}}" type="text/css">
 <link rel="stylesheet" href="{{asset('css/backend/custom.css')}}" type="text/css">
 
-
+<link rel="stylesheet" href="{{asset('js/backend/datatable/dataTables/css/dataTables.bootstrap.css')}}" type="text/css"/>
+<link rel="stylesheet" href="{{asset('js/backend/datatable/buttons/css/buttons.bootstrap.css')}}" type="text/css"/>
 <!-- font awesome 5 -->
 <link href="{{ asset('css/backend/fontawesome-all.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/backend/font-awesome-icon-picker/fontawesome-iconpicker.min.css') }}" rel="stylesheet" type="text/css" />

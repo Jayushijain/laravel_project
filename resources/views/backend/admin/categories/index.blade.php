@@ -27,14 +27,14 @@
           </header>
 
           <section class="album-info">
-            <h3><a href="javascript::"><i class="{{ $category->icon_class }}"></i> {{ $category->name }}</a></h3>
+            <h3><a href="javascript::"><i class="{{ $category->icon_class }}"></i> {{ ucwords($category->name) }}</a></h3>
             <p>{{ count($sub_categories).' Sub Categories' }}</p>
           </section>
 
           @foreach ($sub_categories as $sub_category)
             <footer class="on-hover-action" id = "{{ $sub_category->id }}">
               <div class="album-images-count">
-                <i class="{{ $sub_category->icon_class }}"></i> {{ $sub_category->name }}
+                <i class="{{ $sub_category->icon_class }}"></i> {{ ucwords($sub_category->name) }}
               </div>
 
               <div class="album-options" id = "subcategory-action-btn-{{ $sub_category->id }}" style="display: none;">

@@ -70,6 +70,7 @@
 					</div>
 					<div class="col-sm-offset-3 col-sm-5" style="padding-top: 10px;">
 							<button type="submit" class="btn btn-info">Add Category</button>
+							<button type="button" class="btn btn-secondary" onclick ="javascript:window.history.back();">Cancel</button>
 					</div>
 				</form>
 			</div>

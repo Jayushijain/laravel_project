@@ -45,7 +45,8 @@
   <!-- all the js files -->
   @include('includes.backend.backend_bottom')
   @include('includes.backend.modal')
+  @include('includes.backend.common_scripts')
   @yield('scripts')
-  <?php //include 'common_scripts.php'; ?>
+ 
 </body>
 </html>

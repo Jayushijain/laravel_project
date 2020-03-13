@@ -59,19 +59,19 @@
         </li>
 
         <!-- Amenity -->
-        <li class="@if ($page_info['page_name'] == 'amenities' ||$page_info['page_name'] == 'amenity_add' || $page_info['page_name'] == 'amenity_edit') {{ 'opened active has-sub' }} @endif">
+        <li class="@if ($page_info['page_name'] == 'amenities' ||$page_info['page_name'] == 'add_amenity' || $page_info['page_name'] == 'edit_amenity') {{ 'opened active has-sub' }} @endif">
             <a href="#">
                 <i class="fa fa-puzzle-piece"></i>
                 <span>Amenities</span>
             </a>
             <ul>
-                <li class="@if ($page_info['page_name'] == 'amenity') {{ 'active' }} @endif">
+                <li class="@if ($page_info['page_name'] == 'amenities') {{ 'active' }} @endif">
                     <a href="{{ route('amenities.index') }}">
                         <span><i class="entypo-dot"></i>Amenities</span>
                     </a>
                 </li>
 
-                <li class=" @if ($page_info['page_name'] == 'amenity_add') {{ 'active' }} @endif ">
+                <li class=" @if ($page_info['page_name'] == 'add_amenity') {{ 'active' }} @endif ">
                     <a href="{{ route('amenities.create') }}">
                         <span><i class="entypo-dot"></i>Add New Amenity</span>
                     </a>

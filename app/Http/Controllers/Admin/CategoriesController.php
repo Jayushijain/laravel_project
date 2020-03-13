@@ -74,6 +74,7 @@ class CategoriesController extends Controller
         {
             Session::flash('error_message','Category not Created');
         }
+        
 		return redirect('/admin/categories');
 	}
 

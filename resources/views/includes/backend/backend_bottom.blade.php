@@ -16,6 +16,13 @@
     <script src="{{ asset('js/backend/daterangepicker/daterangepicker.js') }}"></script>
     <script src="{{ asset('js/backend/bootstrap-datepicker.js') }}"></script>
 
+    <script type="text/javascript" src="{{ asset('js/backend/datatable/datatables/js/jquery.dataTables.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/backend/datatable/datatables/js/dataTables.bootstrap.js') }}" ></script>
+
+<script type="text/javascript" src="{{ asset('js/backend/datatable/buttons/js/dataTables.buttons.js') }}"></script>
+
+<script type="text/javascript" src="{{ asset('js/backend/datatable/buttons/js/buttons.bootstrap.js') }}"></script>
+
 
 {{-- For select option --}}
     <script src="{{ asset('js/backend/select2/select2.min.js') }}"></script>
