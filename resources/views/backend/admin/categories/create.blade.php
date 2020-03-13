@@ -7,7 +7,7 @@
 		<div class="panel panel-primary" data-collapsed="0">
 			<div class="panel-heading">
 				<div class="panel-title">
-					Category Add form
+					{{ $page_info['page_title'] }}
 				</div>
 			</div>
 			<div class="panel-body">
@@ -20,7 +20,7 @@
 						<label for="name" class="col-sm-3 control-label">Category Title:</label>
 
 						<div class="col-sm-7">
-							<input type="text" class="form-control" name="name" id="name" placeholder="Provide Category Name" required onchange="checkCategoryName(this.value)">
+							<input type="text" class="form-control" name="name" id="name" placeholder="Provide Category Name" required onchange="checkName(this.value)">
 						</div>
 					</div>
 
@@ -91,23 +91,7 @@ function checkCategoryType(category_type) {
 	}
 }
 
-function checkCategoryName(category_name)
-{
-	if(/^[a-zA-Z0-9]+\s+[a-zA-Z0-9]*$/.test(category_name) == false && 
-		/^[a-zA-Z0-9]*$/.test(category_name) == false)
-	{
-		$("#name").parent().parent().addClass("has-error");
-		$("#name").parent().append('<span class="help-block">Category name can only contain text and numbers</span>');
-		return false;
-	}
-	else
-	{
-		$("#name").parent().parent().removeClass("has-error");
-		$(".help-block").remove();
-		return true;
-	}
 
-}
 </script>
 
 @stop

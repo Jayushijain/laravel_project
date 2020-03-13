@@ -8,6 +8,6 @@ class Package extends Model
 {
     public function histories()
 	{
-		return $this->hasMany('app\PackagePurchasedHistory');
+		return $this->hasMany('App\PackagePurchasedHistory');
 	}
 }

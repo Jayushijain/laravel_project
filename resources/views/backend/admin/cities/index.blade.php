@@ -5,7 +5,7 @@
 <!-- start page title -->
 <div class="row ">
   <div class="col-lg-12">
-    <a href="{{ route('amenities.create') }}" class="btn btn-primary alignToTitle"><i class="entypo-plus"></i>Add New Amenity</a>
+    <a href="{{ route('cities.create') }}" class="btn btn-primary alignToTitle"><i class="entypo-plus"></i>Add New City</a>
   </div><!-- end col-->
 </div>
 
@@ -22,8 +22,8 @@
           <thead>
             <tr>
               <th width="80"><div>#</div></th>
-              <th><div>Icon</div></th>
-              <th><div>Amenity Name</div></th>
+              <th><div>City Name</div></th>
+              <th><div>Country</div></th>
               <th><div>Options</div></th>
             </tr>
           </thead>
@@ -31,31 +31,33 @@
             @php
             $counter = 0;
             @endphp
-            @foreach ($amenities as $amenity)
+            @foreach ($cities as $city)
             <tr>
               <td>{{ ++$counter }}</td>
-              <td><i class="{{ $amenity->icon }}"></i></td>
-              <td>{{ ucwords($amenity->name) }}</td>
+
+              <td>{{ ucwords($city->name) }}</td>
+              <td>              
+                {{ ucwords($city->country->name) }}             
+              </td>
               <td style="text-align: center;">
-                <a href="{{ route('amenities.edit',$amenity->id) }}" class="btn btn-default btn-sm btn-icon icon-left">
-        					<i class="entypo-pencil"></i>
-        					Edit
-        				</a>
-                <a href="#" class="btn btn-danger btn-sm btn-icon icon-left" onclick="confirm_modal('{{ 'amenities' }}','{{ $amenity->id }}');">
-        					<i class="entypo-cancel"></i>
-        					Delete
-        				</a>
+                <a href="{{ route('cities.edit',$city->id) }}" class="btn btn-default btn-sm btn-icon icon-left">
+                  <i class="entypo-pencil"></i>
+                  Edit
+                </a>
+                <a href="#" class="btn btn-danger btn-sm btn-icon icon-left" onclick="confirm_modal('{{ 'cities' }}','{{ $city->id }}');">
+                  <i class="entypo-cancel"></i>
+                  Delete
+                </a>
 
               </td>
             </tr>
-            @endforeach
-          </tbody>
-        </table>
-      </div>
+          @endforeach
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
-
+</div>
 
 @stop
 

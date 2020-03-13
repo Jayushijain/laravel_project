@@ -23,6 +23,8 @@ Route::resource('/admin/categories','Admin\CategoriesController');
 
 Route::resource('/admin/amenities','Admin\AmenitiesController');
 
+Route::resource('/admin/cities','Admin\CitiesController');
+
 Route::resource('/admin/users','Admin\UsersController');
 
 
