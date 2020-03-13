@@ -1,0 +1,36 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    "72.8311",
+                    "21.1702"
+                ]
+            },
+            "properties": {
+                "id": "c08818f8354c00e76ba3761f880adc27",
+                "index": 0,
+                "isActive": true,
+                "logo": "90bb32d4afff7d7b2b6f3cd163a3997d.jpg",
+                "image": "90bb32d4afff7d7b2b6f3cd163a3997d.jpg",
+                "link": "http://localhost/atlas/restaurant/burger-king/4",
+                "url": "",
+                "name": "Burger King",
+                "category": "restaurant",
+                "email": "bugerking@gmail.com",
+                "stars": "3.0",
+                "phone": "1234567890",
+                "address": "VR mall, Surat",
+                "about": "Burger King is \r\n",
+                "tags": [
+                    "Burger king",
+                    "burger",
+                    "burger king surat"
+                ]
+            }
+        }
+    ]
+}

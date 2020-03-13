@@ -1,15 +1,17 @@
 <header class="header menu_fixed">
     <div id="logo">
-        <a href="<?php //echo site_url('home'); ?>" title="Sparker - Directory and listings template">
-            <img src="<?php //echo base_url();?>global/light_logo.png" width="165" height="35" alt="" class="logo_normal">
-            <img src="<?php //echo base_url();?>global/dark_logo.png" width="165" height="35" alt="" class="logo_sticky">
+        <a href="/" title="Sparker - Directory and listings template">
+            <img src="global/light_logo.png" width="165" height="35" alt="" class="logo_normal">
+            <img src="global/dark_logo.png" width="165" height="35" alt="" class="logo_sticky">
         </a>
     </div>
     <ul id="top_menu">
         <?php //if ($this->session->userdata('is_logged_in') != 1): ?>
+        @guest
         <li>
-            <a href="<?php //echo site_url('home/login'); ?>" class="login" title="Sign In">Sign In</a>
+            <a href="/login" class="login" title="Sign In">Sign In</a>
         </li>
+        @endguest
         <?php //endif; ?>
     </ul>
     <!-- /top_menu -->
