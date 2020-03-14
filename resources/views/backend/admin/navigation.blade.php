@@ -137,21 +137,21 @@
         </li>
 
         <!-- Cities -->
-        <li class="<?php //if ($page_name == 'cities' || $page_name == 'city_add' || $page_name == 'city_edit') echo 'opened active has-sub'; ?>">
+        <li class="@if ($page_info['page_name'] == 'cities' || $page_info['page_name'] == 'add_city' || $page_info['page_name'] == 'edit_city') {{ 'opened active has-sub' }} @endif ">
             <a href="#">
                 <i class="fa fa-location-arrow"></i>
-                <span>Cities<?php //echo get_phrase('cities'); ?></span>
+                <span>Cities</span>
             </a>
             <ul>
-                <li class="<?php //if ($page_name == 'cities') echo 'active'; ?> ">
-                    <a href="<?php //echo site_url('admin/cities'); ?>">
-                        <span><i class="entypo-dot"></i> <?php //echo get_phrase('cities'); ?></span>
+                <li class="@if ($page_info['page_name'] == 'cities') {{ 'active' }} @endif">
+                    <a href="{{ route('cities.index') }}">
+                        <span><i class="entypo-dot"></i>Cities</span>
                     </a>
                 </li>
 
-                <li class="<?php //if ($page_name == 'city_add') echo 'active'; ?> ">
-                    <a href="<?php //echo site_url('admin/city_form/add'); ?>">
-                        <span><i class="entypo-dot"></i> <?php //echo get_phrase('add_new_city'); ?></span>
+                <li class="@if ($page_info['page_name'] == 'add_city') {{ 'active' }} @endif">
+                    <a href="{{ route('cities.create') }}">
+                        <span><i class="entypo-dot"></i>Add New City</span>
                     </a>
                 </li>
             </ul>

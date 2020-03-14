@@ -32,17 +32,21 @@ Route::resource('/pricings','PricingsController');
     
 Route::get('/packages', 'PricingsController@packages');
 
+Auth::routes();
+
 //check admin
 Route::group(['middleware' => 'logincheck'], function () {
 
-    
-    Route::get('/admin','Admin\AdminController@index');
-    
-    Route::resource('/admin/categories','Admin\CategoriesController');
-    
-    Route::resource('/admin/amenities','Admin\AmenitiesController');
-    
-    Route::resource('/admin/users','Admin\UsersController');
+Route::get('/admin','Admin\AdminController@index');
+
+Route::resource('/admin/categories','Admin\CategoriesController');
+
+Route::resource('/admin/amenities','Admin\AmenitiesController');
+
+Route::resource('/admin/cities','Admin\CitiesController');
+
+Route::resource('/admin/users','Admin\UsersController');
+
 });
 
 //other page
