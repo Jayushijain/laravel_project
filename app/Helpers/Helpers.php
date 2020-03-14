@@ -104,6 +104,20 @@
         }
     }
 
+    function get_percentage_of_specific_rating($listing_id = "", $rating = "") 
+    {
+        $total_number_of_reviewers = get_listing_wise_review($listing_id);
+        $total_number_of_reviewers_of_specific_rating = DB::table('reviews')->where(['listing_id'=>$listing_id,'review_rating'=>$rating])->count();
+
+        if ($total_number_of_reviewers_of_specific_rating > 0) 
+        {
+            $percentage = ($total_number_of_reviewers_of_specific_rating / $total_number_of_reviewers) * 100;
+        }else 
+        {
+            $percentage = 0;
+        }
+        return floor($percentage);
+    }
 
 /**
  * Check which type of currency and then find the symbol
@@ -261,9 +275,15 @@ if (! function_exists('currency')) {
         function get_listing_url($listing_id = "")
         {
             $listing = DB::table('listings')->where('id', $listing_id)->first();
-            // $listing = $CI->db->get_where('listing', array('id' => $listing_id))->row_array();
-            $custom_url = $listing->listing_type.'/'.slugify($listing->name).'/'.$listing_id;
+            $custom_url = $listing->listing_type .'/'.slugify($listing->name).'/'.$listing_id;
             return $custom_url;
         }
     }
+
+    function get_opening_time($listing_id = "")
+    {
+        $timeconfig = DB::table('time_configurations')->where('listing_id', $listing_id)->first();
+        return $timeconfig;
+    }
+
 ?>
