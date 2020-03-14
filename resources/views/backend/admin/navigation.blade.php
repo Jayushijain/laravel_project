@@ -156,22 +156,23 @@
                 </li>
             </ul>
         </li>
+
         <!-- Pricing -->
-        <li class="<?php //if ($page_name == 'packages' || $page_name == 'package_add' || $page_name == 'package_edit') echo 'opened active has-sub'; ?>">
+        <li class="@if ($page_info['page_name'] == 'packages' || $page_info['page_name'] == 'add_package' || $page_info['page_name'] == 'edit_package') {{ 'opened active has-sub' }} @endif">
             <a href="#">
                 <i class="fa fa-credit-card"></i>
-                <span>Pricing<?php //echo get_phrase('pricings'); ?></span>
+                <span>Pricing</span>
             </a>
             <ul>
-                <li class="<?php //if ($page_name == 'packages') echo 'active'; ?> ">
-                    <a href="<?php //echo site_url('admin/packages'); ?>">
-                        <span><i class="entypo-dot"></i> <?php //echo get_phrase('all_packages'); ?></span>
+                <li class="@if ($page_info['page_name'] == 'packages') {{ 'active' }} @endif ">
+                    <a href="{{ route('packages.index') }}">
+                        <span><i class="entypo-dot"></i>All Packages</span>
                     </a>
                 </li>
 
-                <li class="<?php //if ($page_name == 'package_add') echo 'active'; ?> ">
-                    <a href="<?php //echo site_url('admin/package_form/add'); ?>">
-                        <span><i class="entypo-dot"></i> <?php //echo get_phrase('add_new_package'); ?></span>
+                <li class="@if ($page_info['page_name'] == 'add_package') {{ 'active' }} @endif">
+                    <a href="{{ route('packages.create') }}">
+                        <span><i class="entypo-dot"></i>Add New Package</span>
                     </a>
                 </li>
             </ul>

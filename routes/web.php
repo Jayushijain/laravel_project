@@ -20,7 +20,17 @@ Route::resource('/','WelcomeController');
 
 Route::group(['middleware' => 'logincheck'], function () {
 
-    Route::resource('/admin','AdminController');
+    Route::get('/admin','Admin\AdminController@index');
+
+	Route::resource('/admin/categories','Admin\CategoriesController');
+
+	Route::resource('/admin/amenities','Admin\AmenitiesController');
+
+	Route::resource('/admin/cities','Admin\CitiesController');
+
+	Route::resource('/admin/packages','Admin\PackagesController');
+
+	Route::resource('/admin/users','Admin\UsersController');
 });
 
 Route::resource('/listings','ListingsController');
@@ -31,15 +41,7 @@ Route::resource('/pricings','PricingsController');
 
 Route::get('/packages', 'PricingsController@packages');
 
-Route::get('/admin','Admin\AdminController@index');
 
-Route::resource('/admin/categories','Admin\CategoriesController');
-
-Route::resource('/admin/amenities','Admin\AmenitiesController');
-
-Route::resource('/admin/cities','Admin\CitiesController');
-
-Route::resource('/admin/users','Admin\UsersController');
 
 Auth::routes();
 

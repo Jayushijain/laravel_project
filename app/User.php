@@ -43,4 +43,15 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Role');
     }
+
+    /**
+     * To get the photo of the particular user
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getPhoto($id)
+    {
+        return $this->belongsTo('App\Role');
+    }
 }
