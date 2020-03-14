@@ -12,6 +12,6 @@ class WelcomeController extends Controller
     {
         $categories=Category::all();
         $listings=Listing::all();
-        return view('welcome',compact('categories','listings','settings'));
+        return view('welcome',compact('categories','listings'));
     }
 }
