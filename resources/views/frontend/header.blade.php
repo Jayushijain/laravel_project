@@ -4,7 +4,7 @@
       <div class="col-lg-3 col-12">
         <div id="logo">
           <a href="/<?php //echo site_url('home'); ?>">
-            <img src="global/dark_logo.png" width="165" height="35" alt="" class="logo_sticky">
+            <img src="{{ asset('global/dark_logo.png')}}" width="165" height="35" alt="" class="logo_sticky">
           </a>
         </div>
       </div>

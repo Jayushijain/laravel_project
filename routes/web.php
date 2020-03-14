@@ -15,12 +15,31 @@
 //     return view('welcome');
 
 // });
+Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/','WelcomeController');
 
+
+Route::resource('/listings','ListingsController');
+
+Route::resource('/restaurant/cafe-red','listingsController',['names'=>['show'=>'listings.show']]);
+Route::resource('/restaurant/cafe-red','listingsController',['names'=>['show'=>'listings.show']]);
+
+Route::resource('/categories','CategoriesController');
+    
+Route::resource('/pricings','PricingsController');
+    
+Route::get('/packages', 'PricingsController@packages');
+
+
+Auth::routes();
+
+//check admin
 Route::group(['middleware' => 'logincheck'], function () {
 
-    Route::get('/admin','Admin\AdminController@index');
+Route::get('/admin','Admin\AdminController@index');
 
 	Route::resource('/admin/categories','Admin\CategoriesController');
 
@@ -31,41 +50,25 @@ Route::group(['middleware' => 'logincheck'], function () {
 	Route::resource('/admin/packages','Admin\PackagesController');
 
 	Route::resource('/admin/users','Admin\UsersController');
+
+
 });
-
-Route::resource('/listings','ListingsController');
-
-Route::resource('/categories','CategoriesController');
-
-Route::resource('/pricings','PricingsController');
-
-Route::get('/packages', 'PricingsController@packages');
-
-
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
 
 //other page
 Route::get('/about', function () {
     return view('frontend.about');
 });
-
 Route::get('/terms_and_conditions', function () {
     return view('frontend.terms_and_conditions');
 });
-
 Route::get('/privacy_policy', function () {
     return view('frontend.privacy_policy');
 });
-
 Route::get('/faq', function () {
     return view('frontend.faq');
 });
 //end
 
-
+//logout
 Route::get('/logout', 'Auth\LoginController@logout');
 

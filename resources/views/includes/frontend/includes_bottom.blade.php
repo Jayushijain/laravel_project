@@ -15,15 +15,17 @@
 <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
 
 <!-- SHOW TOASTR NOTIFIVATION -->
+
 @if (Session::has('success_message'))
 <script type="text/javascript">
     toastr.success( '{{ session('success_message') }}' );
 </script>
 @endif
 
+
 @if (Session::has('error_message'))
 <script type="text/javascript">
-    toastr.error( '{{ session('error_message') }}' );
+	toastr.error('{{ session("error_message")}}');
 </script>
 @endif
 
