@@ -15,18 +15,20 @@
 <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
 
 <!-- SHOW TOASTR NOTIFIVATION -->
-@if (Session::has('flash_message'))
+<?php //if ($this->session->flashdata('flash_message') != ""):?>
+
 <script type="text/javascript">
-	toastr.success('{{ session("flash_message")}}');
+	toastr.success('<?php //echo $this->session->flashdata("flash_message");?>');
 </script>
 
-@endif
+<?php //endif;?>
 
-@if (Session::has('error_message'))
+<?php //if ($this->session->flashdata('error_message') != ""):?>
+
 <script type="text/javascript">
-	toastr.error('{{ session("error_message")}}');
+	toastr.error('<?php //echo $this->session->flashdata("error_message");?>');
 </script>
-@endif
+<?php //endif;?>
 
 
 <script type="text/javascript">

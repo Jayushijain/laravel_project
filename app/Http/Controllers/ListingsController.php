@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Listing;
-use App\Amenity;
+use App\Amenitie;
 
 class ListingsController extends Controller
 {
@@ -20,9 +20,9 @@ class ListingsController extends Controller
         //     $this->session->set_userdata('listings_view', $param1);
         // }
         $userdata = Session::put('listings_view','list_view');
-        $amenities = Amenity::all();
+        $amenities = Amenitie::all();
         $categories = Category::all();
-        $listings = Listing::all();
+        $listings =Listing::all();
         return view('frontend.listings',compact('listings','categories','amenities'));
     }
 
@@ -56,10 +56,6 @@ class ListingsController extends Controller
     public function show($id)
     {
         //
-        $amenities = Amenity::all();
-        $categories = Category::all();
-        $listing_detail = Listing::findOrFail($id);
-        return view('frontend.directory_listing',compact('listing_detail','categories','amenities'));
     }
 
     /**
@@ -95,13 +91,4 @@ class ListingsController extends Controller
     {
         //
     }
-
-    // public function search(Request $request)
-    // {
-    //     $search_string = $_GET['search_string'];
-    //     $selected_category_id = $_GET['selected_category_id'];
-
-    //     $listings = search_listing($search_string,$selected_category_id);
-    //     return redirect('/listings');
-    // }
 }

@@ -7,17 +7,17 @@
         </li>
         <li>
             <span>
-                <a href="/listings">Listings</a>
+                <a href="{{route('listings.index')}}">Listings</a>
             </span>
         </li>
         <li>
             <span>
-                <a href="/categories">Category</a>
+                <a href="{{route('categories.index')}}">Category</a>
             </span>
         </li>
         <li>
             <span>
-                <a href="/pricings">Pricing</a>
+                <a href="{{route('pricings.index')}}">Pricing</a>
             </span>
         </li>
         <?php //if ($this->session->userdata('is_logged_in') == 1): ?>
@@ -33,7 +33,7 @@
                     <a href="/admin<?php //echo base_url(strtolower($this->session->userdata('role')).'/dashboard');?>">Manage Account</a>
                 </li>
                 <li>
-                    <a href="/logout">Logout</a>
+                    <a href="{{ route('logout') }}">Logout</a>
                 </li>
             </ul>
         </li>

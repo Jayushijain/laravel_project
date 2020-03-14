@@ -7,7 +7,7 @@
             <p>
                     <?php echo frontend_system_setting('slogan'); ?>
             </p>
-            <form action="" method="get">
+            <form action="<?php //echo site_url('home/search'); ?>" method="get">
                 <div class="row no-gutters custom-search-input-2">
                     <div class="col-lg-7">
                         <div class="form-group">
@@ -125,7 +125,7 @@
                 <figure>
 
                     <!--redirect to routs file-->
-                    <a href="<?php echo get_listing_url($listing['id']); ?>">
+                    <a href="<?php //echo get_listing_url($listing['id']); ?>">
                         <img src="uploads/listing_thumbnails/{{$listing['listing_thumbnail']}}" class="img-fluid" alt=""
                             width="400" height="266">
                         <div class="read_more">
@@ -138,7 +138,7 @@
                 </figure>
                 <div class="wrapper">
                     <h3>
-                        <a href="<?php echo get_listing_url($listing['id']); ?>">
+                        <a href="<?php //echo get_listing_url($listing['id']); ?>">
                             <?php echo $listing['name']; ?>
                         </a>
                     </h3>
