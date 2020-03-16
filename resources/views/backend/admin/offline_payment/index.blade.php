@@ -64,8 +64,3 @@
 
 
 @stop
-
-@section('scripts')
-
-
-@stop

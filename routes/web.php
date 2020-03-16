@@ -51,8 +51,13 @@ Route::group(['middleware' => 'logincheck'], function () {
 
 	Route::resource('/admin/offline_payment','Admin\OfflinePayController');
 
-	Route::resource('/admin/users','Admin\UsersController');
+	Route::resource('/admin/reports','Admin\ReportsController');
 
+	Route::get('/reports/date/{range}',['as' => 'reports.daterange', 'uses' => 'Admin\ReportsController@filter_by_date_range']);
+
+	Route::resource('/admin/rating_wise_quality','Admin\ReviewWiseQualitiesController');
+
+	Route::resource('/admin/users','Admin\UsersController');
 
 });
 

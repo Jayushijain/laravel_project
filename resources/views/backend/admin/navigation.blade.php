@@ -187,17 +187,18 @@
         </li>
 
         <!-- Reports -->
-        <li class="<?php //if ($page_name == 'report' || $page_name == 'package_invoice') echo 'active'; ?> " style="border-top:1px solid #232540;">
-            <a href="<?php //echo site_url('admin/report'); ?>">
+        <li class="@if ($page_info['page_name'] == 'reports' || $page_info['page_name'] == 'package_invoice'){{  'active' }}  @endif" style="border-top:1px solid #232540;">
+            <a href="{{ route('reports.index') }}">
                 <i class="fa fa-paperclip"></i>
-                <span>Reports<?php //echo get_phrase('report'); ?></span>
+                <span>Reports</span>
             </a>
         </li>
+
         <!-- Rating wise quality -->
-        <li class="<?php //if ($page_name == 'rating_wise_quality' || $page_name == 'edit_rating_wise_quality') echo 'active'; ?> " style="border-top:1px solid #232540;">
-            <a href="<?php //echo site_url('admin/rating_wise_quality'); ?>">
+        <li class="@if ($page_info['page_name'] == 'rating_wise_quality' || $page_info['page_name'] == 'edit_rating_wise_quality') {{ 'active' }} @endif" style="border-top:1px solid #232540;">
+            <a href="{{ route('rating_wise_quality.index') }}">
                 <i class="fa fa-thumbs-up"></i>
-                <span>Rating wise quality<?php //echo get_phrase('rating_wise_quality'); ?></span>
+                <span>Rating wise quality</span>
             </a>
         </li>
 
