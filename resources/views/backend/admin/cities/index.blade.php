@@ -60,8 +60,3 @@
 </div>
 
 @stop
-
-@section('scripts')
-
-
-@stop

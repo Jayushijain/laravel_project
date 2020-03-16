@@ -13,6 +13,7 @@
     <script src="{{ asset('js/backend/neon-demo.js') }}"></script>
     <script src="{{ asset('js/backend/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('js/backend/bootstrap-timepicker.min.js') }}"></script>
+    <script src="{{ asset('js/backend/daterangepicker/moment.js') }}"></script>
     <script src="{{ asset('js/backend/daterangepicker/daterangepicker.js') }}"></script>
     <script src="{{ asset('js/backend/bootstrap-datepicker.js') }}"></script>
 
@@ -66,3 +67,13 @@ function error_notify(message) {
      });
   });
 </script>
+
+<script type="text/javascript">
+
+  jQuery(document).ready(function($)
+  {
+    var datatable = $("#table_export").dataTable();
+  });
+
+</script>
+
