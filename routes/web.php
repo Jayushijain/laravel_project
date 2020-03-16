@@ -39,7 +39,7 @@ Auth::routes();
 //check admin
 Route::group(['middleware' => 'logincheck'], function () {
 
-Route::get('/admin','Admin\AdminController@index');
+	Route::get('/admin','Admin\AdminController@index');
 
 	Route::resource('/admin/categories','Admin\CategoriesController');
 
@@ -48,6 +48,8 @@ Route::get('/admin','Admin\AdminController@index');
 	Route::resource('/admin/cities','Admin\CitiesController');
 
 	Route::resource('/admin/packages','Admin\PackagesController');
+
+	Route::resource('/admin/offline_payment','Admin\OfflinePayController');
 
 	Route::resource('/admin/users','Admin\UsersController');
 

@@ -179,10 +179,10 @@
         </li>
 
         <!-- Offline Payment -->
-        <li class="<?php //if ($page_name == 'offline_payment') echo 'active'; ?> " style="border-top:1px solid #232540;">
-            <a href="<?php //echo site_url('admin/offline_payment'); ?>">
+        <li class="@if ($page_info['page_name'] == 'offline_payment') {{ 'active' }} @endif" style="border-top:1px solid #232540;">
+            <a href="{{ route('offline_payment.index') }}">
                 <i class="fa fa-archive"></i>
-                <span>Offline Payment<?php //echo get_phrase('offline_payment'); ?></span>
+                <span>Offline Payment</span>
             </a>
         </li>
 

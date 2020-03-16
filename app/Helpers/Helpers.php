@@ -335,7 +335,6 @@ if (! function_exists('currency_code_and_symbol'))
             $custom_url = $listing->listing_type .'/'.slugify($listing->name).'/'.$listing_id;
             return $custom_url;
         }
-    }
 
     function get_opening_time($listing_id = "")
     {
