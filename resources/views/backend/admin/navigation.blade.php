@@ -203,25 +203,26 @@
         </li>
 
         <!-- Users -->
-        <li class="<?php //if ($page_name == 'agents' || $page_name == 'users' || $page_name == 'user_add' || $page_name == 'user_edit') echo 'opened active has-sub'; ?>">
+        <li class="@if ($page_info['page_name'] == 'agents' || $page_info['page_name'] == 'users' || $page_info['page_name'] == 'add_user' || $page_info['page_name'] == 'edit_user') {{ 'opened active has-sub' }} @endif">
             <a href="#">
                 <i class="fa fa-users"></i>
-                <span>Users<?php //echo get_phrase('users'); ?></span>
+                <span>Users</span>
             </a>
             <ul>
-                <li class="<?php //if ($page_name == 'users') echo 'active'; ?> ">
-                    <a href="<?php //echo site_url('admin/users'); ?>">
-                        <span><i class="entypo-dot"></i> <?php //echo get_phrase('users'); ?></span>
+                <li class="@if ($page_info['page_name'] == 'users') {{ 'active' }}  @endif">
+                    <a href="{{ route('users.index') }}">
+                        <span><i class="entypo-dot"></i> Users</span>
                     </a>
                 </li>
 
                 <li class="<?php //if ($page_name == 'user_add') echo 'active'; ?> ">
                     <a href="<?php //echo site_url('admin/user_form/add'); ?>">
-                        <span><i class="entypo-dot"></i> <?php //echo get_phrase('add_new_user'); ?></span>
+                        <span><i class="entypo-dot"></i>Add New User</span>
                     </a>
                 </li>
             </ul>
         </li>
+
         <!-- SETTINGS -->
         <li class="<?php
         //if ($page_name == 'system_settings' || $page_name == 'frontend_settings' || $page_name == 'payment_settings' || $page_name == 'smtp_settings' || $page_name == 'about' ) echo 'opened active'; ?> ">

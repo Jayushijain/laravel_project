@@ -18,7 +18,11 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return User::count();
+        $users = User::all();
+        $page_info['page_title'] = 'Users';
+        $page_info['page_name']  = 'users';
+
+        return view('backend.admin.users.index', compact('users', 'page_info'));
     }
 
     /**
