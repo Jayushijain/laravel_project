@@ -215,8 +215,8 @@
                     </a>
                 </li>
 
-                <li class="<?php //if ($page_name == 'user_add') echo 'active'; ?> ">
-                    <a href="<?php //echo site_url('admin/user_form/add'); ?>">
+                <li class="@if ($page_info['page_name'] == 'add_user') {{ 'active' }} @endif">
+                    <a href="{{ route('users.create') }}">
                         <span><i class="entypo-dot"></i>Add New User</span>
                     </a>
                 </li>
@@ -224,41 +224,30 @@
         </li>
 
         <!-- SETTINGS -->
-        <li class="<?php
-        //if ($page_name == 'system_settings' || $page_name == 'frontend_settings' || $page_name == 'payment_settings' || $page_name == 'smtp_settings' || $page_name == 'about' ) echo 'opened active'; ?> ">
+        <li class="@if ($page_info['page_name'] == 'system_settings' || $page_info['page_name'] == 'frontend_settings' || $page_info['page_name'] == 'payment_settings' || $page_info['page_name'] == 'smtp_settings' || $page_info['page_name'] == 'about' ) {{ 'opened active' }} @endif ">
         <a href="#">
             <i class="fa fa-cogs"></i>
-            <span>Settings<?php //echo get_phrase('settings'); ?></span>
+            <span>Settings</span>
         </a>
         <ul>
-            <li class="<?php //if ($page_name == 'system_settings') echo 'active'; ?> ">
+            <li class="@if ($page_info['page_name'] == 'system_settings') {{ 'active' }} @endif">
                 <a href="<?php //echo site_url('admin/system_settings'); ?>">
-                    <span><i class="entypo-dot"></i> <?php //echo get_phrase('system_settings'); ?></span>
+                    <span><i class="entypo-dot"></i>System Settings</span>
                 </a>
             </li>
-            <li class="<?php //if ($page_name == 'frontend_settings') echo 'active'; ?> ">
+            <li class="@if ($page_info['page_name'] == 'frontend_settings') {{ 'active' }} @endif">
                 <a href="<?php //echo site_url('admin/frontend_settings'); ?>">
-                    <span><i class="entypo-dot"></i> <?php //echo get_phrase('frontend_settings'); ?></span>
+                    <span><i class="entypo-dot"></i>Frontend Settings</span>
                 </a>
             </li>
-            <li class="<?php //if ($page_name == 'payment_settings') echo 'active'; ?> ">
+            <li class="@if ($page_info['page_name'] == 'payment_settings') {{ 'active' }} @endif">
                 <a href="<?php //echo site_url('admin/payment_settings'); ?>">
-                    <span><i class="entypo-dot"></i> <?php //echo get_phrase('payment_settings'); ?></span>
+                    <span><i class="entypo-dot"></i>Payment Settings</span>
                 </a>
             </li>
-            <li class="<?php //if ($page_name == 'manage_language') echo 'active'; ?> ">
-                <a href="<?php //echo site_url('admin/manage_language'); ?>">
-                    <span><i class="entypo-dot"></i> <?php //echo get_phrase('language_settings'); ?></span>
-                </a>
-            </li>
-            <li class="<?php //if ($page_name == 'smtp_settings') echo 'active'; ?> ">
+            <li class="@if ($page_info['page_name'] == 'smtp_settings') {{ 'active' }} @endif">
                 <a href="<?php //echo site_url('admin/smtp_settings'); ?>">
-                    <span><i class="entypo-dot"></i> <?php //echo get_phrase('smtp_settings'); ?></span>
-                </a>
-            </li>
-            <li class="<?php //if ($page_name == 'about') echo 'active'; ?> ">
-                <a href="<?php //echo site_url('admin/about'); ?>">
-                    <span><i class="entypo-dot"></i> <?php //echo get_phrase('about'); ?></span>
+                    <span><i class="entypo-dot"></i>Smtp Settings</span>
                 </a>
             </li>
         </ul>

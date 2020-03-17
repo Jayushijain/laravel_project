@@ -343,4 +343,17 @@ if (! function_exists('currency_code_and_symbol'))
     }
 
 
+	function getPhoto($user_id)
+    {
+        if(is_file(public_path().'/uploads/user_image/'.$user_id.'jpg'))
+        {
+            return asset('/uploads/user_image/'.$user_id.'jpg');
+        }
+        else
+        {
+             return asset('/uploads/user_image/user.png');
+        }
+
+    }
+
 ?>

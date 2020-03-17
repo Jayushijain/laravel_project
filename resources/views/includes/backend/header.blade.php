@@ -15,15 +15,15 @@
 			<li class="profile-info dropdown pull-right"><!-- add class "pull-right" if you want to place this from right -->
 
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					<img src="<?php //echo $this->user_model->get_user_thumbnail($this->session->userdata('user_id')); ?>" alt="" class="img-circle" width="44">
-					
+					<img src="{{  getPhoto(Auth::user()->id) }}" alt="" class="img-circle" width="44">
+					{{ ucwords(Auth::user()->name) }}
 
 					<div style="margin-top: -15px;
 							    font-size: 10px;
 							    text-align: left;
 							    padding-left: 53px;
 							    color: #707696;">
-						<p style="margin-top: 0px"><?php //echo $this->session->userdata('role');?></p>
+						<p style="margin-top: 0px">{{ Auth::user()->role->name  }}</p>
 					</div>
 				</a>
 
@@ -33,34 +33,34 @@
 					<li class="caret"></li>
 
 					<!-- Settings sub-links -->
-					<?php //if (strtolower($this->session->userdata('role')) == 'admin'): ?>
+					@if (strtolower(Auth::user()->role->name) == 'admin')
 						<li>
 								<a href="<?php //echo site_url('admin/system_settings'); ?>" class="dropdown-item notify-item">
 	                  <i class="flaticon-rotate"></i>
-	                  <span><?php //echo get_phrase('settings'); ?></span>
+	                  <span>Settings</span>
 	              </a>
 						</li>
-          <?php //endif; ?>
+          			@endif
 
 					<!-- Profile sub-links -->
 					<li>
-							<a href="<?php //echo site_url(strtolower($this->session->userdata('role')).'/manage_profile');?>">
-								<i class="flaticon-rotate"></i>
-								<?php //echo get_phrase('edit_profile');?>
-							</a>
+						<a href="<?php //echo site_url(strtolower($this->session->userdata('role')).'/manage_profile');?>">
+							<i class="flaticon-rotate"></i>
+							Edit Profile
+						</a>
 					</li>
 
 					<li>
 						<a href="<?php //echo site_url(strtolower($this->session->userdata('role')).'/manage_profile');?>">
 							<i class="flaticon-lock"></i>
-							<?php //echo get_phrase('change_password');?>
+							Change Password
 						</a>
 					</li>
 
 					<li>
 						<a href="<?php //echo site_url('login/logout');?>">
 							<i class="flaticon-paper-plane-1"></i>
-							<?php //echo get_phrase('log_out');?>
+							Logout
 						</a>
 					</li>
 
