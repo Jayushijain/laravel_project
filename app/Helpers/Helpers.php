@@ -104,7 +104,7 @@ if (!function_exists('sanitizer'))
 {
 	function sanitizer($string = '')
 	{
-		$sanitized_string = html_escape($string);
+		$sanitized_string = htmlspecialchars($string);
 
 		return $sanitized_string;
 	}

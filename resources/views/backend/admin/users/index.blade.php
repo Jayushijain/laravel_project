@@ -36,11 +36,11 @@
                             <tr>
                                 <td>{{ ++$counter }}</td>
                                 <td class="text-center">
-                                	@if(file_exists(asset('/uploads/user_image/'.$user->id.'.jpg')))
+                                	{{-- @if(!file_exists(asset('/uploads/user_image/'.$user->id.'.jpg'))) --}}
                                 		<img class="rounded-circle" src="{{ asset('/uploads/user_image/'.$user->id.'.jpg') }}" alt="" style="height: 50px; width: 50px;">
-                                	@else
+                                	{{-- @else
                                 		<img class="rounded-circle" src="{{ asset('/uploads/user_image/user.png') }}" alt="" style="height: 50px; width: 50px;">
-                                	@endif                                	
+                                	@endif --}}                            	
                                 </td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>

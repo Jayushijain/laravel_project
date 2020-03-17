@@ -59,6 +59,8 @@ Route::group(['middleware' => 'logincheck'], function () {
 
 	Route::resource('/admin/users','Admin\UsersController');
 
+	Route::post('/admin/users/get_emails','Admin\UsersController@get_emails');
+
 });
 
 //other page
