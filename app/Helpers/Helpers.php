@@ -14,13 +14,13 @@ function frontend_system_setting($type = '')
 }
 
 /**
- * Display The our System setting
+ * Display our System setting
  *
  * @param   string  $type  settingtype
  *
  * @return  description
  */
-function system_setting($type = '')
+function get_settings($type = '')
 {
 	$settings = DB::table('settings')->where('type', $type)->first();
 

@@ -231,7 +231,7 @@
         </a>
         <ul>
             <li class="@if ($page_info['page_name'] == 'system_settings') {{ 'active' }} @endif">
-                <a href="<?php //echo site_url('admin/system_settings'); ?>">
+                <a href="{{ route('system_settings.index') }}">
                     <span><i class="entypo-dot"></i>System Settings</span>
                 </a>
             </li>

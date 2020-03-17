@@ -61,6 +61,10 @@ Route::group(['middleware' => 'logincheck'], function () {
 
 	Route::post('/admin/users/get_emails','Admin\UsersController@get_emails');
 
+	Route::resource('/admin/system_settings','Admin\SystemSettingsController');
+
+	Route::post('/admin/update_settings',['as' => 'system.update', 'uses' => 'Admin\SystemSettingsController@update_settings']);
+
 });
 
 //other page
