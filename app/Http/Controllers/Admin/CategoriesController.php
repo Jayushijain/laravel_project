@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Category;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
@@ -127,7 +128,6 @@ class CategoriesController extends Controller
             {
                 if ($file = $request->file('thumbnail'))
                 {
-                    //unlink(public_path().'uploads/category_thumbnails/'.$category->thumbnail);
                     $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME).rand(100, 999).'.jpg';
                     $file->move('uploads/category_thumbnails', $filename);
                     $input['thumbnail'] = $filename;
@@ -157,10 +157,9 @@ class CategoriesController extends Controller
 	public function destroy($id)
 	{
 		$category = Category::findOrFail($id);
-		//return $category;
+
 		if($category->thumbnail === " " || $category->thumbnail !== '/uploads/category_thumbnails/thumbnail.png')
-		{		
-			//unlink(asset('/uploads/category_thumbnails/'.$category->thumbnail));	
+		{
 		    unlink(public_path().'/uploads/category_thumbnails/'.$category->thumbnail);
 		}
 		
@@ -172,8 +171,7 @@ class CategoriesController extends Controller
         {
         	Session::flash('error_message','Category not deleted ');
         }
-
          
-         return redirect('/admin/categories');
+        return redirect('/admin/categories');
 	}
 }

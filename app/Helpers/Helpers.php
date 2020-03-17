@@ -104,7 +104,7 @@ if (!function_exists('sanitizer'))
 {
 	function sanitizer($string = '')
 	{
-		$sanitized_string = html_escape($string);
+		$sanitized_string = htmlspecialchars($string);
 
 		return $sanitized_string;
 	}
@@ -342,5 +342,18 @@ if (! function_exists('currency_code_and_symbol'))
         return $timeconfig;
     }
 
+
+	function getPhoto($user_id)
+    {
+        if(is_file(public_path().'/uploads/user_image/'.$user_id.'jpg'))
+        {
+            return asset('/uploads/user_image/'.$user_id.'jpg');
+        }
+        else
+        {
+             return asset('/uploads/user_image/user.png');
+        }
+
+    }
 
 ?>

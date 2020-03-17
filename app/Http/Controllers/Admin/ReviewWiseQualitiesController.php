@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
 use App\ReviewWiseQuality;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ReviewWiseQualitiesController extends Controller
 {
@@ -80,18 +80,18 @@ class ReviewWiseQualitiesController extends Controller
 	public function update(Request $request, $id)
 	{
 		$quality = ReviewWiseQuality::findOrFail($id);
-        $input = $request->all();
+		$input   = $request->all();
 
-        if($quality->update($input))
-        {
-            Session::flash('success_message','Data Updated Successfully');
-        }
-        else
-        {
-            Session::flash('error_message','Data not Updated Successfully');
-        }
+		if ($quality->update($input))
+		{
+			Session::flash('success_message', 'Data Updated Successfully');
+		}
+		else
+		{
+			Session::flash('error_message', 'Data not Updated Successfully');
+		}
 
-        return redirect('/admin/rating_wise_quality');
+		return redirect('/admin/rating_wise_quality');
 	}
 
 	/**

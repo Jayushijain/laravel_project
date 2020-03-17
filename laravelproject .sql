@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 06, 2020 at 12:33 PM
+-- Generation Time: Mar 16, 2020 at 12:49 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -31,19 +31,22 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `amenities`;
 CREATE TABLE IF NOT EXISTS `amenities` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `icon` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `icon` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `slug` longtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `amenities`
 --
 
-INSERT INTO `amenities` (`id`, `icon`, `name`, `slug`) VALUES
-(1, 'fas fa-tv', 'Television', 'television'),
-(2, 'fas fa-tree', 'Outdoor Seating', 'outdoor-seating');
+INSERT INTO `amenities` (`id`, `name`, `icon`, `slug`, `updated_at`, `created_at`) VALUES
+(1, 'Television', 'fas fa-tv', 'television', '2020-03-13 06:11:46', '0000-00-00 00:00:00'),
+(2, 'Outdoor Seating', 'fas fa-tree', 'outdoor-seating', '2020-03-13 06:11:46', '0000-00-00 00:00:00'),
+(3, 'cycling', 'fas fa-bicycle', 'cycling', '2020-03-13 01:17:34', '2020-03-13 00:41:52');
 
 -- --------------------------------------------------------
 
@@ -106,23 +109,29 @@ DROP TABLE IF EXISTS `categories`;
 CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parent_id` int(11) DEFAULT 0,
-  `icon_class` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `name` longtext COLLATE utf8_unicode_ci DEFAULT NULL,
-  `slug` longtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `icon_class` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `thumbnail` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `slug` longtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `parent_id`, `icon_class`, `name`, `slug`, `thumbnail`) VALUES
-(1, 0, 'fas fa-utensils', 'Restaurant', 'restaurant', 'aa0812f03c7ffba5b641fc516a6c4b8d.jpg'),
-(2, 0, 'fas fa-shopping-cart', 'Shopping', 'shopping', 'ecdaac30a6ef4de57fbb8df365de33f7.jpg'),
-(3, 1, 'fas fa-coffee', 'Cafe', 'cafe', NULL),
-(4, 0, 'fab fa-stripe-s', 'Salon', 'salon', '84f71337b3d8bbff42e1f48745dafe92.jpg'),
-(5, 0, 'fas fa-h-square', 'Hotel', 'hotel', 'thumbnail.png');
+INSERT INTO `categories` (`id`, `parent_id`, `name`, `icon_class`, `thumbnail`, `slug`, `updated_at`, `created_at`) VALUES
+(1, 0, 'Restaurants', 'fas fa-utensils', 'aa0812f03c7ffba5b641fc516a6c4b8d.jpg', 'restaurant', '2020-03-11 04:07:04', NULL),
+(2, 0, 'Shopping', 'fas fa-shopping-cart', 'shopping956.jpg', 'shopping', '2020-03-11 04:14:08', NULL),
+(3, 1, 'Cafes', 'fas fa-coffee', NULL, 'cafe', '2020-03-11 23:59:30', NULL),
+(4, 0, 'Salon', 'fab fa-stripe-s', '84f71337b3d8bbff42e1f48745dafe92.jpg', 'salon', NULL, NULL),
+(6, 0, 'theatre', 'fas fa-film', 'th121.jpg', 'theatre', '2020-03-11 00:45:23', '2020-03-11 00:45:23'),
+(8, 7, 'mobile shops', 'fas fa-mobile-alt', NULL, 'mobile-shops', '2020-03-11 00:59:04', '2020-03-11 00:59:04'),
+(12, 0, '%^&', 'fab fa-500px', 'thumbnail.png', '', '2020-03-12 01:08:20', '2020-03-12 01:08:20'),
+(13, 0, NULL, 'fab fa-accessible-icon', 'thumbnail.png', NULL, '2020-03-12 01:09:45', '2020-03-12 01:09:45'),
+(14, 4, 'barber', 'fab fa-500px', NULL, 'gfhgk', '2020-03-12 22:40:20', '2020-03-12 22:39:53');
 
 -- --------------------------------------------------------
 
@@ -136,16 +145,20 @@ CREATE TABLE IF NOT EXISTS `cities` (
   `country_id` int(11) DEFAULT NULL,
   `name` longtext COLLATE utf8_unicode_ci DEFAULT NULL,
   `slug` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `cities`
 --
 
-INSERT INTO `cities` (`id`, `country_id`, `name`, `slug`) VALUES
-(1, 73, 'Paris', 'paris'),
-(2, 98, 'Surat', 'surat');
+INSERT INTO `cities` (`id`, `country_id`, `name`, `slug`, `updated_at`, `created_at`) VALUES
+(1, 73, 'Paris', 'paris', '2020-03-13 07:09:20', '0000-00-00 00:00:00'),
+(2, 98, 'Surat', 'surat', '2020-03-13 07:09:20', '0000-00-00 00:00:00'),
+(3, 98, 'mumbai', 'mumbai', '2020-03-13 05:40:44', '2020-03-13 05:40:44'),
+(4, 98, 'jodhpur', 'jodhpur', '2020-03-13 05:53:01', '2020-03-13 05:41:05');
 
 -- --------------------------------------------------------
 
@@ -793,7 +806,7 @@ CREATE TABLE IF NOT EXISTS `listings` (
 
 INSERT INTO `listings` (`id`, `user_id`, `city_id`, `country_id`, `google_analytics_id`, `code`, `name`, `description`, `categories`, `amenities`, `photos`, `video_url`, `video_provider`, `tags`, `address`, `email`, `phone`, `website`, `social`, `latitude`, `longitude`, `status`, `listing_type`, `listing_thumbnail`, `listing_cover`, `seo_meta_tags`, `is_featured`, `created_at`, `updated_at`) VALUES
 (1, 1, 1, 73, '', '51b58e6f1253d12cfb6c6af4b20be465', 'Cafe Red', 'Wonderful cafe to spend quality time with your loved ones.', '[\"3\",\"1\"]', '[\"1\",\"2\"]', '[\"b1993e07453bac5a94bba5d55d78600f.jpg\",\"0d88c1e1d0f8c059e0bc028ab503b1fd.jpg\"]', '', 'youtube', 'cafe', 'cia lato', 'CafeRed@email.com', 1234567890, 'CafeRed.com', '{\"facebook\":\"\",\"twitter\":\"\",\"linkedin\":\"\"}', '21.0000000000', '72.8311000000', 'active', 'restaurant', '762972b95980b09cf8071327a5777f10.jpg', '7507013ca53314fd4e50f5963320c12d.jpg', '', 1, '2020-03-06 07:18:46', '0000-00-00 00:00:00'),
-(2, 1, 2, 98, '', 'a4fd1eee2c30051f3f535f6067265304', 'Jawed Habib', 'Best salon', '[\"4\"]', '[\"1\"]', '[\"a540cbdfa9d06643416e9df71ea38ef1.jpg\"]', '', 'youtube', '', 'Pipload', 'jh@gmail.com', 1234567890, 'jawed.com', '{\"facebook\":\"\",\"twitter\":\"\",\"linkedin\":\"\"}', '21.0000000000', '72.8311000000', 'active', 'beauty', 'e2099c94918408b5867305b705eb537a.jpg', '2c50ceffba3e3697f3c9c08ce85d3be1.jpg', '', 1, '2020-03-06 07:18:46', '0000-00-00 00:00:00'),
+(2, 1, 2, 98, '', 'a4fd1eee2c30051f3f535f6067265304', 'Jawed Habib', 'Best salon', '[\"4\"]', '[\"1\"]', '[\"a540cbdfa9d06643416e9df71ea38ef1.jpg\"]', '', 'youtube', '', 'Pipload', 'jh@gmail.com', 1234567890, 'jawed.com', '{\"facebook\":\"\",\"twitter\":\"\",\"linkedin\":\"\"}', '21.0000000000', '72.8311000000', 'inactive', 'beauty', 'e2099c94918408b5867305b705eb537a.jpg', '2c50ceffba3e3697f3c9c08ce85d3be1.jpg', '', 1, '2020-03-09 09:33:26', '0000-00-00 00:00:00'),
 (3, 1, 2, 98, '', '5606cb86ba8841b476fa93c2df851434', 'Hotel Taj', '', '[\"5\"]', '[\"1\",\"2\"]', '[\"8ca604f0c26e75e482cd781d8489fd18.jpg\"]', '', 'youtube', 'hotel,hotelsurat', 'pipload', 'taj@gmail.com', 1234567890, 'xyz.com', '{\"facebook\":\"\",\"twitter\":\"\",\"linkedin\":\"\"}', '21.0000000000', '72.8311000000', 'active', 'hotel', 'e4a5676273f06176cb0eefd6dd721571.jpg', '829c952a22ce4212ab6e5bfce9718222.jpg', 'best hotel', 0, '2020-03-06 07:18:46', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
@@ -817,15 +830,18 @@ CREATE TABLE IF NOT EXISTS `packages` (
   `number_of_categories` int(3) NOT NULL DEFAULT 0,
   `featured` int(1) NOT NULL DEFAULT 0,
   `is_recommended` int(1) NOT NULL DEFAULT 0,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `packages`
 --
 
-INSERT INTO `packages` (`id`, `package_type`, `name`, `price`, `validity`, `number_of_listings`, `ability_to_add_video`, `ability_to_add_contact_form`, `number_of_photos`, `number_of_tags`, `number_of_categories`, `featured`, `is_recommended`) VALUES
-(1, 1, 'Basic', 45, 30, 2, 0, 0, 2, 2, 2, 1, 1);
+INSERT INTO `packages` (`id`, `package_type`, `name`, `price`, `validity`, `number_of_listings`, `ability_to_add_video`, `ability_to_add_contact_form`, `number_of_photos`, `number_of_tags`, `number_of_categories`, `featured`, `is_recommended`, `updated_at`, `created_at`) VALUES
+(1, 1, 'Basic', 50, 30, 2, 0, 0, 2, 2, 2, 1, 1, '2020-03-16 04:50:17', '0000-00-00 00:00:00'),
+(2, 1, 'gold', 100, 50, 10, 0, 1, 5, 10, 10, 0, 0, '2020-03-16 04:50:33', '2020-03-14 01:38:15');
 
 -- --------------------------------------------------------
 
@@ -836,14 +852,24 @@ INSERT INTO `packages` (`id`, `package_type`, `name`, `price`, `validity`, `numb
 DROP TABLE IF EXISTS `package_purchased_histories`;
 CREATE TABLE IF NOT EXISTS `package_purchased_histories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `package_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `expired_date` date DEFAULT NULL,
+  `package_id` int(11) DEFAULT NULL,
   `amount_paid` bigint(10) DEFAULT NULL,
-  `purchase_date` date DEFAULT NULL,
+  `purchase_date` timestamp NULL DEFAULT NULL,
+  `expired_date` timestamp NULL DEFAULT NULL,
   `payment_method` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `package_purchased_histories`
+--
+
+INSERT INTO `package_purchased_histories` (`id`, `user_id`, `package_id`, `amount_paid`, `purchase_date`, `expired_date`, `payment_method`, `updated_at`, `created_at`) VALUES
+(4, 2, 2, 100, '2020-03-16 00:33:09', '2020-05-05 00:33:09', 'cash', '2020-03-16 00:33:09', '2020-03-16 00:33:09'),
+(5, 2, 2, 100, '2020-03-16 00:33:24', '2020-05-05 00:33:24', 'cash', '2020-03-16 00:33:24', '2020-03-16 00:33:24');
 
 -- --------------------------------------------------------
 
@@ -923,6 +949,8 @@ CREATE TABLE IF NOT EXISTS `review_wise_qualities` (
   `rating_from` float DEFAULT NULL,
   `rating_to` float DEFAULT NULL,
   `quality` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -930,12 +958,12 @@ CREATE TABLE IF NOT EXISTS `review_wise_qualities` (
 -- Dumping data for table `review_wise_qualities`
 --
 
-INSERT INTO `review_wise_qualities` (`id`, `rating_from`, `rating_to`, `quality`) VALUES
-(1, 1, 1.5, 'Bad!!'),
-(2, 1.6, 2.8, 'Not Bad'),
-(3, 2.9, 3.4, 'So So'),
-(4, 3.5, 4.5, 'Good'),
-(5, 4.6, 5, 'Awesome');
+INSERT INTO `review_wise_qualities` (`id`, `rating_from`, `rating_to`, `quality`, `updated_at`, `created_at`) VALUES
+(1, 1, 1.5, 'Bad!', '2020-03-16 06:10:04', '0000-00-00 00:00:00'),
+(2, 1.6, 2.8, 'Not Bad', '2020-03-16 11:40:00', '0000-00-00 00:00:00'),
+(3, 2.9, 3.4, 'So So', '2020-03-16 11:40:00', '0000-00-00 00:00:00'),
+(4, 3.5, 4.5, 'Good', '2020-03-16 11:40:00', '0000-00-00 00:00:00'),
+(5, 4.6, 5, 'Awesome', '2020-03-16 06:10:33', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -1048,6 +1076,7 @@ INSERT INTO `time_configurations` (`id`, `listing_id`, `saturday`, `sunday`, `mo
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_id` int(11) DEFAULT NULL,
   `name` varchar(100) COLLATE utf8_unicode_ci DEFAULT '',
   `email` varchar(50) COLLATE utf8_unicode_ci DEFAULT '',
   `address` longtext COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -1056,21 +1085,24 @@ CREATE TABLE IF NOT EXISTS `users` (
   `social` longtext COLLATE utf8_unicode_ci DEFAULT NULL,
   `about` longtext COLLATE utf8_unicode_ci DEFAULT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
-  `role_id` int(11) DEFAULT NULL,
   `wishlists` longtext COLLATE utf8_unicode_ci DEFAULT NULL,
   `verification_code` longtext COLLATE utf8_unicode_ci DEFAULT NULL,
   `is_verified` int(11) NOT NULL DEFAULT 0,
+  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `address`, `phone`, `website`, `social`, `about`, `password`, `role_id`, `wishlists`, `verification_code`, `is_verified`) VALUES
-(1, 'admin', 'admin@narola.email', NULL, 5678890776, '', '{\"facebook\":\"\",\"twitter\":\"\",\"linkedin\":\"\"}', NULL, 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, '[]', NULL, 1),
-(2, 'jayushi jain', 'jjj@narola.email', 'dream palace', 1234567809, NULL, '{\"facebook\":\"\",\"twitter\":\"\",\"linkedin\":\"\"}', NULL, '7c4a8d09ca3762af61e59520943dc26494f8941b', 2, '[]', '2c95cfb746ddc3403157352b41da1590', 1),
-(3, 'Sourabh jain', 'sj@narola.email', 'dream palace', 1234567890, NULL, '{\"facebook\":\"\",\"twitter\":\"\",\"linkedin\":\"\"}', NULL, '7c4a8d09ca3762af61e59520943dc26494f8941b', 2, '[\"1\"]', '24998c0d51cd84d2ac1c8a0e7e9225dc', 1);
+INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `address`, `phone`, `website`, `social`, `about`, `password`, `wishlists`, `verification_code`, `is_verified`, `remember_token`, `updated_at`, `created_at`) VALUES
+(1, 1, 'admin', 'admin@narola.email', NULL, 5678890776, '', '{\"facebook\":\"\",\"twitter\":\"\",\"linkedin\":\"\"}', NULL, '$2y$10$6HO0uabi1pkVwmaWULkUxO044jP/9D1bIoNASkTOOqbT9MIwke136', '[]', '2c95cfb746ddc3403157352b41da1590', 1, NULL, '2020-03-14 04:15:36', '2020-03-09 20:33:09'),
+(2, 2, 'jayushi jain', 'jjj@narola.email', 'dream palace', 1234567809, NULL, '{\"facebook\":\"\",\"twitter\":\"\",\"linkedin\":\"\"}', NULL, '7c4a8d09ca3762af61e59520943dc26494f8941b', '[]', '2c95cfb746ddc3403157352b41da1590', 1, NULL, '2020-03-13 12:08:51', '0000-00-00 00:00:00'),
+(3, 2, 'Sourabh jain', 'sj@narola.email', 'dream palace', 1234567890, NULL, '{\"facebook\":\"\",\"twitter\":\"\",\"linkedin\":\"\"}', NULL, '7c4a8d09ca3762af61e59520943dc26494f8941b', '[\"1\"]', '24998c0d51cd84d2ac1c8a0e7e9225dc', 1, NULL, '2020-03-13 12:08:51', '0000-00-00 00:00:00'),
+(4, 2, 'bhanuuuuu', 'jayushi@narola.email', 'dream palace', 1234567890, '', NULL, NULL, '$2y$10$6HO0uabi1pkVwmaWULkUxO044jP/9D1bIoNASkTOOqbT9MIwke136', NULL, NULL, 1, 'Vqmb7UUZb6eSqGXRl9Mcv5oK1UyS4qqXqi47DQOINsI6urRm0S4SNpL0AsDn', '2020-03-16 04:50:50', '2020-03-13 06:43:00');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
