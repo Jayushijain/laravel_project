@@ -192,8 +192,6 @@ if (!function_exists('currency_code_and_symbol'))
 	{
 		$currency      = DB::table('settings')->where('type', 'system_currency')->first();
 		$currency_code = $currency->description;
-
-<<<<<<< HEAD
 		$symbolfind = DB::table('currencies')->where('code', $currency_code)->first();
 		$symbol     = $symbolfind->symbol;
 
@@ -300,7 +298,7 @@ if (!function_exists('slugify'))
 		$text = preg_replace('~[^\\pL\d]+~u', '-', $text);
 		$text = trim($text, '-');
 		$text = strtolower($text);
-=======
+
   if (! function_exists('is_wishlisted')) {
     function is_wishlisted($listing_id = '') {
       
@@ -331,7 +329,6 @@ if (!function_exists('slugify'))
         }
     }
   }
->>>>>>> feature/descriptionlisting
 
 //$text = preg_replace('~[^-\w]+~', '', $text);
 		if (empty($text))
@@ -419,7 +416,6 @@ if (! function_exists('currency_code_and_symbol'))
         return $food_menus;
     }
 
-<<<<<<< HEAD
 
 	function getPhoto($user_id)
     {
@@ -434,7 +430,6 @@ if (! function_exists('currency_code_and_symbol'))
 
     }
 
-=======
     function get_hotel_rooms($listing_id = "")
     {
         $hotel_rooms = DB::table('hotel_room_specifications')->where('listing_id', $listing_id)->get();
@@ -472,5 +467,5 @@ if (! function_exists('currency_code_and_symbol'))
         // $this->db->where('status', 'active');
         // return  $this->db->get('listing')->result_array();
     }
->>>>>>> feature/descriptionlisting
+
 ?>

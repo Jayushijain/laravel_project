@@ -177,7 +177,7 @@
 							<ul>
 								<?php
 								$counter = 0;
-								$amenities = App\Amenity::all();
+								//$amenities = App\Amenity::all();
 								// $amenities = $this->crud_model->get_amenities()->result_array();
 								foreach ($amenities as $amenity):
 								 	$counter++;

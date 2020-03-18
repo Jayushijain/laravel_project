@@ -29,10 +29,10 @@ Route::get('/claimstore', 'ListingsController@claim');
 Route::get('/review', 'ReviewsController@store');
 
 
-Route::get('/search/{searchstring?}/{id?}','ListingsController@search');
+//Route::get('/search/{searchstring?}/{id?}','ListingsController@search');
 
 // Route::resource('/{category}/{listing_name}/{id?}','ListingsController',['names'=>['show'=>'listings.show']]);
-Route::resource('/{category}/{listingname}/','ListingsController',['names'=>['show'=>'listings.show']]);
+//Route::resource('/{category}/{listingname}/','ListingsController',['names'=>['show'=>'listings.show']]);
 
 
 Route::resource('/restaurant/cafe-red','ListingsController',['names'=>['show'=>'listings.show']]);

@@ -3,7 +3,7 @@
 	<div class="col-md-12 col-sm-12 clearfix " style="background-color:#ffffff; box-shadow: 0px 10px 30px 0px rgba(82,63,105,0.08); border-radius: 5px;">
 		<ul class="list-inline links-list pull-left" style="margin-top:9px;">
 			<li>
-				<a href="{{ route('index') }}" target="_blank">
+				<a href="{{-- {{ route('index') }} --}}" target="_blank">
 					<i class="entypo-paper-plane"></i> Website
 				</a>
 			</li>
@@ -44,21 +44,21 @@
 
 					<!-- Profile sub-links -->
 					<li>
-						<a href="<?php //echo site_url(strtolower($this->session->userdata('role')).'/manage_profile');?>">
+						<a href="">
 							<i class="flaticon-rotate"></i>
 							Edit Profile
 						</a>
 					</li>
 
 					<li>
-						<a href="<?php //echo site_url(strtolower($this->session->userdata('role')).'/manage_profile');?>">
+						<a href="">
 							<i class="flaticon-lock"></i>
 							Change Password
 						</a>
 					</li>
 
 					<li>
-						<a href="<?php //echo site_url('login/logout');?>">
+						<a href="">
 							<i class="flaticon-paper-plane-1"></i>
 							Logout
 						</a>
