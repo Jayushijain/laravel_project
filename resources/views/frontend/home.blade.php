@@ -7,7 +7,7 @@
             <p>
                     <?php echo frontend_system_setting('slogan'); ?>
             </p>
-            <form action="" method="get">
+            <form action="/search/" method="POST">
                 <div class="row no-gutters custom-search-input-2">
                     <div class="col-lg-7">
                         <div class="form-group">
@@ -64,8 +64,7 @@
 				continue;
                 ?>
                 <div class="col-lg-4 col-md-6">
-                    <a href="<?php //echo site_url('home/filter_listings?category='.slugify($category['name']).'&&amenity=&&video=0&&status=all'); ?>"
-                        class="grid_item">
+                    <a href="/{{slugify($category['name'])}}.'/video=0/status=all'"class="grid_item">
                         <figure>
                             <img src="uploads/category_thumbnails/{{$category['thumbnail']}}" alt="">
                             <div class="info">
@@ -123,9 +122,11 @@
         <div class="item">
             <div class="strip grid">
                 <figure>
-
+                    <?php $listing_type = $listing['listing_type'];
+                          $listing_name = $listing['name'];
+                          $lising_id = $listing['id']?>
                     <!--redirect to routs file-->
-                    <a href="<?php echo get_listing_url($listing['id']); ?>">
+                    <a href="{{ $listing['listing_type']}}/{{slugify($listing['name'])}}/{{$listing['id'] }}">
                         <img src="uploads/listing_thumbnails/{{$listing['listing_thumbnail']}}" class="img-fluid" alt=""
                             width="400" height="266">
                         <div class="read_more">

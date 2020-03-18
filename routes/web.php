@@ -17,15 +17,29 @@
 // });
 Auth::routes();
 
-// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index');
 
 Route::resource('/','WelcomeController');
 
 
 Route::resource('/listings','ListingsController');
 
-Route::resource('/restaurant/cafe-red','listingsController',['names'=>['show'=>'listings.show']]);
-Route::resource('/restaurant/cafe-red','listingsController',['names'=>['show'=>'listings.show']]);
+Route::get('/claimstore', 'ListingsController@claim');
+
+Route::get('/review', 'ReviewsController@store');
+
+
+Route::get('/search/{searchstring?}/{id?}','ListingsController@search');
+
+// Route::resource('/{category}/{listing_name}/{id?}','ListingsController',['names'=>['show'=>'listings.show']]);
+Route::resource('/{category}/{listingname}/','ListingsController',['names'=>['show'=>'listings.show']]);
+
+
+Route::resource('/restaurant/cafe-red','ListingsController',['names'=>['show'=>'listings.show']]);
+
+Route::resource('/beauty/jawed-habib','ListingsController',['names'=>['show'=>'listings.show']]);
+
+Route::resource('/hotel/hotel-taj','ListingsController',['names'=>['show'=>'listings.show']]);
 
 Route::resource('/categories','CategoriesController');
     

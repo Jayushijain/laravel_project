@@ -1,5 +1,8 @@
 <!-- <header class="header_in is_sticky menu_fixed <?php //Session::get('listings_view'); //if($this->session->userdata('listings_view') == 'list_view') echo 'map_view' ?>"> -->
-<header class="header_in<?php //if($this->session->userdata('listings_view') == 'list_view') echo 'map_view' ?>">
+<header class="header_in" 
+                        @if(Session::has('listings_view') == 'list_view')
+						  map_view 
+                        @endif>
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-3 col-12">

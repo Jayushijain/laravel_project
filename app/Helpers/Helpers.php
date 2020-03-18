@@ -8,10 +8,24 @@
  */
 function frontend_system_setting($type = '')
 {
-	$settings = DB::table('frontend_settings')->where('type', $type)->first();
-
+    $settings = DB::table('frontend_settings')->where('type', $type)->first();
+    
 	return $settings->description;
 }
+
+    /**
+     * Display The our System setting
+     *
+     * @param   string  $type  settingtype
+     *
+     * @return  description
+     */
+    function get_settings($type = '')
+    {
+        $settings = DB::table('settings')->where('type', $type)->first();
+        
+        return $settings->description;
+    }
 
 /**
  * Display The our System setting
@@ -179,6 +193,7 @@ if (!function_exists('currency_code_and_symbol'))
 		$currency      = DB::table('settings')->where('type', 'system_currency')->first();
 		$currency_code = $currency->description;
 
+<<<<<<< HEAD
 		$symbolfind = DB::table('currencies')->where('code', $currency_code)->first();
 		$symbol     = $symbolfind->symbol;
 
@@ -285,6 +300,38 @@ if (!function_exists('slugify'))
 		$text = preg_replace('~[^\\pL\d]+~u', '-', $text);
 		$text = trim($text, '-');
 		$text = strtolower($text);
+=======
+  if (! function_exists('is_wishlisted')) {
+    function is_wishlisted($listing_id = '') {
+      
+        if (Auth::check()) 
+        {
+            $user_details = DB::table('users')->where('id', Auth::user()->id)->first();
+            // $user_details = $CI->db->get_where('user', array('id' => $CI->session->userdata('user_id')))->row_array();
+            if ($user_details->wishlists != "") 
+            {
+                $wishlists = json_decode($user_details->wishlists);
+                if (in_array($listing_id, $wishlists)) 
+                {
+                return 1;
+                }
+                else 
+                {
+                return 0;
+                }
+            }
+            else 
+            {
+            return 1;
+            }
+        }
+        else
+        {
+          return false;
+        }
+    }
+  }
+>>>>>>> feature/descriptionlisting
 
 //$text = preg_replace('~[^-\w]+~', '', $text);
 		if (empty($text))
@@ -341,7 +388,38 @@ if (! function_exists('currency_code_and_symbol'))
         $timeconfig = DB::table('time_configurations')->where('listing_id', $listing_id)->first();
         return $timeconfig;
     }
+    
+    function claiming_status($listing_id = "")
+    {
+        $claiming_status = DB::table('claimed_listings')->where('listing_id', $listing_id)->value('status');
+        return $claiming_status;
+    }
 
+    function get_role($user_id = "")
+    {
+        $role = DB::table('users')->where('id', $user_id)->first();
+        return $role->role_id;
+    }
+
+    function get_category_name($categories = "")
+    {
+        $categories = DB::table('categories')->where('id', $categories)->first();
+        return $categories->name;
+    }
+
+    function get_amenity_name($amenity = "")
+    {
+        $amenity = DB::table('amenities')->where('id', $amenity)->first();
+        return $amenity->name;
+    }
+
+    function get_food_menus($listing_id = "")
+    {
+        $food_menus = DB::table('food_menus')->where('listing_id', $listing_id)->get();
+        return $food_menus;
+    }
+
+<<<<<<< HEAD
 
 	function getPhoto($user_id)
     {
@@ -356,4 +434,43 @@ if (! function_exists('currency_code_and_symbol'))
 
     }
 
+=======
+    function get_hotel_rooms($listing_id = "")
+    {
+        $hotel_rooms = DB::table('hotel_room_specifications')->where('listing_id', $listing_id)->get();
+        return $hotel_rooms;
+    }
+
+    function get_beauty($listing_id = "")
+    {
+        $beauty_services = DB::table('beauty_services')->where('listing_id', $listing_id)->get();
+        return $beauty_services;
+    }
+
+    function get_shop_product($listing_id = "")
+    {
+        $products = DB::table('product_details')->where('listing_id', $listing_id)->get();
+        return $products;
+    }
+
+    function search_listing($search_string = '', $selected_category_id = '') {
+        if ($search_string != "" || $selected_category_id != "") {
+            $search = DB::table('listings')->where('name', 'like', $search_string)->get();
+            $search = DB::table('categories')->where('id', $selected_category_id)->get();
+            return $search;
+            // $this->db->like('name', $search_string);
+            // $this->db->or_like('description', $search_string);
+        }
+
+        // if ($selected_category_id != "") {
+        //     return $search = DB::table('categories')->where('id', $selected_category_id)->get();
+        //     // $this->db->like('categories', "$selected_category_id");
+        // }
+
+        // $this->db->order_by('is_featured', 'desc');
+
+        // $this->db->where('status', 'active');
+        // return  $this->db->get('listing')->result_array();
+    }
+>>>>>>> feature/descriptionlisting
 ?>

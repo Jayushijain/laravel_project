@@ -7,6 +7,7 @@ use App\Category;
 use App\Listing;
 use App\Amenity;
 
+
 class ListingsController extends Controller
 {
     /**
@@ -96,12 +97,27 @@ class ListingsController extends Controller
         //
     }
 
-    // public function search(Request $request)
-    // {
-    //     $search_string = $_GET['search_string'];
-    //     $selected_category_id = $_GET['selected_category_id'];
+    public function search(Request $request)
+    {
+        //print_r($input = $request->all());
+        // echo $search_string = $request['search_string'];
+        // echo $selected_category_id = $request->selected_category_id;
+        $search_string = "restaurant";
+        $selected_category_id = 1;
+        $amenities = Amenity::all();
+        $categories = Category::all();
+        $listings = Listing::findOrFail($selected_category_id);
+        //$listings = search_listing($search_string,$selected_category_id);
+        if ($selected_category_id != "") {
+            $page['category_ids'] = array($selected_category_id);
+        }
+        if ($search_string != "") {
+            $page['search_string'] = $search_string;
+        }
+        // return redirect('/listings',compact('listings','page'));
+        return view('frontend.listings',compact('listings','categories'));
+    }
 
-    //     $listings = search_listing($search_string,$selected_category_id);
-    //     return redirect('/listings');
-    // }
+    
+
 }

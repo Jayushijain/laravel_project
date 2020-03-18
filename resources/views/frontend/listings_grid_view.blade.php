@@ -23,7 +23,7 @@
 					<div class="row no-gutters custom-search-input-2 inner">
 						<div class="col-lg-8">
 							<div class="form-group">
-								<input class="form-control" name="search_string" type="text" value="<?php //echo $search_string; ?>" placeholder="what are you looking for...">
+								<input class="form-control" name="search_string" type="text" value="<?php echo $search_string; ?>" placeholder="what are you looking for...">
 								<i class="icon_search"></i>
 							</div>
 						</div>
@@ -168,7 +168,7 @@
 						<!-- Price range filter -->
 						<div class="filter_type">
 							<h6>Price limit</h6>
-							<div class="distance">Price within <span></span> <?php echo system_setting('system_currency'); ?></div>
+							<div class="distance">Price within <span></span> <?php echo get_settings('system_currency'); ?></div>
 							<input type="range" class="price-range" min="0" max="<?php //echo $this->frontend_model->get_the_maximum_price_limit_of_all_listings(); ?>" step="10" value="<?php echo $price_range; ?>" data-orientation="horizontal" onchange="filter(this)">
 						</div>
 

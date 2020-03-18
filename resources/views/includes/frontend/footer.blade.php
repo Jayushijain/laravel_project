@@ -64,16 +64,16 @@
                     <ul class="contacts">
                         <li>
                             <i class="ti-home"></i>
-                                <?php echo system_setting('address'); ?>
+                                <?php echo get_settings('address'); ?>
                         </li>
                         <li>
                             <i class="ti-headphone-alt"></i>
-                            <?php echo system_setting('phone'); ?>
+                            <?php echo get_settings('phone'); ?>
                         </li>
                         <li>
                             <i class="ti-email"></i>
                             <a href="#0">
-                            <?php echo system_setting('system_email'); ?>
+                            <?php echo get_settings('system_email'); ?>
                             </a>
                         </li>
                     </ul>

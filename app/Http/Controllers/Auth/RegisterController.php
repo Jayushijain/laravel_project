@@ -69,6 +69,8 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'address'=> $data['address'],
             'phone'=> $data['phone'],
+            'social' => json_encode($data['social']),
+            // 'wishlists' => $data['wishlist'],
         ]);
     }
 }

@@ -3,16 +3,24 @@
 @section('content') 
 @include('frontend.header')
 
-@foreach ($listing_detail as $listing_details)
-                                                             
-<div class="hero_in shop_detail" style="background: url('{{ asset('uploads/listing_cover_photo/')}}{{$listing_detail['listing_cover']}}') center center no-repeat; background-size: cover;">
+<?php
+$reviews = get_listing_wise_review($listing_detail['id']);
+// $quality = get_rating_wise_quality($listing_detail['id'])->quality;
+$rating = get_listing_wise_rating($listing_detail['id']);
+$review = get_listing_wise_review($listing_detail['id']);
+$reviewer = get_listing_wise_review($listing_detail['id']);
+?>
+
+                                                            
+<div class="hero_in shop_detail" style="background: url('{{ asset('uploads/listing_cover_photo')}}/{{$listing_detail['listing_cover']}}') center center no-repeat; background-size: cover;">
 	<!-- <div class="wrapper">
 		<span class="magnific-gallery">
 			<?php 
-					// foreach ($listing_details['photos'] as $key => $photo): 
-					// 	    echo $listing_details['name'];
-					// 		echo $key = 0 ? 'view photos' : 'view photos'; 
-					// endforeach; 
+					foreach (json_decode($listing_detail['photos']) as $key => $photo):
+						echo asset('uploads/listing_images/').$photo;
+						echo $listing_detail['name'];
+						echo $key == 0 ? 'view_photos' : 'view_photos'; 
+					endforeach; 
 			?>
 		</span>
 	</div> -->
@@ -48,9 +56,9 @@
 							echo $listing_detail['name'];
 						?>
 
-						<?php //$claiming_status = $this->db->get_where('claimed_listing', array('listing_id' => $listing_id))->row('status'); ?>
-		                <?php //if($claiming_status == 1): ?>
-		                	<span style="font-size: 20px;"><i class='icon-check text-success'></i></span>
+						<?php //$claiming_status=claiming_status($listing_detail['id']);//$claiming_status = $this->db->get_where('claimed_listing', array('listing_id' => $listing_id))->row('status'); ?>
+		                <?php //if($claiming_status->status == 1): ?>
+		                	<!-- <span style="font-size: 20px;"><i class='icon-check text-success'></i></span> -->
 		                <?php //endif; ?>
 					</h1>
 					<?php if ($listing_detail['latitude'] != "" && $listing_detail['longitude'] != ""): ?>
@@ -58,24 +66,44 @@
 					<?php endif; ?>
 				</div>
 
+				<div class="add_bottom_15">
+					<?php 
+					$categories = json_decode($listing_detail['categories']);
+					for ($i = 0; $i < sizeof($categories); $i++):
+						$category_name = get_category_name($categories[$i]);
+						// $this->db->where('id',$categories[$i]);
+						// $category_name = $this->db->get('category')->row()->name;
+					?>
+					<span class="loc_open mr-2">
+						<a href="home/filter_listings?category='.slugify($category_name).'&&status=all" 
+							style="color: #32a067;">
+							<?php echo $category_name;?> 
+						
+						</a>
+					</span>
+					<?php
+					endfor;
+					?>
+				</div>
 
 				<h5>About</h5>
 				<p>
 					<?php echo $listing_detail['description']; ?>
 				</p>
+				
 				<!-- Photo Gallery -->
-				<?php if ($listing_detail['photos'] > 0): ?>
+				<?php if (count(json_decode($listing_detail['photos'])) > 0): ?>
 					<h5 class="add_bottom_15">Photo Gallery</h5>
 					<div class="grid-gallery">
 						<ul class="magnific-gallery">
-							<?php foreach ($listing_detail['photos'] as $key => $photo): ?>
-								<?php if (file_exists('uploads/listing_images/{{$photo}}')): ?>
+							<?php foreach (json_decode($listing_detail['photos']) as $key => $photo): ?>
+								<?php if (file_exists('uploads/listing_images/'.$photo)): ?>
 									<li>
 										<figure>
-											<img src="{{ asset('uploads/listing_images/') }}{{$photo}}" alt="">
+											<img src="{{ asset('uploads/listing_images')}}/{{$photo}}" alt="">
 											<figcaption>
 												<div class="caption-content">
-													<a href="{{ asset('uploads/listing_images/')}}{{$photo}}" title="" data-effect="mfp-zoom-in">
+													<a href="(asset'uploads/listing_images')}}/{{$photo}}" title="" data-effect="mfp-zoom-in">
 														<i class="pe-7s-plus"></i>
 
 													</a>
@@ -90,17 +118,17 @@
 				<?php endif; ?>
 
 				<hr>
-				<?php //include 'contact_and_social.php'; ?>
+				@include('frontend.contact_and_social')
 				
 				<h5 class="add_bottom_15">Amenities</h5>
 				<div class="row add_bottom_30">
-					<?php //foreach ($listing_details['amenities'] as $key => $amenity): ?>
+					<?php foreach (json_decode($listing_detail['amenities']) as $key => $amenity): ?>
 						<div class="col-md-4">
 							<ul class="bullets">
-								<li><?php echo $listing_detail['amenities'];//echo $this->frontend_model->get_amenity($amenity, 'name')->row()->name; ?></li>
+								<li><?php echo get_amenity_name($amenity);?></li>
 							</ul>
 						</div>
-					<?php // endforeach; ?>
+					<?php endforeach; ?>
 				</div>
 				<!-- /row -->
 
@@ -108,23 +136,24 @@
 				@include('frontend.opening_and_closing_time_schedule')
 
 				<!-- Listing Type Wise Inner Page -->
-				<?php //if ($listing_details['listing_type'] == 'hotel'): ?>
+				@if($listing_detail['listing_type'] == 'hotel')
 					<hr>
-					<?php //include 'hotel_listing_inner_page.php'; ?>
-				<?php //elseif ($listing_details['listing_type'] == 'shop'):?>
+					@include('frontend.hotel_listing_inner_page')
+				@elseif ($listing_detail['listing_type'] == 'shop')
 					<hr>
-					<?php //include 'shop_listing_inner_page.php'; ?>
-				<?php //elseif ($listing_details['listing_type'] == 'restaurant'):?>
+					@include('frontend.shop_listing_inner_page')
+				@elseif ($listing_detail['listing_type'] == 'restaurant')
 					<hr>
-					<?php //include 'restaurant_listing_inner_page.php'; ?>
-				<?php //elseif ($listing_details['listing_type'] == 'beauty'):?>
+					@include('frontend.restaurant_listing_inner_page')
+				@elseif ($listing_detail['listing_type'] == 'beauty')
 					<hr>
-					<?php //include 'beauty_listing_inner_page.php'; ?>
-				<?php //endif; ?>
+					@include('frontend.beauty_listing_inner_page')
+				<@endif
 				<!-- /row -->
 
 				<!-- Video File Base On Package-->
-				<?php //include 'video_player.php'; ?>
+				@include('frontend.video_player')
+				
 				
 				<hr>
 				<h3>Location</h3>
@@ -153,24 +182,24 @@
 		<?php //if(has_package_feature('ability_to_add_contact_form', $listing_details['user_id']) == 1): ?>
 			<aside class="col-lg-4" id="sidebar">
 				<div class="box_detail booking">
-					<form class="contact-us-form" action="home/contact_us/{{$listing_details['listing_type']}}" method="post">
-						<input type="hidden" name="user_id" value="<?php echo $listing_details['user_id']; ?>">
-						<input type="hidden" name="requester_id" value="<?php //echo $this->session->userdata('user_id'); ?>">
-						<input type="hidden" name="listing_id" value="<?php echo $listing_details['id']; ?>">
-						<input type="hidden" name="listing_type" value="<?php echo $listing_details['listing_type']; ?>">
-						<input type="hidden" name="slug" value="<?php echo slugify($listing_details['name']); ?>">
-						<?php //if ($listing_details['listing_type'] == 'hotel'): ?>
-							<?php //include 'hotel_room_booking_contact_form.php'; ?>
-						<?php //elseif ($listing_details['listing_type'] == 'restaurant'): ?>
-							<?php //include 'restaurant_booking_contact_form.php'; ?>
-						<?php //elseif ($listing_details['listing_type'] == 'beauty'): ?>
-							<?php //include 'beauty_service_contact_form.php'; ?>
-						<?php //else: ?>
-							<?php //include 'general_contact_form.php'; ?>
-						<?php //endif; ?>
-						<a href="javascript::" class="add_top_30 btn_1 full-width purchase" onclick="getTheGuestNumberForBooking('<?php echo $listing_details['listing_type']; ?>')">submit</a>
+					<form class="contact-us-form" action="home/contact_us/{{$listing_detail['listing_type']}}" method="post">
+						<input type="hidden" name="user_id" value="<?php echo $listing_detail['user_id']; ?>">
+						<input type="hidden" name="requester_id" value="<?php //echo Auth::user()->id; ?>">
+						<input type="hidden" name="listing_id" value="<?php echo $listing_detail['id']; ?>">
+						<input type="hidden" name="listing_type" value="<?php echo $listing_detail['listing_type']; ?>">
+						<input type="hidden" name="slug" value="<?php echo slugify($listing_detail['name']); ?>">
+						@if ($listing_detail['listing_type'] == 'hotel')
+							@include('frontend.hotel_room_booking_contact_form')
+						@elseif ($listing_detail['listing_type'] == 'restaurant')
+							@include('frontend.restaurant_booking_contact_form')
+						@elseif($listing_detail['listing_type'] == 'beauty')
+							@include('frontend.beauty_service_contact_form')
+						@else
+							@include('frontend.general_contact_form')
+						@endif
+						<a href="javascript::" class="add_top_30 btn_1 full-width purchase" onclick="getTheGuestNumberForBooking('<?php echo $listing_detail['listing_type']; ?>')">submit</a>
 					</form>
-					<a href="javascript:" onclick="addToWishList('<?php echo $listing_details['id']; ?>')" class="btn_1 full-width outline wishlist" id ="btn-wishlist"><i class="icon_heart"></i> <?php echo is_wishlisted($listing_details['id']) ? 'remove_from_wishlist' : 'add_to_wishlist' ?></a>
+					<a href="javascript:" onclick="addToWishList('<?php echo $listing_detail['id']; ?>')" class="btn_1 full-width outline wishlist" id ="btn-wishlist"><i class="icon_heart"></i> <?php echo is_wishlisted($listing_detail['id']) ? 'remove_from_wishlist' : 'add_to_wishlist' ?></a>
 					<div class="text-center"><small>No money charged in this step</small></div>
 				</div>
 
@@ -186,7 +215,7 @@
 	<!-- /row -->
 </div>
 <!-- /container -->
-@endforeach
+
 <script type="text/javascript">
 var isLoggedIn = '<?php //echo $this->session->userdata('is_logged_in'); ?>';
 
