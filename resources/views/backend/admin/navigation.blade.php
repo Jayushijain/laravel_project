@@ -236,7 +236,7 @@
                 </a>
             </li>
             <li class="@if ($page_info['page_name'] == 'frontend_settings') {{ 'active' }} @endif">
-                <a href="<?php //echo site_url('admin/frontend_settings'); ?>">
+                <a href="{{ route('frontend_settings.index') }}">
                     <span><i class="entypo-dot"></i>Frontend Settings</span>
                 </a>
             </li>

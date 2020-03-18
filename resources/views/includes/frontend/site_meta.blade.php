@@ -3,4 +3,4 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Atlas directory listing portal">
     <meta name="author" content="Creativeitem">
-    <title><?php echo system_setting('system_title');?></title>
+    <title><?php echo get_settings('system_title');?></title>

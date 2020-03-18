@@ -53,7 +53,7 @@ Route::group(['middleware' => 'logincheck'], function () {
 
 	Route::resource('/admin/reports','Admin\ReportsController');
 
-	Route::get('/reports/date/{range}',['as' => 'reports.daterange', 'uses' => 'Admin\ReportsController@filter_by_date_range']);
+	//Route::get('/reports/date/{range}',['as' => 'reports.daterange', 'uses' => 'Admin\ReportsController@filter_by_date_range']);
 
 	Route::resource('/admin/rating_wise_quality','Admin\ReviewWiseQualitiesController');
 
@@ -63,7 +63,21 @@ Route::group(['middleware' => 'logincheck'], function () {
 
 	Route::resource('/admin/system_settings','Admin\SystemSettingsController');
 
-	Route::post('/admin/update_settings',['as' => 'system.update', 'uses' => 'Admin\SystemSettingsController@update_settings']);
+	Route::post('/admin/update_system',['as' => 'system.update', 'uses' => 'Admin\SystemSettingsController@update_settings']);
+
+	Route::resource('/admin/frontend_settings','Admin\FrontendSettingsController');
+
+	Route::post('/admin/update_frontend',['as' => 'frontend.update', 'uses' => 'Admin\FrontendSettingsController@update_settings']);
+
+	Route::post('/admin/update/banner_image',['as' => 'banner_image.update', 'uses' => 'Admin\FrontendSettingsController@banner_image']);
+
+	Route::post('/admin/update/light_logo',['as' => 'light_logo.update', 'uses' => 'Admin\FrontendSettingsController@light_logo']);
+
+	Route::post('/admin/update/dark_logo',['as' => 'dark_logo.update', 'uses' => 'Admin\FrontendSettingsController@dark_logo']);
+
+	Route::post('/admin/update/small_logo',['as' => 'small_logo.update', 'uses' => 'Admin\FrontendSettingsController@small_logo']);
+
+	Route::post('/admin/update/favicon',['as' => 'favicon.update', 'uses' => 'Admin\FrontendSettingsController@favicon']);
 
 });
 
