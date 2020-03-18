@@ -367,7 +367,7 @@ if (!function_exists('get_frontend_settings'))
  * @param   int  $user_id
  * @return  path to the file
  */
-	function getPhoto($user_id)
+	function get_photo($user_id)
 	{
 		if (is_file(public_path().'/uploads/user_image/'.$user_id.'jpg'))
 		{

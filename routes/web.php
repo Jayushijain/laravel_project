@@ -61,23 +61,26 @@ Route::group(['middleware' => 'logincheck'], function () {
 
 	Route::post('/admin/users/get_emails','Admin\UsersController@get_emails');
 
+	//System Settings
 	Route::resource('/admin/system_settings','Admin\SystemSettingsController');
 
 	Route::post('/admin/update_system',['as' => 'system.update', 'uses' => 'Admin\SystemSettingsController@update_settings']);
 
+	//Frontend Settings
 	Route::resource('/admin/frontend_settings','Admin\FrontendSettingsController');
 
 	Route::post('/admin/update_frontend',['as' => 'frontend.update', 'uses' => 'Admin\FrontendSettingsController@update_settings']);
 
-	Route::post('/admin/update/banner_image',['as' => 'banner_image.update', 'uses' => 'Admin\FrontendSettingsController@banner_image']);
+	Route::post('/admin/update/image/{image_type}',['as' => 'image.update', 'uses' => 'Admin\FrontendSettingsController@update_image']);
 
-	Route::post('/admin/update/light_logo',['as' => 'light_logo.update', 'uses' => 'Admin\FrontendSettingsController@light_logo']);
+	//Payment Settings
+	Route::resource('/admin/payment_settings','Admin\PaymentSettingsController');
 
-	Route::post('/admin/update/dark_logo',['as' => 'dark_logo.update', 'uses' => 'Admin\FrontendSettingsController@dark_logo']);
+	Route::post('/admin/update_currency',['as' => 'currency.update', 'uses' => 'Admin\PaymentSettingsController@update_system_currency']);
 
-	Route::post('/admin/update/small_logo',['as' => 'small_logo.update', 'uses' => 'Admin\FrontendSettingsController@small_logo']);
+	Route::post('/admin/update_paypal',['as' => 'paypal.update', 'uses' => 'Admin\PaymentSettingsController@update_paypal']);
 
-	Route::post('/admin/update/favicon',['as' => 'favicon.update', 'uses' => 'Admin\FrontendSettingsController@favicon']);
+	Route::post('/admin/update_stripe',['as' => 'stripe.update', 'uses' => 'Admin\PaymentSettingsController@update_stripe']);
 
 });
 

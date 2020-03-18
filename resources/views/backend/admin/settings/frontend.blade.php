@@ -152,7 +152,8 @@ $social_links = json_decode(get_frontend_settings('social_links'), true);
                 </div>
             </div>
             <div class="panel-body">
-                <form action="{{ route('banner_image.update') }}" method="post" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered">
+                <form action="{{ route('image.update','banner_image') }}" method="post" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered">
+				{{ csrf_field() }}
 
                     <div class="form-group">
                         <div class="col-md-12 text-center">
@@ -188,7 +189,7 @@ $social_links = json_decode(get_frontend_settings('social_links'), true);
                 </div>
             </div>
             <div class="panel-body">
-                <form action="{{ route('light_logo.update') }}" method="post" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered">
+                <form action="{{ route('image.update','light_logo') }}" method="get" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered">
 
                     <div class="form-group">
                         <div class="col-md-12 text-center">
@@ -224,7 +225,7 @@ $social_links = json_decode(get_frontend_settings('social_links'), true);
                 </div>
             </div>
             <div class="panel-body">
-                <form action="{{ route('dark_logo.update') }}" method="post" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered">
+                <form action="{{ route('image.update','dark_logo') }}" method="get" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered">
 
                     <div class="form-group">
                         <div class="col-md-12 text-center">
@@ -260,7 +261,7 @@ $social_links = json_decode(get_frontend_settings('social_links'), true);
                 </div>
             </div>
             <div class="panel-body">
-                <form action="{{ route('small_logo.update') }}" method="post" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered">
+                <form action="{{ route('image.update','small_logo') }}" method="get" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered">
 
                     <div class="form-group">
                         <div class="col-md-12 text-center">
@@ -296,7 +297,7 @@ $social_links = json_decode(get_frontend_settings('social_links'), true);
                 </div>
             </div>
             <div class="panel-body">
-                <form action="{{ route('favicon.update') }}" method="post" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered">
+                <form action="{{ route('image.update','favicon') }}" method="get" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered">
 
                     <div class="form-group">
                         <div class="col-md-12 text-center">
