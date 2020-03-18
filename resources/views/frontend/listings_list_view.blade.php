@@ -241,7 +241,7 @@
 							<div class="col-md-12">
 								<div class="add_bottom_30">
 									<h6>Price limit</h6>
-									<div class="distance">Price within<span></span> <?php echo system_setting('system_currency'); ?></div>
+									<div class="distance">Price within<span></span> <?php echo get_settings('system_currency'); ?></div>
 									<input type="range" class="price-range" min="0" max="<?php //echo $this->frontend_model->get_the_maximum_price_limit_of_all_listings(); ?>" step="10" value="<?php //echo $price_range; ?>" data-orientation="horizontal" onchange="filter(this)">
 								</div>
 							</div>

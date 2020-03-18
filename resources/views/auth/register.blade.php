@@ -25,6 +25,8 @@
                     @csrf
                     <div class="form_container">
                         <div class="form-group">
+                            <input type="hidden" name="social" value="{'facebook':'','twitter':'','linkedin':''}">
+                            <input type="hidden" name="wishlist" value="[]">
                             <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" id="email" placeholder="<?php //echo get_phrase('email'); ?>Email*"
                                 value="{{ old('email') }}" required autofocus> @if ($errors->has('email'))
                             <span class="invalid-feedback" role="alert">
