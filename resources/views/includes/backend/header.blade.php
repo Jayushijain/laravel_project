@@ -15,7 +15,7 @@
 			<li class="profile-info dropdown pull-right"><!-- add class "pull-right" if you want to place this from right -->
 
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					<img src="{{  getPhoto(Auth::user()->id) }}" alt="" class="img-circle" width="44">
+					<img src="{{  get_photo(Auth::user()->id) }}" alt="" class="img-circle" width="44">
 					{{ ucwords(Auth::user()->name) }}
 
 					<div style="margin-top: -15px;

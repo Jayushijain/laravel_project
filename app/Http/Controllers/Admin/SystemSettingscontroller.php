@@ -33,6 +33,7 @@ class SystemSettingscontroller extends Controller
     public function update_settings(Request $request)
     {
         $flag = 0;
+
         $input['description'] = sanitizer($request->website_title);
         if(!Setting::where('type', 'website_title')->update($input))
         {

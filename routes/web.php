@@ -67,13 +67,34 @@ Route::group(['middleware' => 'logincheck'], function () {
 
 	Route::resource('/admin/reports','Admin\ReportsController');
 
-	Route::get('/reports/date/{range}',['as' => 'reports.daterange', 'uses' => 'Admin\ReportsController@filter_by_date_range']);
+	//Route::get('/reports/date/{range}',['as' => 'reports.daterange', 'uses' => 'Admin\ReportsController@filter_by_date_range']);
 
 	Route::resource('/admin/rating_wise_quality','Admin\ReviewWiseQualitiesController');
 
 	Route::resource('/admin/users','Admin\UsersController');
 
 	Route::post('/admin/users/get_emails','Admin\UsersController@get_emails');
+
+	//System Settings
+	Route::resource('/admin/system_settings','Admin\SystemSettingsController');
+
+	Route::post('/admin/update_system',['as' => 'system.update', 'uses' => 'Admin\SystemSettingsController@update_settings']);
+
+	//Frontend Settings
+	Route::resource('/admin/frontend_settings','Admin\FrontendSettingsController');
+
+	Route::post('/admin/update_frontend',['as' => 'frontend.update', 'uses' => 'Admin\FrontendSettingsController@update_settings']);
+
+	Route::post('/admin/update/image/{image_type}',['as' => 'image.update', 'uses' => 'Admin\FrontendSettingsController@update_image']);
+
+	//Payment Settings
+	Route::resource('/admin/payment_settings','Admin\PaymentSettingsController');
+
+	Route::post('/admin/update_currency',['as' => 'currency.update', 'uses' => 'Admin\PaymentSettingsController@update_system_currency']);
+
+	Route::post('/admin/update_paypal',['as' => 'paypal.update', 'uses' => 'Admin\PaymentSettingsController@update_paypal']);
+
+	Route::post('/admin/update_stripe',['as' => 'stripe.update', 'uses' => 'Admin\PaymentSettingsController@update_stripe']);
 
 });
 

@@ -42,12 +42,12 @@
     <div class="col-lg-8">
         <div class="panel panel-primary">
 			<div class="panel-heading">
-				<div class="panel-title">package_expiration : {{ date('F') }}</div>
+				<div class="panel-title">Package Expiration : {{ date('F') }}</div>
 			</div>
 
 			<table class="table table-bordered table-responsive">
 				<tbody>
-                    @foreach ($chart_data['expiration_in_this_month'] as $key => $row):
+                    @foreach ($chart_data['expiration_in_this_month'] as $key => $row)
                        @php
 	                        $user_details = App\User::where('id',$row['user_id'])->get()->first();
 	                        $package_details = App\Package::where('id',$row['package_id'])->get()->first();

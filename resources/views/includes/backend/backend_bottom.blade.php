@@ -16,6 +16,7 @@
     <script src="{{ asset('js/backend/daterangepicker/moment.js') }}"></script>
     <script src="{{ asset('js/backend/daterangepicker/daterangepicker.js') }}"></script>
     <script src="{{ asset('js/backend/bootstrap-datepicker.js') }}"></script>
+    <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
 
     <script type="text/javascript" src="{{ asset('js/backend/datatable/datatables/js/jquery.dataTables.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/backend/datatable/datatables/js/dataTables.bootstrap.js') }}" ></script>
@@ -58,6 +59,7 @@ function error_notify(message) {
 </script>
 
 <script src="{{ asset('js/backend/font-awesome-icon-picker/fontawesome-iconpicker.min.js') }}" charset="utf-8"></script>
+<script src="{{ asset('js/backend/custom.js') }}"></script>
 
 {{-- For showing icons dialouge --}}
 <script type="text/javascript">
