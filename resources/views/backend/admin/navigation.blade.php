@@ -111,26 +111,26 @@
         </li>
 
         <!-- Bookings -->
-        <li class="<?php //if ($page_name == 'booking_request_hotel' || $page_name == 'booking_request_restaurant' || $page_name == 'booking_request_beauty') echo 'opened active has-sub'; ?>">
+        <li class="@if ($page_info['page_name'] == 'booking_request_hotel' || $page_info['page_name'] == 'booking_request_restaurant' || $page_info['page_name'] == 'booking_request_beauty') {{ 'opened active has-sub' }} @endif">
             <a href="#">
                 <i class="fa fa-tasks"></i>
-                <span>Bookings<?php //echo get_phrase('booking_requests'); ?></span>
+                <span>Booking Requests</span>
             </a>
             <ul>
-                <li class="<?php //if ($page_name == 'booking_request_hotel') echo 'active'; ?> ">
-                    <a href="<?php //echo site_url('admin/booking_request_hotel'); ?>">
-                        <span><i class="entypo-dot"></i> <?php //echo get_phrase('hotel'); ?></span>
+                <li class="@if ($page_info['page_name'] == 'booking_request_hotel') {{ 'active' }} @endif ">
+                    <a href="{{ route('booking.request','hotel') }}">
+                        <span><i class="entypo-dot"></i>Hotel</span>
                     </a>
                 </li>
 
-                <li class="<?php //if ($page_name == 'booking_request_restaurant') echo 'active'; ?> ">
-                    <a href="<?php //echo site_url('admin/booking_request_restaurant'); ?>">
-                        <span><i class="entypo-dot"></i> <?php //echo get_phrase('restaurant'); ?></span>
+                <li class="@if ($page_info['page_name'] == 'booking_request_restaurant') {{ 'active' }} @endif ">
+                    <a href="{{ route('booking.request','restaurant') }}">
+                        <span><i class="entypo-dot"></i>Restaurant</span>
                     </a>
                 </li>
-                <li class="<?php //if ($page_name == 'booking_request_beauty') echo 'active'; ?> ">
-                    <a href="<?php //echo site_url('admin/booking_request_beauty'); ?>">
-                        <span><i class="entypo-dot"></i> <?php// echo get_phrase('beauty'); ?></span>
+                <li class="@if ($page_info['page_name'] == 'booking_request_beauty') {{ 'active' }} @endif ">
+                    <a href="{{ route('booking.request','beauty') }}">
+                        <span><i class="entypo-dot"></i>Beauty</span>
                     </a>
                 </li>
             </ul>
@@ -241,12 +241,12 @@
                 </a>
             </li>
             <li class="@if ($page_info['page_name'] == 'payment_settings') {{ 'active' }} @endif">
-                <a href="<?php //echo site_url('admin/payment_settings'); ?>">
+                <a href="{{ route('payment_settings.index') }}">
                     <span><i class="entypo-dot"></i>Payment Settings</span>
                 </a>
             </li>
             <li class="@if ($page_info['page_name'] == 'smtp_settings') {{ 'active' }} @endif">
-                <a href="<?php //echo site_url('admin/smtp_settings'); ?>">
+                <a href="{{ route('smtp_settings.index') }}">
                     <span><i class="entypo-dot"></i>Smtp Settings</span>
                 </a>
             </li>

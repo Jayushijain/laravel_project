@@ -55,22 +55,30 @@ Route::group(['middleware' => 'logincheck'], function () {
 
 	Route::get('/admin','Admin\AdminController@index');
 
+	//Categories
 	Route::resource('/admin/categories','Admin\CategoriesController');
 
+	//Amenities
 	Route::resource('/admin/amenities','Admin\AmenitiesController');
 
+	//Cities
 	Route::resource('/admin/cities','Admin\CitiesController');
 
+	//Packages
 	Route::resource('/admin/packages','Admin\PackagesController');
 
+	//Offline Payment
 	Route::resource('/admin/offline_payment','Admin\OfflinePayController');
 
+	//reports
 	Route::resource('/admin/reports','Admin\ReportsController');
 
 	//Route::get('/reports/date/{range}',['as' => 'reports.daterange', 'uses' => 'Admin\ReportsController@filter_by_date_range']);
-
+	
+	//Ratings
 	Route::resource('/admin/rating_wise_quality','Admin\ReviewWiseQualitiesController');
 
+	//Users
 	Route::resource('/admin/users','Admin\UsersController');
 
 	Route::post('/admin/users/get_emails','Admin\UsersController@get_emails');
@@ -95,6 +103,18 @@ Route::group(['middleware' => 'logincheck'], function () {
 	Route::post('/admin/update_paypal',['as' => 'paypal.update', 'uses' => 'Admin\PaymentSettingsController@update_paypal']);
 
 	Route::post('/admin/update_stripe',['as' => 'stripe.update', 'uses' => 'Admin\PaymentSettingsController@update_stripe']);
+
+	//Smtp settings
+	Route::resource('/admin/smtp_settings','Admin\SmtpSettingsController');
+
+	Route::post('/admin/update_smtp',['as' => 'smtp.update', 'uses' => 'Admin\SmtpSettingsController@update_settings']);
+
+	//Booking Requests
+	Route::get('/admin/booking_request/{type}',['as' => 'booking.request', 'uses' => 'Admin\BookingController@index']);
+
+	Route::get('/admin/update/booking_request/{type}/{id}',['as' => 'status.update', 'uses' => 'Admin\BookingController@update_status']);
+
+	Route::delete('/admin/bookings/{id}', 'Admin\BookingController@destroy');
 
 });
 

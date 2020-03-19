@@ -6,11 +6,11 @@
 
 // Paypal Keys
 $paypal_settings = get_settings('paypal');
-$paypal = json_decode($paypal_settings);
+$paypal = json_decode($paypal_settings,true);
 
 // Stripe Keys
 $stripe_settings = get_settings('stripe');
-$stripe = json_decode($stripe_settings);
+$stripe = json_decode($stripe_settings,true);
 @endphp
 <!-- start page title -->
 <div class="row">
@@ -22,7 +22,7 @@ $stripe = json_decode($stripe_settings);
         </div>
       </div>
       <div class="panel-body">
-        <form action="{{ route('currency.update')) }}" method="post" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered">
+        <form action="{{ route('currency.update') }}" method="post" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered">
         	{{ csrf_field() }}
 
           <div class="form-group">
@@ -45,7 +45,7 @@ $stripe = json_decode($stripe_settings);
             <select name="currency_position" id = "currency_position" class="select2" data-allow-clear="true" data-placeholder="Currency Position">
               <option value="left" @if (get_settings('currency_position') == 'left') {{ 'selected' }} @endif>Left</option>
               <option value="right" @if (get_settings('currency_position') == 'right') {{ 'selected' }} @endif> Right</option>
-              <option value="left-space" @if (get_settings('currency_position') == 'left-space') {{ 'selected' }} >Left With A Space</option>
+              <option value="left-space" @if (get_settings('currency_position') == 'left-space') {{ 'selected' }} @endif>Left With A Space</option>
               <option value="right-space" @if (get_settings('currency_position') == 'right-space'){{ 'selected' }} @endif >Right With A Space</option>
             </select>
           </div>
@@ -82,8 +82,8 @@ $stripe = json_decode($stripe_settings);
 
             <div class="col-sm-7">
               <select name="paypal_active" id = "paypal_active" class="select2" data-allow-clear="true" data-placeholder="Paypal Active">
-                <option value="0" @if ($paypal[0]->active == 0) {{ 'selected' }} @endif> No</option>
-                <option value="1" @if ($paypal[0]->active == 1) {{ 'selected' }} @endif> Yes</option>
+                <option value="0" @if ($paypal['active'] == 0) {{ 'selected' }} @endif> No</option>
+                <option value="1" @if ($paypal['active'] == 1) {{ 'selected' }} @endif> Yes</option>
             </select>
           </div>
         </div>
@@ -92,8 +92,8 @@ $stripe = json_decode($stripe_settings);
 
           <div class="col-sm-7">
             <select name="paypal_mode" id = "paypal_mode" class="select2" data-allow-clear="true" data-placeholder="Paypal Mode">
-              <option value="sandbox" @if ($paypal[0]->mode == 'sandbox') {{ 'selected' }} @endif> Sandbox</option>
-              <option value="production" @if ($paypal[0]->mode == 'production') {{ 'selected' }} @endif> Production</option>
+              <option value="sandbox" @if ($paypal['mode'] == 'sandbox') {{ 'selected' }} @endif> Sandbox</option>
+              <option value="production" @if ($paypal['mode'] == 'production') {{ 'selected' }} @endif> Production</option>
             </select>
           </div>
         </div>
@@ -103,7 +103,7 @@ $stripe = json_decode($stripe_settings);
           <div class="col-sm-7">
             <select name="paypal_currency" id = "paypal_currency" class="select2" data-allow-clear="true" data-placeholder="Paypal Currency">
               <option value="">Select Paypal Currency</option>
-              @foreach ($paypal_currencies as $p_currency):?>
+              @foreach ($paypal_currencies as $p_currency)
               <option value="{{ $p_currency->code }}"
                 @if (get_settings('paypal_currency') == $currency->code) {{ 'selected' }} @endif> {{ $p_currency->code }}
               </option>
@@ -115,14 +115,14 @@ $stripe = json_decode($stripe_settings);
         <div class="form-group">
       		<label for="name" class="col-sm-3 control-label">Client Id (Sandbox)</label>
       		<div class="col-sm-7">
-      			<input type="text" class="form-control" name="sandbox_client_id" id="sandbox_client_id" placeholder="Sandbox Client Id"  value="{{ $paypal[0]->sandbox_client_id }}" required >
+      			<input type="text" class="form-control" name="sandbox_client_id" id="sandbox_client_id" placeholder="Sandbox Client Id"  value="{{ $paypal['sandbox_client_id'] }}" required >
       		</div>
       	</div>
 
         <div class="form-group">
       		<label for="production_client_id" class="col-sm-3 control-label">Client Id (Production)</label>
       		<div class="col-sm-7">
-      			<input type="text" class="form-control" name="production_client_id" id="production_client_id" placeholder="Production Client Id"  value="{{ $paypal[0]->production_client_id }}" required >
+      			<input type="text" class="form-control" name="production_client_id" id="production_client_id" placeholder="Production Client Id"  value="{{ $paypal['production_client_id'] }}" required >
       		</div>
       	</div>
 
@@ -151,8 +151,8 @@ $stripe = json_decode($stripe_settings);
 
             <div class="col-sm-7">
               <select name="stripe_active" id = "stripe_active" class="select2" data-allow-clear="true" data-placeholder="Stripe Active">
-                <option value="0" @if ($stripe[0]->active == 0) {{ 'selected' }} @endif> No</option>
-                <option value="1" @if ($stripe[0]->active == 1) {{ 'selected' }} @endif> Yes</option>
+                <option value="0" @if ($stripe['active'] == 0) {{ 'selected' }} @endif> No</option>
+                <option value="1" @if ($stripe['active'] == 1) {{ 'selected' }} @endif> Yes</option>
             </select>
           </div>
         </div>
@@ -162,8 +162,8 @@ $stripe = json_decode($stripe_settings);
 
           <div class="col-sm-7">
             <select name="testmode" id = "testmode" class="select2" data-allow-clear="true" data-placeholder="Test Mode">
-              <option value="on" @if ($stripe[0]->testmode == 'on') {{ 'selected' }} @endif> On</option>
-              <option value="off" @if ($stripe[0]->testmode == 'off') {{ 'selected' }} @endif> Off</option>
+              <option value="on" @if ($stripe['testmode'] == 'on') {{ 'selected' }} @endif> On</option>
+              <option value="off" @if ($stripe['testmode'] == 'off') {{ 'selected' }} @endif> Off</option>
             </select>
           </div>
         </div>
@@ -176,7 +176,7 @@ $stripe = json_decode($stripe_settings);
               <option value="">Select Stripe Currency</option>
               @foreach ($currencies as $currency)
               <option value="{{ $currency->code }}"
-                @if (get_settings('stripe_currency') == $currency->code) {{ 'selected' }} @endphp> {{ $currency->code }}
+                @if (get_settings('stripe_currency') == $currency->code) {{ 'selected' }} @endif> {{ $currency->code }}
               </option>
             @endforeach
             </select>
@@ -186,28 +186,28 @@ $stripe = json_decode($stripe_settings);
         <div class="form-group">
       		<label for="secret_key" class="col-sm-3 control-label">Test Secret Key</label>
       		<div class="col-sm-7">
-      			<input type="text" class="form-control" name="secret_key" id="secret_key" value="{{ $stripe[0]->secret_key }}" >
+      			<input type="text" class="form-control" name="secret_key" id="secret_key" value="{{ $stripe['secret_key'] }}" >
       		</div>
       	</div>
 
         <div class="form-group">
       		<label for="public_key" class="col-sm-3 control-label">Test Public Key</label>
       		<div class="col-sm-7">
-      			<input type="text" class="form-control" name="public_key" id="public_key" value="{{ $stripe[0]->public_key }}" >
+      			<input type="text" class="form-control" name="public_key" id="public_key" value="{{ $stripe['public_key'] }}" >
       		</div>
       	</div>
 
         <div class="form-group">
       		<label for="secret_live_key" class="col-sm-3 control-label">Live Secret key</label>
       		<div class="col-sm-7">
-      			<input type="text" class="form-control" name="secret_live_key" id="secret_live_key" value="{{ $stripe[0]->secret_live_key }}" >
+      			<input type="text" class="form-control" name="secret_live_key" id="secret_live_key" value="{{ $stripe['secret_live_key'] }}" >
       		</div>
       	</div>
 
         <div class="form-group">
       		<label for="public_live_key" class="col-sm-3 control-label">Live Public key</label>
       		<div class="col-sm-7">
-      			<input type="text" class="form-control" name="public_live_key" id="public_live_key" value="{{ $stripe[0]->public_live_key }}" >
+      			<input type="text" class="form-control" name="public_live_key" id="public_live_key" value="{{ $stripe['public_live_key'] }}" >
       		</div>
       	</div>
 

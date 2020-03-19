@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Display the frontend settings
  *
@@ -11,6 +12,21 @@ function frontend_system_setting($type = '')
     $settings = DB::table('frontend_settings')->where('type', $type)->first();
     
 	return $settings->description;
+}
+
+
+/**
+ * Display the frontend settings
+ *
+ * @param  string $type  setting_type
+ *
+ * @return  description
+ */
+function get_key($value = '')
+{
+    $new_value = ucwords(str_replace('_'," ",$value));
+    
+	return $new_value;
 }
 
     /**
@@ -26,19 +42,6 @@ function frontend_system_setting($type = '')
         
         return $settings->description;
     }
-
-/**
- * Display System setting
- *
- * @param   string  $type setting type
- * @return  description
- */
-function get_settings($type = '')
-{
-	$settings = DB::table('settings')->where('type', $type)->first();
-
-	return $settings->description;
-}
 
 /**
  * Display our Frontend setting
@@ -395,21 +398,6 @@ if (!function_exists('get_frontend_settings'))
 				return $currency_code;
 			}
 		}
-	}
-
-	function get_listing_url($listing_id = '')
-	{
-		$listing    = DB::table('listings')->where('id', $listing_id)->first();
-		$custom_url = $listing->listing_type.'/'.slugify($listing->name).'/'.$listing_id;
-
-		return $custom_url;
-	}
-
-	function get_opening_time($listing_id = '')
-	{
-		$timeconfig = DB::table('time_configurations')->where('listing_id', $listing_id)->first();
-
-		return $timeconfig;
 	}
 
 /**
