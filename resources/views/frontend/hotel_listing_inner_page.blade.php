@@ -1,4 +1,4 @@
-<?php $hotel_rooms = get_hotel_rooms($listing_detail['id']); //$hotel_rooms = $this->db->get_where('hotel_room_specification', array('listing_id' => $listing_details['id']))->result_array(); ?>
+<?php $hotel_rooms = get_hotel_rooms($listing_detail['id']); ?>
 <h5>Hotel Room Details</h5>
 <?php foreach ($hotel_rooms as $hotel_room): ?>
 	<div class="room_type first">
@@ -16,7 +16,7 @@
 					<li><img src="{{ asset('global/amenities.svg')}}" alt="" style="height: 20px; width: 20px;"><?php echo ucwords($amenity); ?></li>
 					<?php endforeach; ?>
 				</ul>
-				<p style="margin-bottom: 10px;">price {{currency($hotel_room->price)}}</p>
+				<p style="margin-bottom: 10px;">Price : <b>{{currency($hotel_room->price)}}</b></p>
 			</div>
 		</div>
 	</div>

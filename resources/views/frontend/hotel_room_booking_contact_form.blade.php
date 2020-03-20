@@ -1,6 +1,6 @@
 <div class="price">
 	<span class="contact">Book A Room</span>
-	<div class="score"><span><?php echo isset($quality['quality']) ? $quality['quality'] : 'Unreviewed' ?><em><?php echo $reviews.'reviews'; ?></em></span><strong><?php echo number_format((float)$rating, 1, '.', ''); ?></strong></div>
+	<div class="score"><span><?php echo isset($quality['quality']) ? $quality['quality'] : 'Unreviewed' ?><em><?php echo '<b>'.$reviews.'</b> Reviews'; ?></em></span><strong><?php echo number_format((float)$rating, 1, '.', ''); ?></strong></div>
 </div>
 
 <div class="form-group" id="input-dates">

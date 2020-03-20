@@ -13,17 +13,16 @@ $reviewer = get_listing_wise_review($listing_detail['id']);
 
                                                             
 <div class="hero_in shop_detail" style="background: url('{{ asset('uploads/listing_cover_photo')}}/{{$listing_detail['listing_cover']}}') center center no-repeat; background-size: cover;">
-	<!-- <div class="wrapper">
-		<span class="magnific-gallery">
-			<?php 
-					foreach (json_decode($listing_detail['photos']) as $key => $photo):
-						echo asset('uploads/listing_images/').$photo;
+					
+					<?php 
+					foreach(json_decode($listing_detail['photos']) as $key => $photo):
+					?>	
+					    {{ asset('uploads/listing_images')}}/{{$photo}}
+					<?php
 						echo $listing_detail['name'];
-						echo $key == 0 ? 'view_photos' : 'view_photos'; 
-					endforeach; 
-			?>
-		</span>
-	</div> -->
+						echo  $key == 0 ? 'view_photos' : 'view_photos'; 
+					endforeach;
+					?> 	
 </div>
 <!--/hero_in-->
 
@@ -68,21 +67,21 @@ $reviewer = get_listing_wise_review($listing_detail['id']);
 
 				<div class="add_bottom_15">
 					<?php 
-					$categories = json_decode($listing_detail['categories']);
-					for ($i = 0; $i < sizeof($categories); $i++):
-						$category_name = get_category_name($categories[$i]);
-						// $this->db->where('id',$categories[$i]);
-						// $category_name = $this->db->get('category')->row()->name;
-					?>
+					$categories_id = explode(",",$listing_detail['category_id']);
+					foreach (explode(",",$listing_detail['category_id']) as $key => $categories) 
+					{
+						$category_name = get_category_name($categories);
+					
+				?>
 					<span class="loc_open mr-2">
-						<a href="home/filter_listings?category='.slugify($category_name).'&&status=all" 
-							style="color: #32a067;">
+					             
+						<a href="/listingsview/{{$categories}}" style="color: #32a067;">
 							<?php echo $category_name;?> 
 						
 						</a>
 					</span>
 					<?php
-					endfor;
+					}
 					?>
 				</div>
 
@@ -100,10 +99,10 @@ $reviewer = get_listing_wise_review($listing_detail['id']);
 								<?php if (file_exists('uploads/listing_images/'.$photo)): ?>
 									<li>
 										<figure>
-											<img src="{{ asset('uploads/listing_images')}}/{{$photo}}" alt="">
+											<img style="height:125px" src="{{ asset('uploads/listing_images')}}/{{$photo}}" alt="">
 											<figcaption>
 												<div class="caption-content">
-													<a href="(asset'uploads/listing_images')}}/{{$photo}}" title="" data-effect="mfp-zoom-in">
+													<a href="{{asset('uploads/listing_images')}}/{{$photo}}" title="" data-effect="mfp-zoom-in">
 														<i class="pe-7s-plus"></i>
 
 													</a>
@@ -111,7 +110,7 @@ $reviewer = get_listing_wise_review($listing_detail['id']);
 											</figcaption>
 										</figure>
 									</li>
-								<?php endif; ?>
+								<?php endif; ?>&nbsp;&nbsp;
 							<?php endforeach; ?>
 						</ul>
 					</div>
@@ -122,7 +121,8 @@ $reviewer = get_listing_wise_review($listing_detail['id']);
 				
 				<h5 class="add_bottom_15">Amenities</h5>
 				<div class="row add_bottom_30">
-					<?php foreach (json_decode($listing_detail['amenities']) as $key => $amenity): ?>
+					<?php //$listing_detail->amenity_id;
+					foreach (explode(",",$listing_detail->amenity_id) as $key => $amenity): ?>
 						<div class="col-md-4">
 							<ul class="bullets">
 								<li><?php echo get_amenity_name($amenity);?></li>
@@ -182,9 +182,10 @@ $reviewer = get_listing_wise_review($listing_detail['id']);
 		<?php //if(has_package_feature('ability_to_add_contact_form', $listing_details['user_id']) == 1): ?>
 			<aside class="col-lg-4" id="sidebar">
 				<div class="box_detail booking">
-					<form class="contact-us-form" action="home/contact_us/{{$listing_detail['listing_type']}}" method="post">
+					<form class="contact-us-form" action="{{ route('booking') }}" method="post">
+					{{csrf_field()}}
 						<input type="hidden" name="user_id" value="<?php echo $listing_detail['user_id']; ?>">
-						<input type="hidden" name="requester_id" value="<?php //echo Auth::user()->id; ?>">
+						<!-- <input type="hidden" name="requester_id" value="<?php //echo Auth::user()->id; ?>"> -->
 						<input type="hidden" name="listing_id" value="<?php echo $listing_detail['id']; ?>">
 						<input type="hidden" name="listing_type" value="<?php echo $listing_detail['listing_type']; ?>">
 						<input type="hidden" name="slug" value="<?php echo slugify($listing_detail['name']); ?>">
@@ -197,9 +198,9 @@ $reviewer = get_listing_wise_review($listing_detail['id']);
 						@else
 							@include('frontend.general_contact_form')
 						@endif
-						<a href="javascript::" class="add_top_30 btn_1 full-width purchase" onclick="getTheGuestNumberForBooking('<?php echo $listing_detail['listing_type']; ?>')">submit</a>
+						<a href="javascript::" class="add_top_30 btn_1 full-width purchase" onclick="getTheGuestNumberForBooking('<?php echo $listing_detail['listing_type']; ?>')">Submit</a>
 					</form>
-					<a href="javascript:" onclick="addToWishList('<?php echo $listing_detail['id']; ?>')" class="btn_1 full-width outline wishlist" id ="btn-wishlist"><i class="icon_heart"></i> <?php echo is_wishlisted($listing_detail['id']) ? 'remove_from_wishlist' : 'add_to_wishlist' ?></a>
+					<a href="javascript:" onclick="addToWishList('<?php echo $listing_detail['id']; ?>')" class="btn_1 full-width outline wishlist" id ="btn-wishlist"><i class="icon_heart"></i> <?php echo is_wishlisted($listing_detail['id']) ? 'Remove From Wishlist' : 'Add To Wishlist' ?></a>
 					<div class="text-center"><small>No money charged in this step</small></div>
 				</div>
 
@@ -217,7 +218,7 @@ $reviewer = get_listing_wise_review($listing_detail['id']);
 <!-- /container -->
 
 <script type="text/javascript">
-var isLoggedIn = '<?php //echo $this->session->userdata('is_logged_in'); ?>';
+var isLoggedIn = '{{ Auth::check() }}';
 
 // This function performs all the functionalities to add to wishlist
 function addToWishList(listing_id) {

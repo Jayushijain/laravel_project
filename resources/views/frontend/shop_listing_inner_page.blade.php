@@ -1,4 +1,4 @@
-<?php $products =  get_shop_product($listing_detail['id']);//$products = $this->db->get_where('product_details', array('listing_id' => $listing_details['id']))->result_array(); ?>
+<?php $products =  get_shop_product($listing_detail['id']); ?>
 <h5>Featured Products</h5>
 <div class="row">
   <?php foreach ($products as $product): ?>

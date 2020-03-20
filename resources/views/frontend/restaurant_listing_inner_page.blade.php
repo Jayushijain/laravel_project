@@ -1,5 +1,5 @@
-<?php $food_menus = get_food_menus($listing_detail['id']) //$food_menus = $this->db->get_where('food_menu', array('listing_id' => $listing_details['id']))->result_array(); ?>
-<h5>Special food menus</h5>
+<?php $food_menus = get_food_menus($listing_detail['id']) ?>
+<h5>Special Food Menus</h5>
 <div class="row add_bottom_15">
     <?php foreach ($food_menus as $food_menu): ?>
         <div class="col-lg-6 col-md-12">

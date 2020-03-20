@@ -78,7 +78,7 @@
                                     <label class="container_check">
                                         <small>
                                             Accept<a href="/terms_and_conditions"> terms and condition</a>
-                                            <input type="checkbox">
+                                            <input type="checkbox" name="term" checked="checked">
                                             <span class="checkmark"></span>
                                         </small>
                                     </label>
@@ -97,6 +97,7 @@
             </div> -->
                         <div class="row mt-1">
                             <div class="col-md-12 mb-2">
+                                 
                                 <input type="submit" value="Sign Up" class="btn_1 w-100">
                             </div>
                             <div class="col-md-12">
