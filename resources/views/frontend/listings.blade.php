@@ -3,8 +3,12 @@
 @section('content') 
 
 @include('frontend.header_listing')
-@include('frontend.listings_grid_view')
 
+@if (Session::has('listings_view'))
+    @include('frontend.listings_list_view')
+@else  
+    @include('frontend.listings_grid_view')
+@endif
 
 <!-- Main page -->
 <main>

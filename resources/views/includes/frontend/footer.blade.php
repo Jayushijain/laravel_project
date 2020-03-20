@@ -44,7 +44,7 @@
 							continue;
 						?>
                         <li>
-                            <a href="<?php //echo site_url('home/filter_listings?category='.slugify($category['name']).'&&amenity=&&video=0&&status=all'); ?>">
+                            <a href="/listingsview/{{$category['id']}}<?php //echo site_url('home/filter_listings?category='.slugify($category['name']).'&&amenity=&&video=0&&status=all'); ?>">
                                 <?php echo $category['name']; ?>
                             </a>
                         </li>

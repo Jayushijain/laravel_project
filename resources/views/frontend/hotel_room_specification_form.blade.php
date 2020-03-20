@@ -4,7 +4,7 @@
       <div class="col-xl-12">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title mb-0">Hotel room specification</h5>
+            <h5 class="card-title mb-0">Hotel Room Specification</h5>
             <div class="collapse pt-3 show">
               <div class="row">
                 <div class="col-xl-8">
@@ -23,7 +23,7 @@
                   </div>
 
                   <div class="form-group">
-                    <label for="hotel_room_amenities">Hotel room amenities<small>(Press_Enter_after_entering_every_amenity)</small></label>
+                    <label for="hotel_room_amenities">Hotel room amenities<small>(Press Enter After Entering Every Amenity)</small></label>
                     <input type="text" class="form-control bootstrap-tag-input" name="hotel_room_amenities[]" data-role="tagsinput"/>
                   </div>
                 </div>

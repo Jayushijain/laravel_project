@@ -1,6 +1,6 @@
 <div class="price">
 	<h5 class="d-inline">Appointment</h5>
-	<div class="score"><span><?php echo isset($quality['quality']) ? $quality['quality'] : 'Unreviewed' ?><em><?php echo $reviews.'reviews'; ?></em></span><strong><?php echo number_format((float)$rating, 1, '.', ''); ?></strong></div>
+	<div class="score"><span><?php echo isset($quality['quality']) ? $quality['quality'] : 'Unreviewed' ?><em><?php echo '<b>'.$reviews.'</b> Reviews'; ?></em></span><strong><?php echo number_format((float)$rating, 1, '.', ''); ?></strong></div>
 </div>
 
 <div class="form-group" id="input-dates">
@@ -53,7 +53,7 @@
 				success: function(response){
 					if(response != 1){
 						$('#timepicker').val('');
-						toastr.error('The time must be between opening and closing time.');
+						toastr.error('The Time Must Be Between Opening And Closing Time.');
 					}
 				}
 			});

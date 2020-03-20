@@ -49,6 +49,20 @@
                             </a>
                         </div>
 
+                        <div class="row">
+                            <div class="col-xl-7">
+                                <div class="form-group">
+                                    <label class="container_check">
+                                        <small>
+                                            Remember Me
+                                            <input type="checkbox" name="remember">
+                                            <span class="checkmark"></span>
+                                        </small>
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
 
                         <div class="row">
                             <div class="col-md-12 mb-2">

@@ -1,4 +1,4 @@
-<?php $beauty_services = get_beauty($listing_detail['id']);//$beauty_services = $this->db->get_where('beauty_service', array('listing_id' => $listing_details['id']))->result_array(); ?>
+<?php $beauty_services = get_beauty($listing_detail['id']); ?>
 <h5>Special Beauty Service</h5>
 <div class="row add_bottom_15">
     <?php foreach ($beauty_services as $beauty_service): ?>
@@ -34,7 +34,7 @@
                         $time_from = strtotime($times[0].":00");
                         $time_to   = strtotime($times[1].":00");
                         echo '<p style="margin-bottom: 5px;">Availability : '.date('h:i A', $time_from).' - '.date('h:i A', $time_to).'</p>'; 
-                        echo '<p>duration : '.$times[2].'minutes</p>'
+                        echo '<p>Duration : '.$times[2].' Minutes</p>'
                     ?>
                 </li>
             </ul>

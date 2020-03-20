@@ -7,7 +7,8 @@
             <p>
                     <?php echo frontend_system_setting('slogan'); ?>
             </p>
-            <form action="/search/" method="POST">
+            <form action="{{route('search')}}" method="post">
+            {{csrf_field()}}
                 <div class="row no-gutters custom-search-input-2">
                     <div class="col-lg-7">
                         <div class="form-group">
@@ -17,7 +18,7 @@
                     </div>
                     <div class="col-lg-3">
                         <select class="wide" name="selected_category_id">
-                            <option value="">
+                            <option value="all">
                                 All categories
                             </option>
                             <?php
@@ -64,7 +65,7 @@
 				continue;
                 ?>
                 <div class="col-lg-4 col-md-6">
-                    <a href="/{{slugify($category['name'])}}.'/video=0/status=all'"class="grid_item">
+                    <a href="/listingsview/{{$category['id']}}"class="grid_item">
                         <figure>
                             <img src="uploads/category_thumbnails/{{$category['thumbnail']}}" alt="">
                             <div class="info">
@@ -126,7 +127,7 @@
                           $listing_name = $listing['name'];
                           $lising_id = $listing['id']?>
                     <!--redirect to routs file-->
-                    <a href="{{ $listing['listing_type']}}/{{slugify($listing['name'])}}/{{$listing['id'] }}">
+                    <a href="/description/{{$listing['id']}}">
                         <img src="uploads/listing_thumbnails/{{$listing['listing_thumbnail']}}" class="img-fluid" alt=""
                             width="400" height="266">
                         <div class="read_more">
@@ -139,7 +140,7 @@
                 </figure>
                 <div class="wrapper">
                     <h3>
-                        <a href="<?php echo get_listing_url($listing['id']); ?>">
+                        <a href="/description/{{$listing['id']}}">
                             <?php echo $listing['name']; ?>
                         </a>
                     </h3>
@@ -172,7 +173,7 @@
 						?>
                                     <em>
                                         <?php 
-                                            echo get_listing_wise_review($listing['id']). '   Reviews';
+                                            echo '<b>'.get_listing_wise_review($listing['id']). '</b> Reviews';
                                         ?>
                                     </em>
                             </span>

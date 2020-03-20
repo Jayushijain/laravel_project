@@ -1,12 +1,14 @@
 <?php
+$review_details=get_reviewer_details($listing_detail['id']);
   //$reviews = get_listing_wise_review($listing_detail['id']);
   // $review = get_listing_wise_review($listing_detail['id']);
-  // $reviewer = get_listing_wise_review($listing_detail['id']);
+//   $reviewer = get_listing_wise_review($listing_detail['id']);
   //$rating = get_listing_wise_rating($listing_detail['id']);
 //   $user_type = ""; 
 if(Auth::check())
 {
     $user_id = Auth::user()->id;
+    //$user_name = Auth::user()->name;
     $user_type  = get_role($user_id);
 }
 else
@@ -70,63 +72,72 @@ else
             <?php //foreach($reviews as $key => $review): ?>
             <div class="review-box clearfix">
                 <?php //$reviewer =  $this->db->get_where('user', array('id' => $review['reviewer_id']))->row_array(); ?>
-
+                
                 <?php
-          $file_name = 'uploads/user_image/'.$reviewer['id'].'.jpg';
-          
-          if (file_exists($file_name)) {
-        ?>
+                    $file_name = 'uploads/user_image/'.$reviewer['id'].'.jpg';
+                    
+                    if (file_exists($file_name)) 
+                    {
+                ?>
                     <figure class="rev-thumb">
                         <img src="{{ asset('uploads/user_image')}}/{{$reviewer['id'].'.jpg'}}" alt="">
                     </figure>
-                    <?php }else { ?>
+                <?php 
+                    }
+                    else 
+                    { 
+                ?>
                     <figure class="rev-thumb">
                         <img src="{{ asset('uploads/user_image/user.png')}}" alt="">
                     </figure>
-                    <?php } ?>
+                <?php 
+                    } 
+                ?>
                     <div class="rev-content">
+                    @foreach($review_details as $review_detail)
                         <div class="rating">
-                            <?php for($i = 1; $i <= $review['review_rating']; $i++): ?>
+                            <?php for($i = 1; $i <= $review_detail->review_rating; $i++): ?>
                             <i class="icon_star voted"></i>
                             <?php endfor; ?>
-                            <?php for($i = 1; $i <= (5-$review['review_rating']); $i++): ?>
+                            <?php for($i = 1; $i <= (5-$review_detail->review_rating); $i++): ?>
                             <i class="icon_star"></i>
                             <?php endfor; ?>
                         </div>
                         <div class="rev-info">
-                            <?php echo $reviewer['name']; ?> –
-                            <?php echo date('D, d-M-Y', $review['timestamp']); ?>:
+                            {{ DB::table('users')->where('id', $review_detail->reviewer_id)->value('name')}} –
+                            <?php echo date('D, d-M-Y', $review_detail->timestamp); ?>:
                         </div>
+                        {{ $review_detail->review_comment}}
+                        @endforeach
                         <div class="rev-text">
                             <p>
-                                <?php echo $review['review_comment']; ?>
-                <!-- @guest 
-
-                @else
-
-                @endguest -->
-                
-                                <?php
-                if($user_type == 1){
-              ?>
-                                    <span class="p-0 m-0 float-right">
-                                        <a href="javascript: void(0);" onclick="confirm_modal('admin/review_modify/delete/'<?php //$review['review_id'].'/'.$slug.'/'.$listing_id?>);"
-                                            class="text-danger">
-                                            <i class="icon-trash pb-2"></i>
-                                        </a>
-                                    </span>
-
-                                    <?php }elseif($user_type == 2 && $user_id == $reviewer['id']){ ?>
-                                    <span class="p-0 m-0 mt-1 float-right">
-                                        <a href="javascript: void(0);" onclick="edit_review('<?php echo $review['review_id'] ?>')">
-                                            <i class="icon-edit"></i>
-                                        </a>
-                                        <a href="javascript: void(0);" onclick="confirm_modal('user/review_modify/delete/'<?php //$review['review_id'].'/'.$slug.'/'.$listing_id?>');"
-                                            class="text-danger">
-                                            <i class="icon-trash pb-2"></i>
-                                        </a>
-                                    </span>
-                                    <?php } ?>
+                                    
+                                    
+                                    <?php
+                                    if($user_type == 1)
+                                    {
+                                    ?>
+                                        <span class="p-0 m-0 float-right">
+                                            <a href="javascript: void(0);" onclick="confirm_modal('admin/review_modify/delete/'<?php //$review['review_id'].'/'.$slug.'/'.$listing_id?>);" class="text-danger">
+                                                <i class="icon-trash pb-2"></i>
+                                            </a>
+                                        </span>
+                                <?php 
+                                    }
+                                    elseif($user_type == 2 && $user_id == $reviewer['id'])
+                                    { ?>
+                                                        <span class="p-0 m-0 mt-1 float-right">
+                                                            <a href="javascript: void(0);" onclick="edit_review('<?php echo $review['review_id'] ?>')">
+                                                                <i class="icon-edit"></i>
+                                                            </a>
+                                                            <a href="javascript: void(0);" onclick="confirm_modal('user/review_modify/delete/'<?php //$review['review_id'].'/'.$slug.'/'.$listing_id?>');"
+                                                                class="text-danger">
+                                                                <i class="icon-trash pb-2"></i>
+                                                            </a>
+                                                        </span>
+                                <?php 
+                                    } 
+                                ?>
                             </p>
 
                             <?php if($user_type == 2 && $user_id == $reviewer['id']){ ?>
@@ -164,7 +175,7 @@ else
                                 </div>
                             </div>
                             <?php } ?>
-                    
+
                         </div>
                     </div>
             </div>
@@ -173,7 +184,7 @@ else
         </div>
         <!-- /review-container -->
     </section>
-   
+
     <?php 
   if($user_type == 2)
   { 
@@ -182,10 +193,8 @@ else
     <!-- Leave a review starts -->
     <div class="add-review">
         <h5>Leave a review</h5>
-        <form action="/review/" method="post">
+        <form action="{{route('review')}}" method="post">
             {{csrf_field()}}
-            <input type="hidden" name="reviewer_id" value="<?php echo $user_id; ?>">
-            
             <!-- <input type="hidden" name="slug" value="<?php //echo $slug; ?>"> -->
             <input type="hidden" name="listing_id" value="<?php echo $listing_detail['id']; ?>">
             <div class="row">
@@ -221,8 +230,7 @@ else
                                 </div>
                                 <div class="col-12">
                                     <small style="float: right;" class="mt-2">
-                                        <a href='javascript::' @if(Auth::check()) onclick="showReportForm();" @else onclick="loginAlert()"
-                                            @endif style="color: #616161;">Report this listing</a>
+                                        <a href='javascript::' @if(Auth::check()) onclick="showReportForm();" @else onclick="loginAlert()" @endif style="color: #616161;">Report this listing</a>
                                     </small>
                                 </div>
                             </div>
@@ -240,10 +248,12 @@ else
         {!!Form::hidden('listing_id',$listing_detail['id'])!!}
         <div class="row">
             <div class="form-group col-md-12">
-                {!!Form::label('full_name','Full name')!!} {!!Form::text('full_name',null,['class'=>'form-control','id'=>'name'])!!}
+                {!!Form::label('full_name','Full name')!!} 
+                {!!Form::text('full_name',null,['class'=>'form-control','id'=>'name'])!!}
             </div>
             <div class="form-group col-md-12">
-                {!!Form::label('phone','Phone')!!} {!!Form::text('phone',null,['class'=>'form-control','id'=>'phone'])!!}
+                {!!Form::label('phone','Phone')!!} 
+                {!!Form::text('phone',null,['class'=>'form-control','id'=>'phone'])!!}
             </div>
             <div class="form-group col-md-12">
                 {!!Form::textarea('additional_information',null,['class'=>'form-control','rows'=>3,'placeholder'=>'Additional proof to expedite
@@ -262,10 +272,10 @@ else
 
     <div class="" id="report_form" style="display: none;">
         <h5>Report this listing</h5>
-        <form action="home/report_this_listing" method="post">
-            <input type="hidden" name="slug" value="<?php //echo $slug; ?>">
+        <form action="{{route('report')}}" method="post">
+        {{csrf_field()}} 
+            <!-- <input type="hidden" name="slug" value="<?php //echo $slug; ?>"> -->
             <input type="hidden" name="listing_id" value="<?php echo $listing_detail['id']; ?>">
-            <input type="hidden" name="reporter_id" value="<?php Auth::user()->id; ?>">
             <div class="row">
                 <div class="form-group col-md-12">
                     <label>Report</label>
