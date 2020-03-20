@@ -27,6 +27,10 @@ class LoginCheck
                 return redirect('/pricings');
             }
         }
+        else
+        {
+            return redirect('/login');
+        }
         return $next($request);
     }
 

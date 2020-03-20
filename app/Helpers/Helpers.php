@@ -418,12 +418,7 @@ if (!function_exists('get_frontend_settings'))
 		}
 	}
 
-        function get_listing_url($listing_id = "")
-        {
-            $listing = DB::table('listings')->where('id', $listing_id)->first();
-            $custom_url = $listing->listing_type .'/'.slugify($listing->name).'/'.$listing_id;
-            return $custom_url;
-        }
+        
 
     function get_opening_time($listing_id = "")
     {

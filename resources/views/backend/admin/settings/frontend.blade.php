@@ -42,7 +42,7 @@ $social_links = json_decode(get_frontend_settings('social_links'), true);
                         <label for="about_us" class="col-sm-3 control-label">About Us</label>
                         <div class="col-sm-7">
                             <div class="form-group">
-                                <textarea class="form-control" name="about_us" name="about_us" id="about_us">{{ get_frontend_settings('about_us') }}</textarea>
+                                <textarea class="form-control" name="about_us" name="about_us" id="about_us">{!! htmlspecialchars_decode(get_frontend_settings('about_us')) !!}</textarea>
                             </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@ $social_links = json_decode(get_frontend_settings('social_links'), true);
                         <label for="terms_and_condition" class="col-sm-3 control-label">Terms And Condition</label>
                         <div class="col-sm-7">
                             <div class="form-group">
-                                <textarea class="form-control" name="terms_and_condition" name="terms_and_condition" id="terms_and_condition">{{ get_frontend_settings('terms_and_condition') }}</textarea>
+                                <textarea class="form-control" name="terms_and_condition" name="terms_and_condition" id="terms_and_condition">{!!htmlspecialchars_decode(get_frontend_settings('terms_and_condition')) !!}</textarea>
                             </div>
                         </div>
                     </div>
@@ -60,7 +60,7 @@ $social_links = json_decode(get_frontend_settings('social_links'), true);
                         <label for="privacy_policy" class="col-sm-3 control-label">Privacy Policy</label>
                         <div class="col-sm-7">
                             <div class="form-group">
-                                <textarea class="form-control" name="privacy_policy" name="privacy_policy" id="privacy_policy">{{ get_frontend_settings('privacy_policy') }}</textarea>
+                                <textarea class="form-control" name="privacy_policy" name="privacy_policy" id="privacy_policy">{!! htmlspecialchars_decode(get_frontend_settings('privacy_policy')) !!}</textarea>
                             </div>
                         </div>
                     </div>
@@ -69,7 +69,7 @@ $social_links = json_decode(get_frontend_settings('social_links'), true);
                         <label for="faq" class="col-sm-3 control-label">Faq</label>
                         <div class="col-sm-7">
                             <div class="form-group">
-                                <textarea class="form-control" name="faq" name="faq" id="faq">{{ get_frontend_settings('faq') }}</textarea>
+                                <textarea class="form-control" name="faq" name="faq" id="faq">{!! htmlspecialchars_decode(get_frontend_settings('faq')) !!}</textarea>
                             </div>
                         </div>
                     </div>

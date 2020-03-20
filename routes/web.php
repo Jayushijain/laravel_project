@@ -28,13 +28,6 @@ Route::get('/claimstore', 'ListingsController@claim');
 
 Route::get('/review', 'ReviewsController@store');
 
-
-//Route::get('/search/{searchstring?}/{id?}','ListingsController@search');
-
-// Route::resource('/{category}/{listing_name}/{id?}','ListingsController',['names'=>['show'=>'listings.show']]);
-//Route::resource('/{category}/{listingname}/','ListingsController',['names'=>['show'=>'listings.show']]);
-
-
 Route::resource('/restaurant/cafe-red','ListingsController',['names'=>['show'=>'listings.show']]);
 
 Route::resource('/beauty/jawed-habib','ListingsController',['names'=>['show'=>'listings.show']]);
@@ -115,6 +108,15 @@ Route::group(['middleware' => 'logincheck'], function () {
 	Route::get('/admin/update/booking_request/{type}/{id}',['as' => 'status.update', 'uses' => 'Admin\BookingController@update_status']);
 
 	Route::delete('/admin/bookings/{id}', 'Admin\BookingController@destroy');
+
+	//Listings
+	Route::resource('/admin/listings','Admin\ListingsController');
+
+	Route::post('admin/listings/filter_table',['as' => 'listings.filter', 'uses' => 'Admin\ListingsController@filter_listing_table']);
+
+	Route::patch('admin/listings/update_column/{id}','Admin\ListingsController@update_column');
+
+	Route::post('admin/listings/get_cities',['as' => 'cities.list', 'uses' => 'Admin\ListingsController@get_cities']);
 
 });
 

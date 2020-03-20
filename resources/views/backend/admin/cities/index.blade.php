@@ -5,7 +5,7 @@
 <!-- start page title -->
 <div class="row ">
   <div class="col-lg-12">
-    <a href="{{ route('cities.create') }}" class="btn btn-primary alignToTitle"><i class="entypo-plus"></i>{{ $page_info['page_title'] }}</a>
+    <a href="{{ route('cities.create') }}" class="btn btn-primary alignToTitle"><i class="entypo-plus"></i>Add new City</a>
   </div><!-- end col-->
 </div>
 
