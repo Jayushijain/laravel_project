@@ -73,35 +73,35 @@
 
 						<div class="tab-content">
 							<div class="tab-pane active" id="first">
-								@include('backend.admin.listings.create_basic')
+								@include('backend.admin.listings.create.create_basic')
 							</div>
 							<div class="tab-pane" id="second">
-								@include('backend.admin.listings.create_location')
+								@include('backend.admin.listings.create.create_location')
 							</div>
 							<div class="tab-pane" id="third">
-								@include('backend.admin.listings.create_amenity')
+								@include('backend.admin.listings.create.create_amenity')
 							</div>
 
 							<div class="tab-pane" id="fourth">
-								@include('backend.admin.listings.create_media')
+								@include('backend.admin.listings.create.create_media')
 							</div>
 
 							<div class="tab-pane" id="fifth">
-								@include('backend.admin.listings.create_seo')
+								@include('backend.admin.listings.create.create_seo')
 							</div>
 							<div class="tab-pane" id="sixth">
-								<?php //include 'add_listing_schedule.php'; ?>
+								@include('backend.admin.listings.create.create_schedule')
 							</div>
 
 							<div class="tab-pane" id="seventh">
-								<?php //include 'add_listing_contact.php'; ?>
+								@include('backend.admin.listings.create.create_contact')
 							</div>
 
 							<div class="tab-pane" id="eighth">
-								<?php //include 'add_listing_type.php'; ?>
+								@include('backend.admin.listings.create.create_type')
 							</div>
 							<div class="tab-pane" id="ninth">
-								<?php //include 'add_listing_finish.php'; ?>
+								@include('backend.admin.listings.create.create_finish')
 							</div>
 						</div>
 					</div>

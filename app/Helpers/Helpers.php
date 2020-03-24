@@ -202,38 +202,6 @@ if (!function_exists('get_frontend_settings'))
 		}
 	}
 
-/**
- * Check which type of currency
- *
- * @return  [type]  return symbol and currency code
- */
-
-	if (!function_exists('currency_code_and_symbol'))
-	{
-		$currency      = DB::table('settings')->where('type', 'system_currency')->first();
-		$currency_code = $currency->description;
-		$symbolfind = DB::table('currencies')->where('code', $currency_code)->first();
-		$symbol     = $symbolfind->symbol;
-
-		function currency_code_and_symbol($type = '')
-		{
-			$currency      = DB::table('settings')->where('type', 'system_currency')->first();
-			$currency_code = $currency->description;
-
-			$symbolfind = DB::table('currencies')->where('code', $currency_code)->first();
-			$symbol     = $symbolfind->symbol;
-
-
-			if ($type == '')
-			{
-				return $symbol;
-			}
-			else
-			{
-				return $currency_code;
-			}
-		}
-	}
 
 /**
  * Count sub category
@@ -381,13 +349,27 @@ if (!function_exists('get_frontend_settings'))
 		}
 	}
 
+	/**
+ * Check which type of currency
+ *
+ * @return  [type]  return symbol and currency code
+ */
+
 	if (!function_exists('currency_code_and_symbol'))
 	{
+		$currency      = DB::table('settings')->where('type', 'system_currency')->first();
+		$currency_code = $currency->description;
+		$symbolfind = DB::table('currencies')->where('code', $currency_code)->first();
+		$symbol     = $symbolfind->symbol;
+
 		function currency_code_and_symbol($type = '')
 		{
-			$currency_code = DB::table('settings')->where('type', 'system_currency')->first();
+			$currency      = DB::table('settings')->where('type', 'system_currency')->first();
+			$currency_code = $currency->description;
 
-			$symbol = DB::table('currency')->where('code', $currency_code)->pluck('symbol');
+			$symbolfind = DB::table('currencies')->where('code', $currency_code)->first();
+			$symbol     = $symbolfind->symbol;
+
 
 			if ($type == '')
 			{
@@ -399,6 +381,26 @@ if (!function_exists('get_frontend_settings'))
 			}
 		}
 	}
+
+
+	// if (!function_exists('currency_code_and_symbol'))
+	// {
+	// 	function currency_code_and_symbol($type = '')
+	// 	{
+	// 		$currency_code = DB::table('settings')->where('type', 'system_currency')->first();
+
+	// 		$symbol = DB::table('currency')->where('code', $currency_code)->pluck('symbol');
+
+	// 		if ($type == '')
+	// 		{
+	// 			return $symbol;
+	// 		}
+	// 		else
+	// 		{
+	// 			return $currency_code;
+	// 		}
+	// 	}
+	// }
 
 /**
  * To get photo for the particular user.

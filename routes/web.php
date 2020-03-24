@@ -118,6 +118,11 @@ Route::group(['middleware' => 'logincheck'], function () {
 
 	Route::post('admin/listings/get_cities',['as' => 'cities.list', 'uses' => 'Admin\ListingsController@get_cities']);
 
+	//Claimed Listings
+	Route::resource('/admin/claimed_listings','Admin\ClaimedListingsController');
+
+	Route::get('/admin/claimed_listings/update/{id}',['as'=> 'listing_status.update','uses' => 'Admin\ClaimedListingsController@update_status']);
+
 });
 
 //other page

@@ -58,6 +58,7 @@ function error_notify(message) {
 </script>
 
 <script src="{{ asset('js/backend/font-awesome-icon-picker/fontawesome-iconpicker.min.js') }}" charset="utf-8"></script>
+<script src="{{ asset('js/frontend/bootstrap-tagsinput.min.js') }}" charset="utf-8"></script>
 <script src="{{ asset('js/backend/custom.js') }}"></script>
 
 {{-- For showing icons dialouge --}}

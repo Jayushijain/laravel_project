@@ -16,6 +16,8 @@
 <!-- font awesome 5 -->
 <link href="{{ asset('css/backend/fontawesome-all.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/backend/font-awesome-icon-picker/fontawesome-iconpicker.min.css') }}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css">
+<link href="{{ asset('css/backend/main.css') }}" rel="stylesheet" type="text/css" />
 
 {{-- For select option --}}
 <link rel="stylesheet" href="{{ asset('js/backend/select2/select2-bootstrap.css') }}">

@@ -97,8 +97,8 @@
                         <span><i class="entypo-dot"></i> Add New Listing</span>
                     </a>
                 </li>
-                <li class="<?php //if ($page_name == 'claimed_listings') echo 'active'; ?> ">
-                    <a href="<?php //echo site_url('admin/claimed_listings'); ?>">
+                <li class="@if ($page_info['page_name'] == 'claimed_listing') {{ 'active' }} @endif">
+                    <a href="{{ route('claimed_listings.index') }}">
                         <span><i class="entypo-dot"></i>Claimed Listings</span>
                     </a>
                 </li>
