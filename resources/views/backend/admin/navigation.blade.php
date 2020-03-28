@@ -102,8 +102,8 @@
                         <span><i class="entypo-dot"></i>Claimed Listings</span>
                     </a>
                 </li>
-                <li class="<?php //if ($page_name == 'reported_listings') echo 'active'; ?> ">
-                    <a href="<?php //echo site_url('admin/reported_listings'); ?>">
+                <li class="@if ($page_info['page_name'] == 'reported_listing') {{ 'active' }} @endif">
+                    <a href="{{ route('reported_listings.index') }}">
                         <span><i class="entypo-dot"></i>Reported Listings</span>
                     </a>
                 </li>

@@ -8,6 +8,7 @@ use App\City;
 use App\Country;
 use App\Listing;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -78,7 +79,85 @@ class ListingsController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		//
+		$input = $request->all();
+		$photo_gallery = [];
+		if($request->is_featured)
+		{
+			$input['is_featured'] = sanitizer($request->is_featured);
+		}
+		else
+		{
+			$input['is_featured'] = sanitizer(0);
+		}
+
+		if(sizeof($request->amenity_id)>0)
+		{
+			$input['amenity_id'] = implode(',',$request->amenity_id);
+		}
+		else
+		{
+			$input['amenity_id'] = $request->amenity_id;
+		}
+
+		if(sizeof($request->category_id)>0)
+		{
+			$input['category_id'] = implode(',',$request->category_id);
+		}
+		else
+		{
+			$input['category_id'] = $request->category_id;
+		}
+
+		$input['user_id'] = Auth::user()->id;
+		$social_links = array(
+		    'facebook' => sanitizer($request->facebook),
+		    'twitter'  => sanitizer($request->twitter),
+		    'linkedin' => sanitizer($request->linkedin),
+		  );
+  		$input['social'] = json_encode($social_links);
+
+  		$time_config = array();
+	  	$days = array('sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday');
+	  	foreach ($days as $day) {
+	    $time_config[$day] = sanitizer($this->input->post($day.'_opening')).'-'.sanitizer($this->input->post($day.'_closing'));
+	  }
+
+		if ($file = $request->file('listing_thumbnail'))
+        {
+        	$filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME).rand(100, 999).'.jpg';
+            $file->move('uploads/listing_thumbnail', $filename);
+        }
+
+        if ($file = $request->file('listing_cover'))
+        {
+        	$filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME).rand(100, 999).'.jpg';
+            $file->move('uploads/listing_cover_photo', $filename);
+        }
+
+        foreach ($request->file('listing_images') as $listing_image) 
+        {
+        	if ($file = $listing_image)
+        	{
+        		$filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME).rand(100, 999).'.jpg';
+            	$temp = $file->move('uploads/listing_image', $filename);
+            	array_push($photo_gallery,$temp);
+        	}	
+        }
+        
+        $input['photos'] = json_decode($photo_gallery);
+        $input['code'] = md5(rand(10000000, 20000000));
+
+        if(Auth::user()->role == 'admin')
+        {
+        	$input['status'] = 1;
+        }
+        else
+        {
+        	$input['status'] = 0;
+        }
+
+        echo "<PRE>";
+		return $input;
 	}
 
 	/**
@@ -102,8 +181,13 @@ class ListingsController extends Controller
 	{
 		//$country = Country::where($request->country_id);
 		$cities = City::where('country_id', $request->country_id)->get();
-
-		return $cities;
+		$arr = [];
+		foreach ($cities as $city) 
+		{
+			$arr.push($city);
+		}	
+		
+		return $arr;
 	}
 
 	/**

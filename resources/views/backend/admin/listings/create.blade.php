@@ -123,7 +123,7 @@
 				'X-CSRF-TOKEN': $('meta[name=csrf_token]').attr('content')
 			},
 			type : 'POST',
-			url : '{{ route('cities.list') }}',
+			url : '/get_cities',
 			data : {country_id : country_id},
 			success : function(response) {
 				alert(response);
@@ -283,7 +283,7 @@ function checkMinimumFieldRequired() {
 	var latitude = $('#latitude').val();
 	var longitude = $('#longitude').val();
 	if (title === "" || defaultCategory === "" || latitude === "" || longitude === "") {
-		error_notify('Listing Title ,Listing Category ,Latitude,Longitude Can Not Be Empty');
+		error_notify('Listing Title, Listing Category, Latitude, Longitude Can Not Be Empty');
 	}else {
 		$('.listing_add_form').submit();
 	}

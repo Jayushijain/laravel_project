@@ -1,5 +1,3 @@
-
-
 <div class="form-group">
   <label for="title" class="col-sm-3 control-label">Title</label>
   <div class="col-sm-7">
@@ -35,7 +33,7 @@
     <div id="category_area">
       <div class="row">
         <div class="col-sm-7">
-          <select class="form-control selectboxit" name="categories[]" id = "category_default" required>
+          <select class="form-control selectboxit" name="category_id[]" id = "category_default" required>
             <option value="">Select Category</option>
             @foreach ($categories as $category)
               <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -51,7 +49,7 @@
     <div id="blank_category_field">
       <div class="row appendedCategoryFields" style="margin-top: 10px;">
         <div class="col-sm-7 pr-0">
-          <select class="form-control" name="categories[]">
+          <select class="form-control" name="category_id[]">
             <option value="">Select Category</option>
             @foreach ($categories as $category)
               <option value="{{ $category->id }}">{{ $category->name }}</option>

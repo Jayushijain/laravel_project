@@ -24,7 +24,7 @@ class ClaimedListingsController extends Controller
     }
 
     /**
-     * To update the status of a single lisying.
+     * To update the status of a single listing.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

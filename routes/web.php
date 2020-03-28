@@ -116,12 +116,17 @@ Route::group(['middleware' => 'logincheck'], function () {
 
 	Route::patch('admin/listings/update_column/{id}','Admin\ListingsController@update_column');
 
-	Route::post('admin/listings/get_cities',['as' => 'cities.list', 'uses' => 'Admin\ListingsController@get_cities']);
+	Route::post('/get_cities','Admin\ListingsController@get_cities');
 
 	//Claimed Listings
 	Route::resource('/admin/claimed_listings','Admin\ClaimedListingsController');
 
-	Route::get('/admin/claimed_listings/update/{id}',['as'=> 'listing_status.update','uses' => 'Admin\ClaimedListingsController@update_status']);
+	Route::get('/admin/claimed_listings/update/{id}',['as'=> 'claimed_listing.status.update','uses' => 'Admin\ClaimedListingsController@update_status']);
+
+	//Reported Listings.
+	Route::resource('/admin/reported_listings','Admin\ReportedListingsController');
+
+	Route::patch('/admin/reported_listing/{id}','Admin\ReportedListingsController@update_status');
 
 });
 

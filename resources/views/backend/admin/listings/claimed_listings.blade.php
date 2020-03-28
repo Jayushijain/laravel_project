@@ -47,7 +47,7 @@
                 @endif
               </td>
               <td class="text-center">
-                <a href="{{ route('listing_status.update',$claimed_listing->id) }}" class="btn btn-info btn-sm btn-icon icon-left">
+                <a href="{{ route('claimed_listing.status.update',$claimed_listing->id) }}" class="btn btn-info btn-sm btn-icon icon-left">
         					<i class="entypo-check"></i>
         					Approve
         				</a>
