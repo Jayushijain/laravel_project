@@ -3,7 +3,7 @@
 	<div class="col-md-12 col-sm-12 clearfix " style="background-color:#ffffff; box-shadow: 0px 10px 30px 0px rgba(82,63,105,0.08); border-radius: 5px;">
 		<ul class="list-inline links-list pull-left" style="margin-top:9px;">
 			<li>
-				<a href="{{-- {{ route('index') }} --}}" target="_blank">
+				<a href="{{ route('index') }}" target="_blank">
 					<i class="entypo-paper-plane"></i> Website
 				</a>
 			</li>
@@ -35,7 +35,7 @@
 					<!-- Settings sub-links -->
 					@if (strtolower(Auth::user()->role->name) == 'admin')
 						<li>
-								<a href="<?php //echo site_url('admin/system_settings'); ?>" class="dropdown-item notify-item">
+								<a href="{{ route('system_settings.index') }}" class="dropdown-item notify-item">
 	                  <i class="flaticon-rotate"></i>
 	                  <span>Settings</span>
 	              </a>
@@ -44,14 +44,14 @@
 
 					<!-- Profile sub-links -->
 					<li>
-						<a href="">
+						<a href="/admin/{{ 'manage_profile' }}/{{ Auth::user()->id }}">
 							<i class="flaticon-rotate"></i>
 							Edit Profile
 						</a>
 					</li>
 
 					<li>
-						<a href="">
+						<a href="/admin/{{ 'change_password' }}/{{ Auth::user()->id }}">
 							<i class="flaticon-lock"></i>
 							Change Password
 						</a>

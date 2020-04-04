@@ -36,6 +36,9 @@ Route::resource('/description','ListingsController',['names'=>['show'=>'listings
 
 Route::get('/listingsview/{id}','ListingsController@listingsview');
 
+Route::resource('/restaurant/cafe-red','ListingsController',['names'=>['show'=>'listings.show']]);
+
+
 Route::get('/listings_view/{param1}','ListingsController@listings_view');	
 
 Route::resource('/categories','CategoriesController');
@@ -114,6 +117,29 @@ Route::group(['middleware' => 'logincheck'], function () {
 	Route::get('/admin/update/booking_request/{type}/{id}',['as' => 'status.update', 'uses' => 'Admin\BookingController@update_status']);
 
 	Route::delete('/admin/bookings/{id}', 'Admin\BookingController@destroy');
+
+	//Listings
+	Route::resource('/admin/listings','Admin\ListingsController');
+
+	Route::post('admin/listings/filter_table',['as' => 'listings.filter', 'uses' => 'Admin\ListingsController@filter_listing_table']);
+
+	Route::patch('admin/listings/update_column/{id}','Admin\ListingsController@update_column');
+
+	Route::post('/get_cities','Admin\ListingsController@get_cities');
+
+	//Claimed Listings
+	Route::resource('/admin/claimed_listings','Admin\ClaimedListingsController');
+
+	Route::get('/admin/claimed_listings/update/{id}',['as'=> 'claimed_listing.status.update','uses' => 'Admin\ClaimedListingsController@update_status']);
+
+	//Reported Listings.
+	Route::resource('/admin/reported_listings','Admin\ReportedListingsController');
+
+	Route::patch('/admin/reported_listing/{id}','Admin\ReportedListingsController@update_status');
+
+	Route::get('/admin/{edit_type}/{id}','Admin\AdminController@edit');
+
+	Route::patch('/admin/update/{edit_type}/{id}','Admin\AdminController@update');
 
 });
 

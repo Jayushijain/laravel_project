@@ -1,6 +1,5 @@
 <script src="{{ asset('js/backend/gsap/main-gsap.js') }}"></script>
 <script src="{{ asset('js/backend/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js') }}"></script>
-
     
     <script src="{{ asset('js/backend/bootstrap.js') }}"></script>
     <script src="{{ asset('js/backend/joinable.js') }}"></script>
@@ -59,6 +58,7 @@ function error_notify(message) {
 </script>
 
 <script src="{{ asset('js/backend/font-awesome-icon-picker/fontawesome-iconpicker.min.js') }}" charset="utf-8"></script>
+<script src="{{ asset('js/frontend/bootstrap-tagsinput.min.js') }}" charset="utf-8"></script>
 <script src="{{ asset('js/backend/custom.js') }}"></script>
 
 {{-- For showing icons dialouge --}}

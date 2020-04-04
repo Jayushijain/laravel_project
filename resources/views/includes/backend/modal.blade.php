@@ -43,23 +43,21 @@ function showAjaxModal(url)
     </div>
 </div> 
 
-
-
-
 <script type="text/javascript">
-function confirm_modal(delete_url,id, modal_type)
+function confirm_modal(path,id, modal_type,field)
 {
     // Scroll to top
     window.scrollTo(0, 0);
     if (modal_type === 'generic_confirmation') {
         jQuery('#modal-generic_confirmation').modal('show', {backdrop: 'static'});
-        document.getElementById('update_link').setAttribute('href' , delete_url);
+        url = '/admin/'+path+'/'+id;
+        document.getElementById('update_column').setAttribute('value' , field);
+        document.getElementById('update_form').setAttribute('action' , url);
     }
     else{
         
         jQuery('#modal-4').modal('show', {backdrop: 'static'});
-        url = '/admin/'+delete_url+'/'+id;
-        // alert(url);
+        url = '/admin/'+path+'/'+id;
         document.getElementById('delete_form').setAttribute('action' , url);
     }
 }
@@ -76,14 +74,11 @@ function confirm_modal(delete_url,id, modal_type)
             </div>
 
             <div class="modal-footer" style="margin:0px; border-top:0px; text-align:center;">
-                
-                {{-- {!! Form::open(['method'=>'DELETE','role' =>'form','class'=>'form-horizontal form-groups-bordered','id'=>'delete_form']) !!} --}}
                  <form action="" method="post" id ='delete_form' >
                     {{ method_field('delete') }}
                     {{ csrf_field() }}
                 <button type="submit" class="btn btn-danger" id="delete_link">Delete</button>
                 </form> 
-               {{-- {!! Form::close() !!} --}}
                 <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
             </div>
         </div>
@@ -97,13 +92,16 @@ function confirm_modal(delete_url,id, modal_type)
 
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" style="text-align:center;"><?php //echo get_phrase('are_you_sure_to_update_this_information'); ?> ?</h4>
+                <h4 class="modal-title" style="text-align:center;">Are You Sure To Update This Information ?</h4>
             </div>
-
-
             <div class="modal-footer" style="margin:0px; border-top:0px; text-align:center;">
-                <a href="#" class="btn btn-danger" id="update_link"><?php //echo get_phrase('yes');?></a>
-                <button type="button" class="btn btn-info" data-dismiss="modal"><?php //echo get_phrase('no');?></button>
+                <form action="" method="post" id ='update_form' >
+                    {{ method_field('patch') }}
+                    {{ csrf_field() }}
+                    <input type="hidden" name="column" value="" id="update_column">
+                <button type="submit" class="btn btn-danger" id="update_link">Yes</button>
+                </form>
+                <button type="button" class="btn btn-info" data-dismiss="modal">No</button>
             </div>
         </div>
     </div>

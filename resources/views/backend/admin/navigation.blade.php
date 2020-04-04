@@ -80,31 +80,31 @@
         </li>
 
         <!-- Listings -->
-        <li class="<?php //if ($page_name == 'listings' || $page_name == 'listing_add_wiz' || $page_name == 'listing_edit_wiz' || $page_name == 'reported_listings' || $page_name == 'claimed_listings') echo 'opened active has-sub'; ?>">
+        <li class="@if ($page_info['page_name'] == 'listings' || $page_info['page_name'] == 'add_listing' || $page_info['page_name'] == 'listing_edit_wiz' || $page_info['page_name'] == 'reported_listings' || $page_info['page_name'] == 'claimed_listings') {{ 'opened active has-sub' }} @endif">
             <a href="#">
                 <i class="fa fa-sitemap"></i>
-                <span>Listings<?php //echo get_phrase('listings'); ?></span>
+                <span>Listings</span>
             </a>
             <ul>
-                <li class="<?php //if ($page_name == 'listings') echo 'active'; ?> ">
-                    <a href="<?php //echo site_url('admin/listings'); ?>">
-                        <span><i class="entypo-dot"></i> <?php //echo get_phrase('listings'); ?></span>
+                <li class="@if ($page_info['page_name'] == 'listings') {{ 'active' }} @endif">
+                    <a href="{{ route('listings.index') }}">
+                        <span><i class="entypo-dot"></i> Listings</span>
                     </a>
                 </li>
 
-                <li class="<?php //if ($page_name == 'listing_add_wiz') echo 'active'; ?> ">
-                    <a href="<?php //echo site_url('admin/listing_form/add'); ?>">
-                        <span><i class="entypo-dot"></i> <?php //echo get_phrase('add_new_listing'); ?></span>
+                <li class="@if ($page_info['page_name'] == 'add_listing') {{ 'active' }} @endif">
+                    <a href="{{ route('listings.create') }}">
+                        <span><i class="entypo-dot"></i> Add New Listing</span>
                     </a>
                 </li>
-                <li class="<?php //if ($page_name == 'claimed_listings') echo 'active'; ?> ">
-                    <a href="<?php //echo site_url('admin/claimed_listings'); ?>">
-                        <span><i class="entypo-dot"></i> <?php //echo get_phrase('claimed_listings'); ?></span>
+                <li class="@if ($page_info['page_name'] == 'claimed_listing') {{ 'active' }} @endif">
+                    <a href="{{ route('claimed_listings.index') }}">
+                        <span><i class="entypo-dot"></i>Claimed Listings</span>
                     </a>
                 </li>
-                <li class="<?php //if ($page_name == 'reported_listings') echo 'active'; ?> ">
-                    <a href="<?php //echo site_url('admin/reported_listings'); ?>">
-                        <span><i class="entypo-dot"></i> <?php //echo get_phrase('reported_listings'); ?></span>
+                <li class="@if ($page_info['page_name'] == 'reported_listing') {{ 'active' }} @endif">
+                    <a href="{{ route('reported_listings.index') }}">
+                        <span><i class="entypo-dot"></i>Reported Listings</span>
                     </a>
                 </li>
             </ul>

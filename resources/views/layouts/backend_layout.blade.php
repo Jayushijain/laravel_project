@@ -10,9 +10,8 @@
 <head>
 
   <title>{{ $page_info['page_title'] }} | <?php //echo $website_title;?></title>
-  <!-- all the meta tags -->
-  <meta name="csrf_token" content="{{ csrf_token() }}">
-  <?php //include 'metas.php'; ?>
+  <!-- all the meta tags -->  
+  @include('includes.backend.metas')
   <!-- all the css files -->
   @include('includes.backend.backend_top')
 
