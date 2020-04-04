@@ -1,7 +1,7 @@
 <div class="form-group">
   <label for="title" class="col-sm-3 control-label">Title</label>
   <div class="col-sm-7">
-    <input type="text" class="form-control" name="name" id="name" placeholder="Title" required>
+    <input type="text" class="form-control" name="name" id="name" placeholder="Title" required value="{{ $listing->name }}">
   </div>
 </div>
 
@@ -15,16 +15,16 @@
   <label for="featured_type" class="col-sm-3 control-label">Featured Type</label>
   <div class="col-sm-7">
     <select name="is_featured" id = "featured_type" class="selectboxit" required>
-      <option value="">Select Featured Type</option>
-      <option value="1">Featured</option>
-      <option value="0">None Featured</option>
+      <option value="" @if($listing->is_featured == "") {{ 'selected' }} @endif>Select Featured Type</option>
+      <option value="1" @if($listing->is_featured == 1) {{ 'selected' }} @endif>Featured</option>
+      <option value="0" @if($listing->is_featured == 0) {{ 'selected' }} @endif>None Featured</option>
 		</select>
   </div>
 </div>
 <div class="form-group">
   <label for="google_analytics_id" class="col-sm-3 control-label">Google Analytics Id</label>
   <div class="col-sm-7">
-    <input type="text" class="form-control" name="google_analytics_id" id="google_analytics_id"  placeholder="GA_MEASUREMENT_ID">
+    <input type="text" class="form-control" name="google_analytics_id" id="google_analytics_id"  placeholder="GA_MEASUREMENT_ID" value="{{ $listing->google_analytics_id }}">
   </div>
 </div>
 <div class="form-group">
@@ -35,8 +35,13 @@
         <div class="col-sm-7">
           <select class="form-control selectboxit" name="category_id[]" id = "category_default" required>
             <option value="">Select Category</option>
+            @php
+              $category_id = explode(",",$listing->category_id);
+            @endphp
             @foreach ($categories as $category)
-              <option value="{{ $category->id }}">{{ $category->name }}</option>
+            @for ($i = 0; $i < count($category_id); $i++)
+               <option value="{{ $category->id }}" @if($category_id[$i] == $category->id) {{ 'selected' }} @endif>{{ $category->name }}</option>
+             @endfor               
             @endforeach
           </select>
         </div>

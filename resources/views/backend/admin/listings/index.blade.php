@@ -12,7 +12,7 @@
 
 <div class="row ">
   <div class="col-lg-12">
-    <a href="#" class="btn btn-primary alignToTitle"><i class="entypo-plus"></i>Add New Listing</a>
+    <a href="{{ route('listings.create') }}" class="btn btn-primary alignToTitle"><i class="entypo-plus"></i>Add New Listing</a>
   </div><!-- end col-->
 </div>
 <div class="row">

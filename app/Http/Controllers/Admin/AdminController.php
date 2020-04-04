@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\User;
 use App\Http\Controllers\Controller;
 use App\Listing;
 use App\PackagePurchasedHistory;
@@ -86,9 +87,13 @@ class AdminController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit($id)
+	public function edit($edit_type,$id)
 	{
-		//
+		$admin = User::findOrFail($id);
+		$page_info['page_title'] = 'Manage Profile';
+		$page_info['page_name']  = 'edit_profile';
+
+		return view("backend.admin.edit",compact('admin','page_info'));
 	}
 
 	/**
@@ -98,9 +103,45 @@ class AdminController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, $id)
-	{
-		//
+	public function update(Request $request,$edit_type, $id)
+	{		
+		$admin = User::findOrFail($id);
+
+		if($edit_type == 'manage_profile')
+		{	
+			$input = $request->all();
+			$input['email'] = sanitizer($request->email);
+	        $input['name'] = sanitizer($request->name);
+	        $input['address'] = sanitizer($request->address);
+	        $input['phone'] = sanitizer($request->phone);
+	        $input['website'] = sanitizer($request->website);
+	        $input['about'] = sanitizer($request->about);
+	        $social_links = array(
+	            'facebook' => sanitizer($request->facebook),
+	            'twitter' => sanitizer($request->twitter),
+	            'linkedin' => sanitizer($request->linkedin),
+	        );
+	        $input['social'] = json_encode($social_links);
+
+	        if ($file = $request->file('user_image'))
+	        {
+	            $filename = $id.'.jpg';
+	            $file->move('uploads/user_image', $filename);
+	        }		
+			$admin->update($input);
+			Session::flash('success_message', 'Profile Updated');
+		}
+		else if($edit_type == 'change_password')
+		{
+			$input['password'] = bcrypt($request->password);
+			$admin->update($input);
+			Session::flash('success_message', 'Password Changed');
+		}
+
+		$page_info['page_title'] = 'Manage Profile';
+		$page_info['page_name']  = 'edit_profile';
+
+		return view("backend.admin.edit",compact('admin','page_info'));
 	}
 
 	/**

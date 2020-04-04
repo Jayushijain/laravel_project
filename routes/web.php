@@ -128,6 +128,10 @@ Route::group(['middleware' => 'logincheck'], function () {
 
 	Route::patch('/admin/reported_listing/{id}','Admin\ReportedListingsController@update_status');
 
+	Route::get('/admin/{edit_type}/{id}','Admin\AdminController@edit');
+
+	Route::patch('/admin/update/{edit_type}/{id}','Admin\AdminController@update');
+
 });
 
 //other page

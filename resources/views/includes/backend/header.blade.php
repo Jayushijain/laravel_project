@@ -35,7 +35,7 @@
 					<!-- Settings sub-links -->
 					@if (strtolower(Auth::user()->role->name) == 'admin')
 						<li>
-								<a href="<?php //echo site_url('admin/system_settings'); ?>" class="dropdown-item notify-item">
+								<a href="{{ route('system_settings.index') }}" class="dropdown-item notify-item">
 	                  <i class="flaticon-rotate"></i>
 	                  <span>Settings</span>
 	              </a>
@@ -44,14 +44,14 @@
 
 					<!-- Profile sub-links -->
 					<li>
-						<a href="">
+						<a href="/admin/{{ 'manage_profile' }}/{{ Auth::user()->id }}">
 							<i class="flaticon-rotate"></i>
 							Edit Profile
 						</a>
 					</li>
 
 					<li>
-						<a href="">
+						<a href="/admin/{{ 'change_password' }}/{{ Auth::user()->id }}">
 							<i class="flaticon-lock"></i>
 							Change Password
 						</a>

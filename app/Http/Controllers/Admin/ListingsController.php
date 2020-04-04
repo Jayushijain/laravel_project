@@ -102,6 +102,7 @@ class ListingsController extends Controller
 		if(sizeof($request->category_id)>0)
 		{
 			$input['category_id'] = implode(',',$request->category_id);
+			array_pop($input['category_id']);
 		}
 		else
 		{
@@ -119,19 +120,21 @@ class ListingsController extends Controller
   		$time_config = array();
 	  	$days = array('sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday');
 	  	foreach ($days as $day) {
-	    $time_config[$day] = sanitizer($this->input->post($day.'_opening')).'-'.sanitizer($this->input->post($day.'_closing'));
+	    $time_config[$day] = sanitizer($request->$day.'_opening').'-'.sanitizer($request->$day.'_closing');
 	  }
 
 		if ($file = $request->file('listing_thumbnail'))
         {
         	$filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME).rand(100, 999).'.jpg';
-            $file->move('uploads/listing_thumbnail', $filename);
+            $file->move('uploads/listing_thumbnails', $filename);
+            $input['listing_thumbnail'] = $filename;
         }
 
         if ($file = $request->file('listing_cover'))
         {
         	$filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME).rand(100, 999).'.jpg';
             $file->move('uploads/listing_cover_photo', $filename);
+            $input['listing_cover'] = $filename;
         }
 
         foreach ($request->file('listing_images') as $listing_image) 
@@ -139,15 +142,15 @@ class ListingsController extends Controller
         	if ($file = $listing_image)
         	{
         		$filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME).rand(100, 999).'.jpg';
-            	$temp = $file->move('uploads/listing_image', $filename);
-            	array_push($photo_gallery,$temp);
+            	$file->move('uploads/listing_images', $filename);
+            	array_push($photo_gallery,$filename);
         	}	
         }
         
-        $input['photos'] = json_decode($photo_gallery);
+        $input['photos'] = json_encode($photo_gallery);
         $input['code'] = md5(rand(10000000, 20000000));
 
-        if(Auth::user()->role == 'admin')
+        if(Auth::user()->role_id == 1)
         {
         	$input['status'] = 1;
         }
@@ -156,8 +159,18 @@ class ListingsController extends Controller
         	$input['status'] = 0;
         }
 
-        echo "<PRE>";
-		return $input;
+        $listing = Listing::create($input);
+		
+		if ($listing)
+		{
+			Session::flash('success_message', 'Listing Created');
+		}
+		else
+		{
+			Session::flash('error_message', 'Listing not Created');
+		}
+
+		return redirect('admin/listings');
 	}
 
 	/**
@@ -190,17 +203,6 @@ class ListingsController extends Controller
 		return $arr;
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
 	public function update_column(Request $request, $id)
 	{
 		$value = Listing::where('id', $id)->value($request->column);
@@ -229,6 +231,24 @@ class ListingsController extends Controller
 	}
 
 	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function edit($id)
+	{
+		$listing                 = Listing::findOrFail($id);
+		$countries               = Country::all();
+		$categories              = Category::all();
+		$amenities               = Amenity::all();
+		$page_info['page_title'] = 'Listing Edit';
+		$page_info['page_name']  = 'edit_listing';
+
+		return view('backend.admin.listings.edit', compact('listing','countries', 'categories','amenities', 'page_info'));
+	}
+
+	/**
 	 * Update the specified resource in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
@@ -237,6 +257,112 @@ class ListingsController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
+		$input = $request->all();
+		$listing = Listing::findOrFail($id);
+		$photo_gallery = [];
+		if($request->is_featured)
+		{
+			$input['is_featured'] = sanitizer($request->is_featured);
+		}
+		else
+		{
+			$input['is_featured'] = sanitizer(0);
+		}
+
+		if(sizeof($request->amenity_id)>0)
+		{
+			$input['amenity_id'] = implode(',',$request->amenity_id);
+		}
+		else
+		{
+			$input['amenity_id'] = $request->amenity_id;
+		}
+
+		if(sizeof($request->category_id)>0)
+		{
+			$input['category_id'] = implode(',',$request->category_id);
+			array_pop($input['category_id']);
+		}
+		else
+		{
+			$input['category_id'] = $request->category_id;
+		}
+
+		$input['user_id'] = Auth::user()->id;
+		$social_links = array(
+		    'facebook' => sanitizer($request->facebook),
+		    'twitter'  => sanitizer($request->twitter),
+		    'linkedin' => sanitizer($request->linkedin),
+		  );
+  		$input['social'] = json_encode($social_links);
+
+  		$time_config = array();
+	  	$days = array('sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday');
+	  	foreach ($days as $day) {
+	    $time_config[$day] = sanitizer($request->$day.'_opening').'-'.sanitizer($request->$day.'_closing');
+	  }
+
+	  if($request->file('listing_thumbnail') != "")
+	  {
+	  	if ($file = $request->file('listing_thumbnail'))
+        {
+        	$filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME).rand(100, 999).'.jpg';
+            $file->move('uploads/listing_thumbnails', $filename);
+            $input['listing_thumbnail'] = $filename;
+        }
+	  }
+	  else
+	  {
+	  	$input['listing_thumbnail'] = $listing->listing_thumbnail;
+	  }
+
+	  if($request->file('listing_thumbnail') != "")
+	  {
+	  	if ($file = $request->file('listing_cover'))
+        {
+        	$filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME).rand(100, 999).'.jpg';
+            $file->move('uploads/listing_cover_photo', $filename);
+            $input['listing_cover'] = $filename;
+        }
+	  }
+	  else
+	  {
+	  	$input['listing_cover'] = $listing->listing_cover;
+	  } 
+
+	  $photos = json_decode($request->photos);
+        foreach ($request->file('listing_images') as $listing_image) 
+        {
+        	if ($file = $listing_image)
+        	{
+        		$filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME).rand(100, 999).'.jpg';
+            	$file->move('uploads/listing_images', $filename);
+            	array_push($photo_gallery,$filename);
+        	}	
+        }
+        
+        $input['photos'] = json_encode($photo_gallery);
+        $input['code'] = md5(rand(10000000, 20000000));
+
+        if(Auth::user()->role_id == 1)
+        {
+        	$input['status'] = 1;
+        }
+        else
+        {
+        	$input['status'] = 0;
+        }
+		
+		if ($listing->update($input))
+		{
+			Session::flash('success_message', 'Listing Updated');
+		}
+		else
+		{
+			Session::flash('error_message', 'Listing not Updated');
+		}
+
+		return redirect('admin/listings');
 	}
 
 	/**
@@ -247,6 +373,17 @@ class ListingsController extends Controller
 	 */
 	public function destroy($id)
 	{
-		//
+		$listing = Listing::findOrFail($id);
+
+		if ($listing->delete())
+		{
+			Session::flash('success_message', 'Listing Deleted');
+		}
+		else
+		{
+			Session::flash('error_message', 'Listing not Deleted');
+		}
+
+		return redirect('admin/listings');
 	}
 }
