@@ -21,7 +21,12 @@
 <body class="page-body" >
   <div class="page-container <?php //if ($text_align == 'right-to-left') echo 'right-sidebar';?>" >
     <!-- SIDEBAR -->
-    @include('backend.admin.navigation')
+    @if (Auth::user()->role->name == 'Admin')
+      @include('backend.admin.navigation')
+    @else
+      @include('backend.user.navigation')
+    @endif
+    
     <?php //include $logged_in_user_role.'/'.'navigation.php' ?>
     <div class="main-content">
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
 use App\Listing;
 use App\PackagePurchasedHistory;
@@ -46,7 +47,7 @@ class AdminController extends Controller
 		$page_info['page_title'] = 'Dashboard';
 		$page_info['page_name']  = 'dashboard';
 
-		return view('backend.index', compact('chart_data', 'page_info'));
+		return view('backend.admin.index', compact('chart_data', 'page_info'));
 	}
 
 	/**

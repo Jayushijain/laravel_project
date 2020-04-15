@@ -18,20 +18,14 @@ class LoginCheck
     {
         if(Auth::check())
         {
-            if(Auth::user()->LoginCheck())
-            {
-                // return redirect('/admin');
-            }
-            else
-            {
-                return redirect('/pricings');
-            }
+            return $next($request);
+            
         }
         else
         {
             return redirect('/login');
         }
-        return $next($request);
+        
     }
 
 }

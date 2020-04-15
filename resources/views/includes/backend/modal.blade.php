@@ -50,14 +50,23 @@ function confirm_modal(path,id, modal_type,field)
     window.scrollTo(0, 0);
     if (modal_type === 'generic_confirmation') {
         jQuery('#modal-generic_confirmation').modal('show', {backdrop: 'static'});
-        url = '/admin/'+path+'/'+id;
+        @if (Auth::user()->role->name == 'Admin')
+            url = '/admin/'+path+'/'+id;
+        @else
+            url = '/user/'+path+'/'+id;
+        @endif
+        
         document.getElementById('update_column').setAttribute('value' , field);
         document.getElementById('update_form').setAttribute('action' , url);
     }
     else{
         
         jQuery('#modal-4').modal('show', {backdrop: 'static'});
-        url = '/admin/'+path+'/'+id;
+        @if (Auth::user()->role->name == 'Admin')
+            url = '/admin/'+path+'/'+id;
+        @else
+            url = '/user/'+path+'/'+id;
+        @endif
         document.getElementById('delete_form').setAttribute('action' , url);
     }
 }

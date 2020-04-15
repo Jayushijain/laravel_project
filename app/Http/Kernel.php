@@ -61,5 +61,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'logincheck' => \App\Http\Middleware\LoginCheck::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        'role' => \App\Http\Middleware\CheckRole::class,
     ];
 }

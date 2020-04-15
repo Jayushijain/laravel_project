@@ -34,8 +34,14 @@ class User extends Authenticatable
     {
         if($this->role->name == "Admin" && $this->is_verified == 1)
         {
-            return true;
+            return 'Admin';
         }
+        else if($this->role->name == "User" && $this->is_verified == 1)
+        {
+            return 'User';
+        }
+        
+
         return false;
     }
     
@@ -49,7 +55,13 @@ class User extends Authenticatable
         return $this->belongsTo('App\Review');
     }
 
-    
+    public function packagePurchasedHistories()
+    {
+        return $this->hasMany('App\PackagePurchasedHistory');
+    }
 
-    
+    public function listings()
+    {
+        return $this->hasMany('App\Listing');
+    }    
 }

@@ -331,7 +331,8 @@ class ListingsController extends Controller
 	  } 
 
 	  $photos = json_decode($request->photos);
-        foreach ($request->file('listing_images') as $listing_image) 
+	  $listing_images = $request->file('listing_images');
+        foreach ($listing_images as $listing_image) 
         {
         	if ($file = $listing_image)
         	{

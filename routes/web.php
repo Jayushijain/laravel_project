@@ -52,9 +52,11 @@ Route::post('/booking',['as'=>'booking','uses'=>'BookingController@store']);
 
 Auth::routes();
 
-//check admin
-Route::group(['middleware' => 'logincheck'], function () {
+Route::middleware(['logincheck'])->group(function () {
 
+Route::middleware(['role:Admin'])->group(function () {
+
+	
 	Route::get('/admin','Admin\AdminController@index');
 
 	//Categories
@@ -141,7 +143,35 @@ Route::group(['middleware' => 'logincheck'], function () {
 
 	Route::patch('/admin/update/{edit_type}/{id}','Admin\AdminController@update');
 
-});
+	});
+
+	//Route::middleware(['role:User'])->group(function () {
+
+	Route::resource('/user/user_listings', 'User\ListingsController');
+
+	Route::patch('user/user_listings/update_column/{id}','User\ListingsController@update_column');
+
+		//Booking Requests
+	Route::get('/user/user_booking_request/{type}',['as' => 'user.booking.request', 'uses' => 'User\BookingController@index']);
+
+	Route::get('/user/update/user_booking_request/{type}/{id}',['as' => 'user_booking.status.update', 'uses' => 'User\BookingController@update_status']);
+
+	Route::delete('/user/user_bookings/{id}', 'User\BookingController@destroy');
+
+	Route::resource('/user/user_packages', 'User\PackagesController');
+
+	Route::get('user/stripe_checkout/{package_id}','User\PackagesController@stripe_checkout');
+
+	Route::get('user/paypal_checkout/{package_id}','User\PackagesController@paypal_checkout');
+
+	Route::get('/user/purchase_history', ['as' => 'user.purchase_history','uses' => 'User\PackagesController@history']);
+
+	Route::get('/user/wishlist', 'User\WishListsController@index');
+
+	Route::resource('/user','User\UserController');
+//});
+
+	});
 
 //other page
 Route::get('/about', function () {

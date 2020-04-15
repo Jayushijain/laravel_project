@@ -44,21 +44,36 @@
 
 					<!-- Profile sub-links -->
 					<li>
-						<a href="/admin/{{ 'manage_profile' }}/{{ Auth::user()->id }}">
+						@if (Auth::user()->role->name == 'Admin')
+							<a href="/admin/{{ 'manage_profile' }}/{{ Auth::user()->id }}">
 							<i class="flaticon-rotate"></i>
 							Edit Profile
 						</a>
+						@else
+						<a href="{{ route('user.edit',Auth::user()->id) }}">
+							<i class="flaticon-rotate"></i>
+							Edit Profile
+						</a>
+						@endif
+						
 					</li>
 
 					<li>
+						@if (Auth::user()->role->name == 'Admin')
 						<a href="/admin/{{ 'change_password' }}/{{ Auth::user()->id }}">
 							<i class="flaticon-lock"></i>
 							Change Password
 						</a>
+						@else
+						<a href="{{ route('user.edit',Auth::user()->id) }}">
+							<i class="flaticon-rotate"></i>
+							Change Password
+						</a>
+						@endif
 					</li>
 
 					<li>
-						<a href="">
+						<a href="/logout">
 							<i class="flaticon-paper-plane-1"></i>
 							Logout
 						</a>
