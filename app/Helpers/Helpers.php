@@ -132,20 +132,6 @@ if (!function_exists('get_frontend_settings'))
 
 		return $qu;
 	}
-
-	// if (!function_exists('sanitizer'))
-	// {
-	// 	function sanitizer($string = '')
-	// 	{
-	// 		$sanitized_string = htmlspecialchars($string);
-
-	// 		return $sanitized_string;
-	// 	}
-	
- //        $settings = DB::table('settings')->where('type', $type)->value('description');
-
- //        return $settings;
- //    }
  
     function get_reviewer_details($listing_id)
     {
@@ -274,17 +260,6 @@ if (!function_exists('get_frontend_settings'))
 			}
 		}
 	}
-
-	if (!function_exists('slugify'))
-	{
-		function slugify($text)
-		{
-			$text = preg_replace('~[^\\pL\d]+~u', '-', $text);
-			$text = trim($text, '-');
-			$text = strtolower($text);
-	    }
-	 }
-
 
   /**
    * Count sub category
@@ -474,7 +449,7 @@ if (! function_exists('has_package')) {
       $user_id = Auth::user()->id;
     }
 
-    if (strtolower($role) == 'Admin') {
+    if (strtolower($role) == 'admin') {
       return 1;
     }else {
     	$purchased_package = App\PackagePurchasedHistory::where([
@@ -484,7 +459,7 @@ if (! function_exists('has_package')) {
         ])->orderBy('id','desc')->first();
 
       if ($pacakge_details == false) {
-        
+
         if($purchased_package != '')
         {
           return $purchased_package->package_id;

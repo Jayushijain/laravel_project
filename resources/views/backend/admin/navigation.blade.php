@@ -187,7 +187,7 @@
         </li>
 
         <!-- Reports -->
-        <li class="@if ($page_info['page_name'] == 'reports' || $page_info['page_name'] == 'package_invoice'){{  'active' }}  @endif" style="border-top:1px solid #232540;">
+        <li class="@if ($page_info['page_name'] == 'reports' || $page_info['page_name'] == 'invoice'){{  'active' }}  @endif" style="border-top:1px solid #232540;">
             <a href="{{ route('reports.index') }}">
                 <i class="fa fa-paperclip"></i>
                 <span>Reports</span>

@@ -9,29 +9,29 @@
 
     <div class="col-lg-12">
       <div class="custom-control custom-radio">
-        <input type="radio" id="hotel" name="listing_type" class="custom-control-input listing-type-radio" value="hotel" onclick="showListingTypeForm('hotel')">
-        <label class="custom-control-label" for="hotel" @if ($listing->listing_type == 'hotel') {{ 'checked'}} @endif><i class="fa fa-hotel" style="color: #636363;"></i> Hotel </label>
+        <input type="radio" id="hotel" name="listing_type" class="custom-control-input listing-type-radio" value="hotel" onclick="showListingTypeForm('hotel')" @if ($listing->listing_type == 'hotel') {{ 'checked'}} @endif>
+        <label class="custom-control-label" for="hotel" ><i class="fa fa-hotel" style="color: #636363;"></i> Hotel </label>
       </div>
     </div>
 
     <div class="col-lg-12">
       <div class="custom-control custom-radio">
-        <input type="radio" id="restaurant" name="listing_type" class="custom-control-input listing-type-radio" value="restaurant" onclick="showListingTypeForm('restaurant')">
-        <label class="custom-control-label" for="restaurant" @if ($listing->listing_type == 'restaurant') {{ 'checked'}} @endif><i class="fa fa-hotel" style="color: #636363;"></i> Restaurant</label>
+        <input type="radio" id="restaurant" name="listing_type" class="custom-control-input listing-type-radio" value="restaurant" onclick="showListingTypeForm('restaurant')" @if ($listing->listing_type == 'restaurant') {{ 'checked'}} @endif>
+        <label class="custom-control-label" for="restaurant" ><i class="fa fa-hotel" style="color: #636363;"></i> Restaurant</label>
       </div>
     </div>
 
     <div class="col-lg-12">
       <div class="custom-control custom-radio">
-        <input type="radio" id="shop" name="listing_type" class="custom-control-input listing-type-radio" value="shop" onclick="showListingTypeForm('shop')">
-        <label class="custom-control-label" for="shop" @if ($listing->listing_type == 'shop') {{ 'checked'}} @endif><i class="fa fa-hotel" style="color: #636363;"></i> Shop</label>
+        <input type="radio" id="shop" name="listing_type" class="custom-control-input listing-type-radio" value="shop" onclick="showListingTypeForm('shop')" @if ($listing->listing_type == 'shop') {{ 'checked'}} @endif>
+        <label class="custom-control-label" for="shop" ><i class="fa fa-hotel" style="color: #636363;"></i> Shop</label>
       </div>
     </div>
 
     <div class="col-lg-12">
       <div class="custom-control custom-radio">
-        <input type="radio" id="beauty" name="listing_type" class="custom-control-input listing-type-radio" value="beauty" onclick="showListingTypeForm('beauty')">
-        <label class="custom-control-label" for="beauty" @if ($listing->listing_type == 'beauty') {{ 'checked'}} @endif><i class="fa fa-hotel" style="color: #636363;"></i> Beauty</label>
+        <input type="radio" id="beauty" name="listing_type" class="custom-control-input listing-type-radio" value="beauty" onclick="showListingTypeForm('beauty')" @if ($listing->listing_type == 'beauty') {{ 'checked'}} @endif>
+        <label class="custom-control-label" for="beauty" ><i class="fa fa-hotel" style="color: #636363;"></i> Beauty</label>
       </div>
     </div>
   </div>

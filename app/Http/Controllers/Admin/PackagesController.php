@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Package;
+use App\User;
+use App\PackagePurchasedHistory;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -81,14 +83,21 @@ class PackagesController extends Controller
 	}
 
 /**
- * Display the specified resource.
+ * Display the specified resource invoice.
  *
  * @param  int  $id
  * @return \Illuminate\Http\Response
  */
-	public function show($id)
+	public function package_invoice($id)
 	{
-		//
+		$purchase_history = PackagePurchasedHistory::findOrFail($id);
+		$user_details = User::where('id',$purchase_history->user_id)->first();
+		$package_details = Package::where('id',$purchase_history->package_id)->first();
+
+		$page_info['page_title'] = 'Package Invoice';
+		$page_info['page_name']  = 'invoice';
+
+		return view('backend.admin.packages.invoice',compact('purchase_history','page_info','user_details','package_details'));
 	}
 
 /**

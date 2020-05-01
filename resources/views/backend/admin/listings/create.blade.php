@@ -116,6 +116,26 @@
 @section('scripts')
 
 <script type="text/javascript">
+
+	function checkLocation(id,value)
+	{
+		if(/^[a-zA-Z]*$/.test(value) == true)
+		{
+			if(!($("#"+id).parent().parent().hasClass("has-error")))
+			{
+				$("#"+id).parent().parent().addClass("has-error");
+				$("#"+id).parent().append('<span class="help-block" id="span-error">This field should consist numbers</span>');
+			}			
+			return false;
+		}
+		else
+		{
+			$("#"+id).parent().parent().removeClass("has-error help-block");
+			$("#"+id).siblings('span').remove();
+			return true;
+		}
+	}
+
 	function getCityList(country_id) {
 
 		$.ajax({

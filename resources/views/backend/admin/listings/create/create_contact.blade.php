@@ -15,7 +15,7 @@
 <div class="form-group">
   <label class="col-sm-3 control-label" for="phone_number">Phone Number</label>
   <div class="col-sm-7">
-    <input type="text" class="form-control" id="phone_number" name="phone" placeholder="Phone Number">
+    <input type="number" class="form-control" id="phone_number" name="phone" placeholder="Phone Number">
   </div>
 </div>
 

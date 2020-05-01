@@ -30,13 +30,13 @@
 <div class="form-group">
   <label class="col-sm-3 control-label" for="latitude">Latitude</label>
   <div class="col-sm-7">
-    <input type="text" class="form-control" id="latitude" name="latitude" placeholder="You Can Provide Latitude For Getting The Exact Result">
+    <input type="text" class="form-control" id="latitude" name="latitude" placeholder="You Can Provide Latitude For Getting The Exact Result" required onchange="return checkLocation('latitude',this.value);">
   </div>
 </div>
 
 <div class="form-group row mb-3">
   <label class="col-sm-3 control-label" for="longitude">Longitude</label>
   <div class="col-md-7">
-    <input type="text" class="form-control" id="longitude" name="longitude" placeholder="You Can Provide Longitude For Getting The Exact Result">
+    <input type="text" class="form-control" id="longitude" name="longitude" placeholder="You Can Provide Longitude For Getting The Exact Result" required onchange="return checkLocation('longitude',this.value);">
   </div>
 </div>

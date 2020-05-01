@@ -86,9 +86,9 @@ function confirm_modal(path,id, modal_type,field)
                  <form action="" method="post" id ='delete_form' >
                     {{ method_field('delete') }}
                     {{ csrf_field() }}
-                <button type="submit" class="btn btn-danger" id="delete_link">Delete</button>
-                </form> 
+                <button type="submit" class="btn btn-danger" id="delete_link">Delete</button>                 
                 <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                </form>
             </div>
         </div>
     </div>
@@ -109,8 +109,8 @@ function confirm_modal(path,id, modal_type,field)
                     {{ csrf_field() }}
                     <input type="hidden" name="column" value="" id="update_column">
                 <button type="submit" class="btn btn-danger" id="update_link">Yes</button>
-                </form>
                 <button type="button" class="btn btn-info" data-dismiss="modal">No</button>
+                </form>
             </div>
         </div>
     </div>

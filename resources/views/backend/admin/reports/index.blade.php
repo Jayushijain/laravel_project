@@ -13,15 +13,17 @@
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-lg-offset-3 col-lg-6">
-						<form class="form-inline" action="{{-- {{ route('reports.daterange') }} --}}" method="post">
+						<form class="form-inline" action="{{ route('reports.daterange') }}" method="post">
 							{{-- <input type="hidden" name="range" value="{{ $post->id }}"> --}}
 							{{ csrf_field() }}
 							<div class="col-lg-10">
 								<div id="reportrange" class="daterange daterange-inline add-ranges" data-format="MMMM D, YYYY" data-start-date="{{ date("F d, Y" , $page_info['timestamp_start']) }}" data-end-date="{{ date("F d, Y" , $page_info['timestamp_end']) }}">
 									<i class="entypo-calendar"></i>
-									<span id="selectedValue">{{ date("F d, Y" , $page_info['timestamp_start']) . " - " . date("F d, Y" , $page_info['timestamp_end']) }}</span>
+									<span id="selectedValue" >{{ date("F d, Y" , $page_info['timestamp_start']) . " - " . date("F d, Y" , $page_info['timestamp_end']) }}</span>
+
+									
 								</div>
-								<input id="date_range" type="hidden" name="date_range" value="{{ date("d F, Y" , $page_info['timestamp_start']) . " - " . date("d F, Y" , $page_info['timestamp_end']) }}">
+								<input id="date_range" type="hidden" name="date_range" value="">
 							</div>
 							<div class="col-lg-2">
 								<button type="submit" class="btn btn-info" id="submit-button" onclick="update_date_range();"> Filter</button>
@@ -80,7 +82,7 @@
 											@endif
 										</td>
 										<td class="text-center">
-											<a href="#" class="btn btn-primary"><i class="mdi mdi-printer"></i>Invoice</a>
+											<a href="{{ url('admin/package_invoice/'.$purchase_history->id) }}" class="btn btn-primary"><i class="mdi mdi-printer"></i>Invoice</a>
 										</td>
 									</tr>
 								<?php endforeach; ?>
@@ -93,18 +95,18 @@
 	</div>
 </div>
 
-</script>
-
-
 @stop
 
 @section('scripts')
 
 <script type="text/javascript">
+
 function update_date_range()
 {
 	var x = $("#selectedValue").html();
 	$("#date_range").val(x);
 }
+
+</script>
 
 @stop

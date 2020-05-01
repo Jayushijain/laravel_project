@@ -2,13 +2,28 @@
 
 @section('content')
 
+@php
+
+$months = array('january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december');
+$month_wise_income = array();
+
+for ($i = 0; $i < 12; $i++) {
+    $first_day_of_month = date("Y")."-".($i+1)."-"."1".' 00:00:00';
+    $last_day_of_month = date("Y")."-".($i+1)."-".cal_days_in_month(CAL_GREGORIAN, $i+1, date("Y")).' 00:00:00';
+    $total_amount = App\PackagePurchasedHistory::where([
+        ['purchase_date','>=',$first_day_of_month],['purchase_date','<=',$last_day_of_month]])->sum('amount_paid');
+    $total_amount > 0 ? array_push($month_wise_income, $total_amount) : array_push($month_wise_income, 0);
+}
+    
+@endphp
+
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-primary " data-collapsed="0">
             <div class="panel-heading">
                 <div class="panel-title">
                     <i class="fa fa-calendar"></i>
-                    <?php //echo get_phrase('income_overview_this_year').' ('.currency_code_and_symbol('code').')'; ?>
+                    Income Overview This Year{{ '('.currency_code_and_symbol('code').')' }}
                 </div>
             </div>
             <div class="panel-body" style="padding:0px;">
@@ -27,7 +42,7 @@
             <div class="panel-heading">
                 <div class="panel-title">
                     <i class="fa fa-calendar"></i>
-                    <?php //echo get_phrase('listing_overview'); ?>
+                    Listing Overview
                 </div>
             </div>
             <div class="panel-body" style="padding:0px;">
@@ -42,45 +57,46 @@
     <div class="col-lg-8">
         <div class="panel panel-primary">
 			<div class="panel-heading">
-				<div class="panel-title"><?php //echo get_phrase('package_expiration').' : '.date('F'); ?></div>
+				<div class="panel-title">Package Expiration {{' : '.date('F') }}</div>
 			</div>
 
 			<table class="table table-bordered table-responsive">
 				<tbody>
-                    <?php //foreach ($expiration_in_this_month as $key => $row):
-                        //$user_details = $this->user_model->get_all_users($row['user_id'])->row_array();
-                        //$package_details = $this->crud_model->get_packages($row['package_id'])->row_array();
-                    ?>
+                    @foreach ($chart_data['expiration_in_this_month'] as $key => $row)
+                        @php
+                        $user_details = App\User::where('id',$row->user_id)->first();
+                        $package_details = App\Package::where('id',$row->package_id)->first();
+                        @endphp
                         <tr>
                             <td>
-                                <h5 class="font-14 my-1"><a href="javascript:void(0);" class="text-body" style="cursor: auto;"><?php //echo $package_details['name']; ?></a></h5>
-                                <span class="text-muted font-13"><?php //echo get_phrase('package_name'); ?></span>
+                                <h5 class="font-14 my-1"><a href="javascript:void(0);" class="text-body" style="cursor: auto;">{{ ucwords($package_details->name) }}</a></h5>
+                                <span class="text-muted font-13">Package Name</span>
                             </td>
                             <td>
-                                <h5 class="font-14 my-1"><a href="javascript:void(0);" class="text-body" style="cursor: auto;"><?php //echo $user_details['name']; ?></a></h5>
-                                <small><?php //echo get_phrase('email'); ?>: <span class="text-muted font-13"><?php //echo $user_details['email']; ?></span></small>
+                                <h5 class="font-14 my-1"><a href="javascript:void(0);" class="text-body" style="cursor: auto;">{{ ucwords($user_details->name) }}</a></h5>
+                                <small>Email: <span class="text-muted font-13">{{ $user_details->email }}</span></small>
                             </td>
                             <td>
-                                <span class="text-muted font-13"><?php //echo get_phrase('expires_in'); ?></span> <br/>
-                                <?php //if ($current_date_time > $row['expired_date']): ?>
-                                    <span class="badge badge-danger-lighten"><?php //echo date('D, d-M-Y', $row['expired_date']); ?></span>
-                                <?php //else: ?>
-                                    <span class="badge badge-warning-lighten"><?php// echo date('D, d-M-Y', $row['expired_date']); ?></span>
-                                <?php //endif; ?>
+                                <span class="text-muted font-13">Expires In</span> <br/>
+                                @if ($chart_data['current_date_time'] > $row->expired_date)
+                                    <span class="badge badge-danger-lighten">{{ date('D, d-M-Y', strtotime($row->expired_date)) }}</span>
+                                @else
+                                    <span class="badge badge-warning-lighten">{{ date('D, d-M-Y', strtotime($row->expired_date)) }}</span>
+                                @endif
                             </td>
                             <td>
-                                <h5 class="font-14 my-1"><a href="javascript:void(0);" class="text-body" style="cursor: auto;"><?php //echo $this->db->get_where('listing', array('user_id' => $row['user_id'], 'status' => 'active'))->num_rows(); ?></a></h5>
-                                <small><span class="text-muted font-13"><?php //echo get_phrase('total_number_of_listing'); ?></span></small>
+                                <h5 class="font-14 my-1"><a href="javascript:void(0);" class="text-body" style="cursor: auto;">{{ App\Listing::where([['user_id',$row->id],['status',1]])->count() }}</a></h5>
+                                <small><span class="text-muted font-13">total Number Of Listing</span></small>
                             </td>
                         </tr>
-                    <?php //endforeach; ?>
-                    <?php //if (sizeof($expiration_in_this_month) == 0): ?>
+                    @endforeach
+                    @if (sizeof($chart_data['expiration_in_this_month']) == 0)
                         <tr>
                             <td colspan="4">
-                                <h5 class="font-14 my-1"><?php //echo get_phrase('no_package_found'); ?></h5>
+                                <h5 class="font-14 my-1">No Package Found</h5>
                             </td>
                         </tr>
-                    <?php //endif; ?>
+                    @endif
 				</tbody>
 			</table>
 		</div>
@@ -104,13 +120,13 @@ am4core.ready(function() {
     var data = [];
 
     chart.data = [
-        <?php for ($i = 0; $i < 12; $i++): ?>
+        @for ($i = 0; $i < 12; $i++)
         {
-            "month" : "<?php echo ucfirst($months[$i]); ?>",
-            "income": "<?php //echo $month_wise_income[$i]; ?>",
+            "month" : "{{ ucfirst($months[$i]) }}",
+            "income": "{{ $month_wise_income[$i] }}",
             "lineColor": chart.colors.next()
         },
-        <?php endfor; ?>
+        @endfor
     ];
     var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
     categoryAxis.renderer.grid.template.location = 0;
@@ -209,10 +225,10 @@ hoverShadow.blur = 5;
 chart.legend = new am4charts.Legend();
 
 chart.data = [{
-  "country": "<?php echo 'active_listing'; ?>",
+  "country": "{{ 'Active Listing' }}",
   "litres": "5"
 },{
-  "country": "<?php echo 'pending_listing'; ?>",
+  "country": "{{ 'Pending Listing' }}",
   "litres": "5"
 }];
 

@@ -46,6 +46,7 @@ class CategoriesController extends Controller
 	public function store(Request $request)
 	{
 		$input = $request->all();
+		$input['name'] = sanitizer($request->name);
 
 		if ($input['parent_id'] == 0)
 		{
@@ -117,6 +118,7 @@ class CategoriesController extends Controller
 	{
         $category = Category::findOrFail($id);
 		$input = $request->all();
+		$input['name'] = sanitizer($request->name);
 
         if ($input['parent_id'] == 0)
         {

@@ -1,7 +1,7 @@
 <div class="form-group">
   <label for="title" class="col-sm-3 control-label">Title</label>
   <div class="col-sm-7">
-    <input type="text" class="form-control" name="name" id="name" placeholder="Title" required>
+    <input type="text" class="form-control" name="name" id="name" placeholder="Title" required onchange="return checkName(this.value);">
   </div>
 </div>
 

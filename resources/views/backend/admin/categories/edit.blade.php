@@ -23,7 +23,7 @@
 						<label for="name" class="col-sm-3 control-label">Category Title:</label>
 
 						<div class="col-sm-7">
-							<input type="text" class="form-control" name="name" id="name" placeholder="Provide Category Name" value="{{ $category->name }}" required onchange="checkName(this.value)">
+							<input type="text" class="form-control" name="name" id="name" placeholder="Provide Category Name" value="{{ $category->name }}" required onchange="return checkName(this.value)">
 						</div>
 					</div>
 
