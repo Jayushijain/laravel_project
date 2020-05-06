@@ -9,10 +9,10 @@ use App\City;
 use App\Country;
 use App\FoodMenu;
 use App\HotelRoomSpecification;
-use App\TimeConfiguration;
 use App\Http\Controllers\Controller;
 use App\Listing;
 use App\ProductDetail;
+use App\TimeConfiguration;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -179,9 +179,9 @@ class ListingsController extends Controller
 			$input['status'] = 0;
 		}
 
-		$listing = Listing::create($input);
+		$listing                   = Listing::create($input);
 		$time_config['listing_id'] = $listing->id;
-		$time_configuration = TimeConfiguration::create($time_config);
+		$time_configuration        = TimeConfiguration::create($time_config);
 		(new ListingsController())->store_listing_type_wise($request->listing_type, $listing->id, $request);
 
 		if ($listing)
@@ -196,6 +196,13 @@ class ListingsController extends Controller
 		return redirect('admin/listings');
 	}
 
+	/**
+	 * It will store the listing information depending on its type.
+	 * 
+	 * @param  string                    $listing_type [listing type name]
+	 * @param  integer                   $listing_id   [id of the listing]
+	 * @param  \Illuminate\Http\Request  $request
+	 */
 	public function store_listing_type_wise($listing_type, $listing_id, Request $request)
 	{
 		$listing_photos = array();
@@ -333,7 +340,8 @@ class ListingsController extends Controller
 	 * To get the cities for single country
 	 *
 	 * @param  \Illuminate\Http\Request  $request
-	 * @return \Illuminate\Http\Response
+	 *
+	 * @return array $arr [name of the cities]
 	 */
 	public function get_cities(Request $request)
 	{
@@ -349,6 +357,13 @@ class ListingsController extends Controller
 		return $arr;
 	}
 
+	/**
+	 * To update the value of single column
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  integer                   $id      [id of the row that has to be updated]	 *
+	 * @return \Illuminate\Http\Response
+	 */
 	public function update_column(Request $request, $id)
 	{
 		$value = Listing::where('id', $id)->value($request->column);
@@ -398,7 +413,7 @@ class ListingsController extends Controller
 	 * Update the specified resource in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
-	 * @param  int  $id
+	 * @param  integer 					 $id
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update(Request $request, $id)
@@ -427,7 +442,6 @@ class ListingsController extends Controller
 
 		if (sizeof($request->category_id) > 0)
 		{
-
 			array_pop($request->category_id);
 			$input['category_id'] = implode(',', $request->category_id);
 		}
@@ -482,53 +496,53 @@ class ListingsController extends Controller
 
 		$old_listing_images = json_decode($request->photos);
 		$new_listing_images = $request->new_listing_images;
-		$listing_images = $request->file('listing_images');		
-    	unset($new_listing_images[count($new_listing_images)-1]);
+		$listing_images     = $request->file('listing_images');
+		unset($new_listing_images[count($new_listing_images) - 1]);
 		$final_listing_images = array();
 
-		if(!empty($old_listing_images))
+		if (!empty($old_listing_images))
 		{
 			foreach ($listing_images as $key => $listing_image)
 			{
-				if (in_array($new_listing_images[$key], $old_listing_images)) 
+				if (in_array($new_listing_images[$key], $old_listing_images))
 				{
-			      	if ($file = $listing_image)
-				  	{
-						$filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME).rand(100, 999).'.jpg';
-						$file->move('uploads/listing_images', $filename);
-						array_push($photo_gallery, $filename);
-				  	}
-			      	else 
-			      	{
-				        $filename = $new_listing_images[$key];
-				        array_push($photo_gallery, $filename);
-			      	}
-			    }
-			    else 
-			    {
-			      	if ($file = $listing_image)
+					if ($file = $listing_image)
 					{
 						$filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME).rand(100, 999).'.jpg';
 						$file->move('uploads/listing_images', $filename);
 						array_push($photo_gallery, $filename);
 					}
-			    }
+					else
+					{
+						$filename = $new_listing_images[$key];
+						array_push($photo_gallery, $filename);
+					}
+				}
+				else
+				{
+					if ($file = $listing_image)
+					{
+						$filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME).rand(100, 999).'.jpg';
+						$file->move('uploads/listing_images', $filename);
+						array_push($photo_gallery, $filename);
+					}
+				}
 			}
 		}
 		else
 		{
 			if ($request->file('listing_images'))
-		{
-			foreach ($request->file('listing_images') as $listing_image)
 			{
-				if ($file = $listing_image)
+				foreach ($request->file('listing_images') as $listing_image)
 				{
-					$filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME).rand(100, 999).'.jpg';
-					$file->move('uploads/listing_images', $filename);
-					array_push($photo_gallery, $filename);
+					if ($file = $listing_image)
+					{
+						$filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME).rand(100, 999).'.jpg';
+						$file->move('uploads/listing_images', $filename);
+						array_push($photo_gallery, $filename);
+					}
 				}
 			}
-		}
 		}
 
 		$input['photos'] = json_encode($photo_gallery);
@@ -546,7 +560,7 @@ class ListingsController extends Controller
 		if ($listing->update($input))
 		{
 			$time_config['listing_id'] = $listing->id;
-			$time_configuration = TimeConfiguration::where('listing_id',$listing->id)->update($time_config);
+			$time_configuration        = TimeConfiguration::where('listing_id', $listing->id)->update($time_config);
 			(new ListingsController())->update_listing_type_wise($request->listing_type, $listing->id, $request);
 			//(new ListingsController())->remove_from_other_tables($request->listing_type, $listing->id);
 			Session::flash('success_message', 'Listing Updated');
@@ -559,11 +573,20 @@ class ListingsController extends Controller
 		return redirect('admin/listings');
 	}
 
+	/**
+	 * [to update the tables depending on listing type]
+	 * 
+	 * @param  string  $listing_type [type of listing]
+	 * @param  string  $listing_id   [id of listing]
+	 * @param  \Illuminate\Http\Request  $request
+	 * 
+	 * @return \Illuminate\Http\Response
+	 */
 	public function update_listing_type_wise($listing_type = '', $listing_id = '', Request $request)
 	{
 		$listing_photos = array();
 
-// Updating listing wise image and data saving.
+		// Updating listing wise image and data saving.
 		if ($listing_type == 'hotel')
 		{
 			$room_name_array = $request->room_name;
@@ -580,8 +603,7 @@ class ListingsController extends Controller
 			// Image Uploading functions starts here
 			$old_hotel_room_images = $request->old_hotel_room_images;
 			array_pop($old_hotel_room_images);
-
-// Image Uploading functions ends here
+			// Image Uploading functions ends here
 
 			foreach ($request->file('room_image') as $key => $room_image)
 			{
@@ -616,23 +638,23 @@ class ListingsController extends Controller
 				}
 			}
 		}
-		else if($listing_type == 'restaurant')
+		else if ($listing_type == 'restaurant')
 		{
 			$menu_name_array = sanitizer($request->menu_name);
-		    array_pop($menu_name_array);
-		    $menu_items_array = sanitizer($request->items);
-		    array_pop($menu_items_array);
-		    $menu_price_array = sanitizer($request->menu_price);
-		    array_pop($menu_price_array);
-		    $menu_ids_array = sanitizer($request->food_menu_id);
-		    array_pop($menu_ids_array);
+			array_pop($menu_name_array);
+			$menu_items_array = sanitizer($request->items);
+			array_pop($menu_items_array);
+			$menu_price_array = sanitizer($request->menu_price);
+			array_pop($menu_price_array);
+			$menu_ids_array = sanitizer($request->food_menu_id);
+			array_pop($menu_ids_array);
 
-		    // Image Uploading functions starts here
-		    $old_food_menu_images = sanitizer($request->old_food_menu_images);
-		    array_pop($old_food_menu_images);
+			// Image Uploading functions starts here
+			$old_food_menu_images = sanitizer($request->old_food_menu_images);
+			array_pop($old_food_menu_images);
+			// Image Uploading functions ends here
 
-		    // Image Uploading functions ends here
-		    foreach ($request->file('menu_image') as $key => $menu_image)
+			foreach ($request->file('menu_image') as $key => $menu_image)
 			{
 				if ($file = $menu_image)
 				{
@@ -646,44 +668,48 @@ class ListingsController extends Controller
 				}
 			}
 
-		    foreach ($menu_ids_array as $key => $menu_id) {
-		      $input['name']       = sanitizer($menu_name_array[$key]);
-		      $input['price']      = sanitizer($menu_price_array[$key]);
-		      $input['items']      = sanitizer($menu_items_array[$key]);
-		      $input ['photo']     = sanitizer($listing_photos[$key]);
-		      $input['listing_id'] = sanitizer($listing_id);
-		      if ($menu_id > 0) {
-		      	$food_menu = App\FoodMenu::findOrFail($menu_id)->update($input);
-		      }else {
-		      	$food_menu = App\FoodMenu::insert($input);
-		      }
-		    }
+			foreach ($menu_ids_array as $key => $menu_id)
+			{
+				$input['name']       = sanitizer($menu_name_array[$key]);
+				$input['price']      = sanitizer($menu_price_array[$key]);
+				$input['items']      = sanitizer($menu_items_array[$key]);
+				$input['photo']      = sanitizer($listing_photos[$key]);
+				$input['listing_id'] = sanitizer($listing_id);
+				if ($menu_id > 0)
+				{
+					$food_menu = App\FoodMenu::findOrFail($menu_id)->update($input);
+				}
+				else
+				{
+					$food_menu = App\FoodMenu::insert($input);
+				}
+			}
 		}
-		elseif ($listing_type == 'beauty') 
+		elseif ($listing_type == 'beauty')
 		{
-		    $service_name_array = $request->service_name;
-		    array_pop($service_name_array);
+			$service_name_array = $request->service_name;
+			array_pop($service_name_array);
 
-		    $service_starting_time_array = $request->starting_time;
-		    array_pop($service_starting_time_array);
+			$service_starting_time_array = $request->starting_time;
+			array_pop($service_starting_time_array);
 
-		    $service_ending_time_array = $request->ending_time;
-		    array_pop($service_ending_time_array);
+			$service_ending_time_array = $request->ending_time;
+			array_pop($service_ending_time_array);
 
-		    $service_duration_array = $request->duration;
-		    array_pop($service_duration_array);
+			$service_duration_array = $request->duration;
+			array_pop($service_duration_array);
 
-		    $service_price_array = $request->service_price;
-		    array_pop($service_price_array);
-		    $service_ids_array = $request->beauty_service_id;
-		    array_pop($service_ids_array);
+			$service_price_array = $request->service_price;
+			array_pop($service_price_array);
+			$service_ids_array = $request->beauty_service_id;
+			array_pop($service_ids_array);
 
-		    // Image Uploading functions starts here
-		    $old_beauty_service_images = $request->old_beauty_service_images;
-		    array_pop($old_beauty_service_images);
-		    // Image Uploading functions ends here
-		    
-		    foreach ($request->file('service_image') as $key => $service_image)
+			// Image Uploading functions starts here
+			$old_beauty_service_images = $request->old_beauty_service_images;
+			array_pop($old_beauty_service_images);
+			// Image Uploading functions ends here
+
+			foreach ($request->file('service_image') as $key => $service_image)
 			{
 				if ($file = $service_image)
 				{
@@ -697,36 +723,40 @@ class ListingsController extends Controller
 				}
 			}
 
-		    foreach ($service_ids_array as $key => $service_id) {
-		      $input['name']       = sanitizer($service_name_array[$key]);
-		      $input['price']      = sanitizer($service_price_array[$key]);
-		      $input['service_times']      = sanitizer($service_starting_time_array[$key]).','.sanitizer($service_ending_time_array[$key]).','.sanitizer($service_duration_array[$key]);
-		      $input ['photo']     = sanitizer($listing_photos[$key]);
-		      $input['listing_id'] = sanitizer($listing_id);
-		      if ($service_id > 0) {
-		      	$beauty_service = App\BeautyService::findOrFail($service_id)->update($input);
-		      }else {
-		        $beauty_service = App\BeautyService::insert($input);
-		      }
-		    }
+			foreach ($service_ids_array as $key => $service_id)
+			{
+				$input['name']          = sanitizer($service_name_array[$key]);
+				$input['price']         = sanitizer($service_price_array[$key]);
+				$input['service_times'] = sanitizer($service_starting_time_array[$key]).','.sanitizer($service_ending_time_array[$key]).','.sanitizer($service_duration_array[$key]);
+				$input['photo']         = sanitizer($listing_photos[$key]);
+				$input['listing_id']    = sanitizer($listing_id);
+				if ($service_id > 0)
+				{
+					$beauty_service = App\BeautyService::findOrFail($service_id)->update($input);
+				}
+				else
+				{
+					$beauty_service = App\BeautyService::insert($input);
+				}
+			}
 		}
-		elseif ($listing_type == 'shop') 
+		elseif ($listing_type == 'shop')
 		{
-		    $product_name_array = $request->product_name;
-		    array_pop($product_name_array);
-		    $product_variants_array = $request->variants;
-		    array_pop($product_variants_array);
-		    $product_price_array = $request->product_price;
-		    array_pop($product_price_array);
-		    $product_ids_array = $request->product_id;
-		    array_pop($product_ids_array);
+			$product_name_array = $request->product_name;
+			array_pop($product_name_array);
+			$product_variants_array = $request->variants;
+			array_pop($product_variants_array);
+			$product_price_array = $request->product_price;
+			array_pop($product_price_array);
+			$product_ids_array = $request->product_id;
+			array_pop($product_ids_array);
 
-		    // Image Uploading functions starts here
-		    $old_product_images = $request->old_product_images;
-		    array_pop($old_product_images);
-		    // Image Uploading functions ends here
+			// Image Uploading functions starts here
+			$old_product_images = $request->old_product_images;
+			array_pop($old_product_images);
+			// Image Uploading functions ends here
 
-		    foreach ($request->file('product_image') as $key => $product_image)
+			foreach ($request->file('product_image') as $key => $product_image)
 			{
 				if ($file = $product_image)
 				{
@@ -740,19 +770,23 @@ class ListingsController extends Controller
 				}
 			}
 
-		    foreach ($product_ids_array as $key => $product_id) {
-		      $input['name']       = sanitizer($product_name_array[$key]);
-		      $input['variant']    = sanitizer($product_variants_array[$key]);
-		      $input['price']      = sanitizer($product_price_array[$key]);
-		      $input ['photo']     = sanitizer($listing_photos[$key]);
-		      $input['listing_id'] = sanitizer($listing_id);
-		      if ($product_id > 0) {
-		      	$product_detail = App\ProductDetail::findOrFail($product_id)->update($input);
-		      }else {
-		        $product_detail = App\ProductDetail::insert($input);
-		      }
-		    }
-		  }
+			foreach ($product_ids_array as $key => $product_id)
+			{
+				$input['name']       = sanitizer($product_name_array[$key]);
+				$input['variant']    = sanitizer($product_variants_array[$key]);
+				$input['price']      = sanitizer($product_price_array[$key]);
+				$input['photo']      = sanitizer($listing_photos[$key]);
+				$input['listing_id'] = sanitizer($listing_id);
+				if ($product_id > 0)
+				{
+					$product_detail = App\ProductDetail::findOrFail($product_id)->update($input);
+				}
+				else
+				{
+					$product_detail = App\ProductDetail::insert($input);
+				}
+			}
+		}
 	}
 
 	/**
@@ -777,20 +811,34 @@ class ListingsController extends Controller
 		return redirect('admin/listings');
 	}
 
-	// This function removes all the exisiting data of a certain listing
-	function remove_from_other_tables($listing_type = "", $listing_id = "") {
+	/**
+	 * [to delete the tables depending on listing type]
+	 * 
+	 * @param  string  $listing_type [type of listing]
+	 * @param  string  $listing_id   [id of listing]
+	 * 
+	 * @return \Illuminate\Http\Response
+	 */
+	function remove_from_other_tables($listing_type = '', $listing_id = '')
+	{
+		if ($listing_type != 'hotel')
+		{
+			$hotel_room = HotelRoomSpecification::findOrFail($listing_id)->delete();
+		}
 
-		  if ($listing_type != "hotel") {
-		  	$hotel_room = HotelRoomSpecification::findOrFail($listing_id)->delete();
-		  }
-		  if ($listing_type != "shop") {
-		  	$product_detail = ProductDetail::findOrFail($listing_id)->delete();
-		  }
-		  if ($listing_type != "restaurant") {
-		   	$food_menu = FoodMenu::findOrFail($listing_id)->delete();
-		  }
-		  if ($listing_type != "beauty") {
-		    $beauty_service = BeautyService::findOrFail($listing_id)->delete();
-		  }
+		if ($listing_type != 'shop')
+		{
+			$product_detail = ProductDetail::findOrFail($listing_id)->delete();
+		}
+
+		if ($listing_type != 'restaurant')
+		{
+			$food_menu = FoodMenu::findOrFail($listing_id)->delete();
+		}
+
+		if ($listing_type != 'beauty')
+		{
+			$beauty_service = BeautyService::findOrFail($listing_id)->delete();
+		}
 	}
 }

@@ -78,6 +78,7 @@
                 <div class="fileinput fileinput-new" data-provides="fileinput">
                   <div class="fileinput-new thumbnail" style="width: 200px; height: 200px;" data-trigger="fileinput">
                     <img src="{{ asset('uploads/listing_images/'.$photo) }}" alt="..." style="width: 200px; height: 200px;">
+                    <input type="hidden" class="name_of_previous_image" name="new_listing_images[]" value="{{ $photo }}">
                   </div>
                   <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px"></div>
                   <div>
@@ -104,6 +105,7 @@
                 <div class="fileinput fileinput-new" data-provides="fileinput">
                   <div class="fileinput-new thumbnail" style="width: 200px; height: 200px;" data-trigger="fileinput">
                     <img src="{{ asset('uploads/listing_images/'.$photo) }}" alt="..." style="width: 200px; height: 200px;">
+                    <input type="hidden" class="name_of_previous_image" name="new_listing_images[]" value="{{ $photo }}">
                   </div>
                   <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px"></div>
                   <div>

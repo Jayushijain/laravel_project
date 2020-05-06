@@ -24,6 +24,13 @@ class BookingController extends Controller
         return view('backend.admin.bookings.'.$page, compact('bookings', 'page_info'));
     }
 
+    /**
+     * To update the status of the booking.
+     *
+     * @param  string  $request_type  [the value of current status]
+     * @param  int     $id            [the id of the recore that has to be updated]
+     * @return \Illuminate\Http\Response
+     */
     public function update_status($request_type=" ",$id=" ")
     {
         $flag = 0;
@@ -32,6 +39,7 @@ class BookingController extends Controller
        if($request_type == 'pending')
        {
             $input['status'] = 0;
+
             if(!Booking::where('id',$id)->update($input))
             {
                 $flag =1;

@@ -82,12 +82,12 @@ class PackagesController extends Controller
 		return redirect('/admin/packages');
 	}
 
-/**
- * Display the specified resource invoice.
- *
- * @param  int  $id
- * @return \Illuminate\Http\Response
- */
+	/**
+	 * Display the specified resource invoice.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
 	public function package_invoice($id)
 	{
 		$purchase_history = PackagePurchasedHistory::findOrFail($id);
@@ -100,12 +100,12 @@ class PackagesController extends Controller
 		return view('backend.admin.packages.invoice',compact('purchase_history','page_info','user_details','package_details'));
 	}
 
-/**
- * Show the form for editing the specified resource.
- *
- * @param  int  $id
- * @return \Illuminate\Http\Response
- */
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
 	public function edit($id)
 	{
 		$package                 = Package::findOrFail($id);
@@ -115,13 +115,13 @@ class PackagesController extends Controller
 		return view('backend.admin.packages.edit', compact('package', 'page_info'));
 	}
 
-/**
- * Update the specified resource in storage.
- *
- * @param  \Illuminate\Http\Request  $request
- * @param  int  $id
- * @return \Illuminate\Http\Response
- */
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
 	public function update(Request $request, $id)
 	{
 		$package = Package::findOrFail($id);
@@ -159,12 +159,12 @@ class PackagesController extends Controller
 		return redirect('/admin/packages');
 	}
 
-/**
- * Remove the specified resource from storage.
- *
- * @param  int  $id
- * @return \Illuminate\Http\Response
- */
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
 	public function destroy($id)
 	{
 		$package = Package::findOrFail($id);
