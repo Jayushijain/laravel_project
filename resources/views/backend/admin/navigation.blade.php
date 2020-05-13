@@ -224,10 +224,10 @@
         </li>
 
         <!-- SETTINGS -->
-        <li class="@if ($page_info['page_name'] == 'system_settings' || $page_info['page_name'] == 'frontend_settings' || $page_info['page_name'] == 'payment_settings' || $page_info['page_name'] == 'smtp_settings' || $page_info['page_name'] == 'about' ) {{ 'opened active' }} @endif ">
+        <li class="@if ($page_info['page_name'] == 'system_settings' || $page_info['page_name'] == 'frontend_settings' || $page_info['page_name'] == 'payment_settings' || $page_info['page_name'] == 'smtp_settings' ) {{ 'opened active' }} @endif ">
         <a href="#">
             <i class="fa fa-cogs"></i>
-            <span>Settings</span>
+            <span>{{ 'Settings' }}</span>
         </a>
         <ul>
             <li class="@if ($page_info['page_name'] == 'system_settings') {{ 'active' }} @endif">

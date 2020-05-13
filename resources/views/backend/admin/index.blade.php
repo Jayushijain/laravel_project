@@ -77,7 +77,7 @@ for ($i = 0; $i < 12; $i++) {
                                 <small>Email: <span class="text-muted font-13">{{ $user_details->email }}</span></small>
                             </td>
                             <td>
-                                <span class="text-muted font-13">Expires In</span> <br/>
+                                <span class="text-muted font-13">Expired On</span> <br/>
                                 @if ($chart_data['current_date_time'] > $row->expired_date)
                                     <span class="badge badge-danger-lighten">{{ date('D, d-M-Y', strtotime($row->expired_date)) }}</span>
                                 @else
@@ -86,7 +86,7 @@ for ($i = 0; $i < 12; $i++) {
                             </td>
                             <td>
                                 <h5 class="font-14 my-1"><a href="javascript:void(0);" class="text-body" style="cursor: auto;">{{ App\Listing::where([['user_id',$row->id],['status',1]])->count() }}</a></h5>
-                                <small><span class="text-muted font-13">total Number Of Listing</span></small>
+                                <small><span class="text-muted font-13">Total Number Of Listing</span></small>
                             </td>
                         </tr>
                     @endforeach

@@ -42,7 +42,7 @@
                                 		<img class="rounded-circle" src="{{ asset('/uploads/user_image/user.png') }}" alt="" style="height: 50px; width: 50px;">
                                 	@endif --}}                            	
                                 </td>
-                                <td>{{ $user->name }}</td>
+                                <td>{{ ucwords($user->name) }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->phone }}</td>
                                 <td class="text-center">

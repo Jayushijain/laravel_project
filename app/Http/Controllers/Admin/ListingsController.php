@@ -102,20 +102,14 @@ class ListingsController extends Controller
 			{
 				$input['amenity_id'] = implode(',', $request->amenity_id);
 			}
-			else
-			{
-				$input['amenity_id'] = $request->amenity_id;
-			}
 		}
 
-		if (sizeof($request->category_id) > 0)
-		{
-			//array_pop($request->category_id);
-			$input['category_id'] = implode(',', $request->category_id);
-		}
-		else
-		{
-			$input['category_id'] = $request->category_id;
+		$temp =  $request->category_id;
+		array_pop($temp);
+
+		if (sizeof($temp) > 0)
+		{			
+			$input['category_id'] = implode(',', $temp);
 		}
 
 		$input['user_id'] = Auth::user()->id;

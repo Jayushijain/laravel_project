@@ -2,10 +2,6 @@
 
 @section('content')
 
-@extends('layouts.backend_layout')
-
-@section('content')
-
  <div class="row">
    <div class="col-lg-12">
      <div class="panel panel-primary" data-collapsed="0">
@@ -118,8 +114,6 @@
      </div>
    </div><!-- end col-->
  </div>
-@stop
-
 @stop
 
 @section('scripts')
