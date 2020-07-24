@@ -16,7 +16,7 @@
 
     <div class="col-lg-12">
       <div class="custom-control custom-radio">
-        <input type="radio" id="restaurant" name="listing_type" class="custom-control-input listing-type-radio" value="restaurant" onclick="showListingTypeForm('restaurant')" @if ($listing->listing_type == 'restaurant') {{ 'checked'}} @endif>
+        <input type="radio" id="restaurant" name="listing_type" class="custom-control-input listing-type-radio" value="restaurant" onclick="showListingTypeForm('restaurant')" @if ($listing->listing_type == 'restaurant') checked = "checked" @endif>
         <label class="custom-control-label" for="restaurant" ><i class="fa fa-hotel" style="color: #636363;"></i> Restaurant</label>
       </div>
     </div>

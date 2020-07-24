@@ -1,8 +1,9 @@
 <header class="header menu_fixed">
     <div id="logo">
         <a href="/" title="Sparker - Directory and listings template">
-            <img src="global/light_logo.png" width="165" height="35" alt="" class="logo_normal">
-            <img src="global/dark_logo.png" width="165" height="35" alt="" class="logo_sticky">
+           <img src="{{ asset('/global/favicon.png') }}"  style="max-height:30px;position: relative;
+  bottom: 5px;"/>
+            <span style="font-size:25px;color:white">Ziolty</span>
         </a>
     </div>
     <ul id="top_menu">

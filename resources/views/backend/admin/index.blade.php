@@ -14,6 +14,7 @@ for ($i = 0; $i < 12; $i++) {
         ['purchase_date','>=',$first_day_of_month],['purchase_date','<=',$last_day_of_month]])->sum('amount_paid');
     $total_amount > 0 ? array_push($month_wise_income, $total_amount) : array_push($month_wise_income, 0);
 }
+$current_month = date("m");
     
 @endphp
 
@@ -77,12 +78,16 @@ for ($i = 0; $i < 12; $i++) {
                                 <small>Email: <span class="text-muted font-13">{{ $user_details->email }}</span></small>
                             </td>
                             <td>
-                                <span class="text-muted font-13">Expired On</span> <br/>
-                                @if ($chart_data['current_date_time'] > $row->expired_date)
-                                    <span class="badge badge-danger-lighten">{{ date('D, d-M-Y', strtotime($row->expired_date)) }}</span>
-                                @else
-                                    <span class="badge badge-warning-lighten">{{ date('D, d-M-Y', strtotime($row->expired_date)) }}</span>
-                                @endif
+                                @if ($current_month == date("m",strtotime($row->expired_date)))
+
+                                    @if ($chart_data['current_date_time'] >= $row->expired_date)
+                                     <span class="text-muted font-13">Expired On</span> <br/>
+                                        <span class="badge badge-danger-lighten">{{ date('D, d-M-Y', strtotime($row->expired_date)) }}</span>
+                                    @else
+                                        <span class="text-muted font-13">Expires At</span> <br/>
+                                        <span class="badge badge-warning-lighten">{{ date('D, d-M-Y', strtotime($row->expired_date)) }}</span>
+                                    @endif
+                                @endif                               
                             </td>
                             <td>
                                 <h5 class="font-14 my-1"><a href="javascript:void(0);" class="text-body" style="cursor: auto;">{{ App\Listing::where([['user_id',$row->id],['status',1]])->count() }}</a></h5>

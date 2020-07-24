@@ -4,7 +4,9 @@
       <div class="col-lg-3 col-12">
         <div id="logo">
           <a href="/<?php //echo site_url('home'); ?>">
-            <img src="{{ asset('global/dark_logo.png')}}" width="165" height="35" alt="" class="logo_sticky">
+            <img src="{{ asset('/global/favicon.png') }}"  style="max-height:30px;position: relative;
+  bottom: 5px;"/>
+            <span style="font-size:25px;color:black">Ziolty</span>
           </a>
         </div>
       </div>

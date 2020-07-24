@@ -24,8 +24,9 @@
     <div style=""></div>
     <ul id="main-menu" class="">
         <div style="text-align: -webkit-center;" id="branding_element">
-            Demo
-            <img src="<?php //echo base_url('assets/global/light_logo.png'); ?>"  style="max-height:30px;"/>
+            <img src="{{ asset('/global/favicon.png') }}"  style="max-height:30px;position: relative;
+  bottom: 5px;"/>
+            <span style="font-size:25px;color:white">Ziolty</span>
         </div>
         <br>
 

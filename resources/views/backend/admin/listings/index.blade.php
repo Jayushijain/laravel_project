@@ -104,7 +104,7 @@
                 <td>
                   <strong>
                     <a href="{{ route('listings.edit',$listing->id) }}">
-                      {{ $listing->name }}
+                      {{ ucwords($listing->name) }}
                       @if ($listing->is_featured == 1)
                         <i class="entypo-star" style="color: #FF5722; font-size: 11px;" data-toggle="tooltip" data-placement="top" title="" data-original-title="Featured"></i>
                       @endif
@@ -112,7 +112,7 @@
                   </strong>
                   <br>
                   <small>
-                  	{{ $listing->user->name }}
+                  	{{ ucwords($listing->user->name) }}
                     {!! '<br/>'.date('D, d-M-Y', strtotime($listing['created_at'])) !!}             
                   </small>
                 </td>

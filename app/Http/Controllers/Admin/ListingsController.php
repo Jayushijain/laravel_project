@@ -104,6 +104,7 @@ class ListingsController extends Controller
 			}
 		}
 
+		$input['city_id'] = 98;
 		$temp =  $request->category_id;
 		array_pop($temp);
 
@@ -125,7 +126,9 @@ class ListingsController extends Controller
 
 		foreach ($days as $day)
 		{
-			$time_config[$day] = sanitizer($request->$day.'_opening').'-'.sanitizer($request->$day.'_closing');
+			$opening = $day.'_opening';
+			$closing = $day.'_closing';
+			$time_config[$day] = sanitizer($request->$opening).'-'.sanitizer($request->$closing);
 		}
 
 		if ($request->file('listing_thumbnail'))
@@ -434,14 +437,12 @@ class ListingsController extends Controller
 			$input['amenity_id'] = $request->amenity_id;
 		}
 
-		if (sizeof($request->category_id) > 0)
-		{
-			array_pop($request->category_id);
-			$input['category_id'] = implode(',', $request->category_id);
-		}
-		else
-		{
-			$input['category_id'] = $request->category_id;
+		$temp =  $request->category_id;
+		array_pop($temp);
+
+		if (sizeof($temp) > 0)
+		{			
+			$input['category_id'] = implode(',', $temp);
 		}
 
 		$input['user_id'] = Auth::user()->id;
@@ -457,7 +458,9 @@ class ListingsController extends Controller
 
 		foreach ($days as $day)
 		{
-			$time_config[$day] = sanitizer($request->$day.'_opening').'-'.sanitizer($request->$day.'_closing');
+			$opening = $day.'_opening';
+			$closing = $day.'_closing';
+			$time_config[$day] = sanitizer($request->$opening).'-'.sanitizer($request->$closing);
 		}
 
 		if ($request->file('listing_thumbnail') != '')
@@ -634,31 +637,34 @@ class ListingsController extends Controller
 		}
 		else if ($listing_type == 'restaurant')
 		{
-			$menu_name_array = sanitizer($request->menu_name);
+			$menu_name_array = $request->menu_name;
 			array_pop($menu_name_array);
-			$menu_items_array = sanitizer($request->items);
+			$menu_items_array = $request->items;
 			array_pop($menu_items_array);
-			$menu_price_array = sanitizer($request->menu_price);
+			$menu_price_array = $request->menu_price;
 			array_pop($menu_price_array);
-			$menu_ids_array = sanitizer($request->food_menu_id);
+			$menu_ids_array = $request->food_menu_id;
 			array_pop($menu_ids_array);
 
 			// Image Uploading functions starts here
-			$old_food_menu_images = sanitizer($request->old_food_menu_images);
+			$old_food_menu_images = $request->old_food_menu_images;
 			array_pop($old_food_menu_images);
 			// Image Uploading functions ends here
-
-			foreach ($request->file('menu_image') as $key => $menu_image)
+			
+			if($request->file('menu_image'))
 			{
-				if ($file = $menu_image)
+				foreach ($request->file('menu_image') as $key => $menu_image)
 				{
-					$filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME).rand(100, 999).'.jpg';
-					$file->move('uploads/restaurant_menu_images', $filename);
-					array_push($listing_photos, $filename);
-				}
-				else
-				{
-					array_push($listing_photos, $old_food_menu_images[$key]);
+					if ($file = $menu_image)
+					{
+						$filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME).rand(100, 999).'.jpg';
+						$file->move('uploads/restaurant_menu_images', $filename);
+						array_push($listing_photos, $filename);
+					}
+					else
+					{
+						array_push($listing_photos, $old_food_menu_images[$key]);
+					}
 				}
 			}
 
@@ -669,6 +675,7 @@ class ListingsController extends Controller
 				$input['items']      = sanitizer($menu_items_array[$key]);
 				$input['photo']      = sanitizer($listing_photos[$key]);
 				$input['listing_id'] = sanitizer($listing_id);
+
 				if ($menu_id > 0)
 				{
 					$food_menu = App\FoodMenu::findOrFail($menu_id)->update($input);

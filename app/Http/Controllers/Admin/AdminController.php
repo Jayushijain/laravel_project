@@ -36,7 +36,7 @@ class AdminController extends Controller
 		}
 
 		// Package expiration in this month
-		$chart_data['current_date_time']        = date('d-m-Y H:i:s');
+		$chart_data['current_date_time']        = date('Y-m-d H:i:s');
 		$chart_data['first_day_this_month']     = date('Y-m-01 H:i:s'); // hard-coded '01' for first day
 		$chart_data['last_day_this_month']      = date('Y-m-t H:i:s');
 		$chart_data['expiration_in_this_month'] = PackagePurchasedHistory::where([

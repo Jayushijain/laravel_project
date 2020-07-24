@@ -30,7 +30,7 @@
               @php $listing_type = $booking->listing->listing_type @endphp
               <tr>
                 <td>{{ $count }}</td>
-                <td>{{ $booking->listing->name }}</td>
+                <td>{{ ucwords($booking->listing->name) }}</td>
                 <td>
                   @if($listing_type == 'hotel')
                     @php $booking_date = explode(' | ', $booking->booking_date) 
@@ -42,7 +42,7 @@
                  {!!  '<br>'.'Requesting Date : '.date('d M Y', strtotime($booking->created_at)) !!}           
                 </td>
                 <td>
-                  <h5 class="mt-0 mb-1">{{ $booking->user->name }}</h5>
+                  <h5 class="mt-0 mb-1">Request From : {{ ucwords($booking->user->name) }}</h5>
                   @php
                   $informations = json_decode($booking->additional_information)
                   @endphp

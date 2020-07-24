@@ -42,7 +42,7 @@
                  {!!  '<br>'.'Requesting Date : '.date('d M Y', strtotime($booking->created_at)) !!}           
                 </td>
                 <td>
-                  <h5 class="mt-0 mb-1">{{ $booking->user->name }}</h5>
+                  <h5 class="mt-0 mb-1">Request From : {{ ucwords($booking->user->name) }}</h5>
                   @php
                   $informations = json_decode($booking->additional_information)
                   @endphp

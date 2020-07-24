@@ -63,7 +63,7 @@
 											{{ date('D d-M-Y', strtotime($purchase_history->purchase_date)) }}
 										</td>
 										<td>
-											{{ $user_details = App\User::where('id',$purchase_history->user_id)->pluck('name')[0]  }}
+											{{ $user_details = ucwords(App\User::where('id',$purchase_history->user_id)->pluck('name')[0])  }}
 										</td>
 										<td>
 											{{ $package_details = App\Package::where('id',$purchase_history->package_id)->pluck('name')[0] }}
